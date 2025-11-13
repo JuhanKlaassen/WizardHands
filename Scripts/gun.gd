@@ -9,7 +9,7 @@ func _process(_delta):
 	look_at(mouse_pos)
 
 	# If left mouse button is pressed, shoot
-	if Input.is_action_just_pressed("shoot"):
+	if Input.is_action_just_pressed("action1"):
 		shoot()
 
 
