@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://c52v7h8qvl88w"]
+
+[ext_resource type="Script" uid="uid://d6wux572orlk" path="res://Scripts/ItemsController.cs" id="1_sy3tx"]
+[ext_resource type="PackedScene" uid="uid://ccbmgdwcicqbx" path="res://Prefabs/GroundItem.tscn" id="2_r4bmh"]
+
+[node name="Node" type="Node"]
+script = ExtResource("1_sy3tx")
+GroundItemScene = ExtResource("2_r4bmh")

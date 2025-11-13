@@ -1,13 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://d2m608gyssept"]
+[gd_scene load_steps=5 format=3 uid="uid://d2m608gyssept"]
 
 [ext_resource type="Script" uid="uid://cpmkfkhur8g0t" path="res://Scripts/mob.gd" id="1_xhyow"]
 [ext_resource type="PackedScene" uid="uid://ogik4s70pgwl" path="res://Assets/characters/slime/slime.tscn" id="3_n2uyc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ypitm"]
-radius = 67.0
+radius = 50.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3ue3y"]
+radius = 55.0
 
 [node name="Mob" type="CharacterBody2D"]
-collision_layer = 2
+collision_layer = 16
+collision_mask = 26
 script = ExtResource("1_xhyow")
 
 [node name="Slime" parent="." instance=ExtResource("3_n2uyc")]
@@ -17,3 +21,11 @@ unique_name_in_owner = true
 position = Vector2(0, -28)
 shape = SubResource("CircleShape2D_ypitm")
 debug_color = Color(0.701961, 0.282353, 0.352941, 0.419608)
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -28)
+shape = SubResource("CircleShape2D_3ue3y")

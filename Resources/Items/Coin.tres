@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://ddi0tpujp6mr"]
+
+[ext_resource type="Script" uid="uid://dxr4okieismck" path="res://Scripts/ItemData.cs" id="1_khkyv"]
+[ext_resource type="Texture2D" uid="uid://f2u4rrxwfhb0" path="res://Sprites/Items.tres" id="1_mx1gf"]
+
+[resource]
+script = ExtResource("1_khkyv")
+Name = "Coin"
+Icon = ExtResource("1_mx1gf")
+MaxStack = 16
+metadata/_custom_type_script = "uid://dxr4okieismck"

@@ -1,14 +1,26 @@
-[gd_scene load_steps=5 format=3 uid="uid://dun1cpardk2xw"]
+[gd_scene load_steps=13 format=3 uid="uid://dun1cpardk2xw"]
 
 [ext_resource type="Script" uid="uid://duhg01ib15pvu" path="res://Scripts/game.gd" id="1_kavro"]
 [ext_resource type="PackedScene" uid="uid://dsw8raqgacxsc" path="res://Prefabs/player.tscn" id="2_fk7m3"]
 [ext_resource type="PackedScene" uid="uid://c2qg1nuvfnd4q" path="res://Assets/trees/pine_tree.tscn" id="3_eua6o"]
+[ext_resource type="Script" uid="uid://h4ykjed6htlo" path="res://Scripts/InventorySystemGroup.cs" id="3_fk7m3"]
+[ext_resource type="Script" uid="uid://7y2hiyadxpq1" path="res://Scripts/InventorySystem.cs" id="4_eua6o"]
+[ext_resource type="Script" uid="uid://bqu3mpqqm7s21" path="res://Scripts/UI/UIControler.cs" id="5_qxpe7"]
+[ext_resource type="PackedScene" uid="uid://dv7nnwo6fsxpd" path="res://Prefabs/UI/UITransferSlot.tscn" id="6_8o5cv"]
+[ext_resource type="PackedScene" uid="uid://uota1sk3cua3" path="res://Prefabs/UI/UIPlayerHotbar.tscn" id="6_v0jmy"]
+[ext_resource type="PackedScene" uid="uid://gy141ydha6p2" path="res://Prefabs/UI/UIPlayerInventory.tscn" id="7_qxpe7"]
 
 [sub_resource type="Curve2D" id="Curve2D_cp6e5"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -1055, -697, 0, 0, 0, 0, 1057, -697, 0, 0, 0, 0, 1057, 671, 0, 0, 0, 0, -1055, 663, 0, 0, 0, 0, -1055, -689)
 }
 point_count = 5
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v0jmy"]
+radius = 100.0
+
+[sub_resource type="InputEventAction" id="InputEventAction_v0jmy"]
+action = &"inventory_toggle"
 
 [node name="Game" type="Node2D"]
 y_sort_enabled = true
@@ -19,6 +31,9 @@ wait_time = 0.3
 autostart = true
 
 [node name="Player" parent="." instance=ExtResource("2_fk7m3")]
+collision_layer = 8
+collision_mask = 2
+_speed = 500.0
 
 [node name="Path2D" type="Path2D" parent="Player"]
 curve = SubResource("Curve2D_cp6e5")
@@ -26,6 +41,27 @@ curve = SubResource("Curve2D_cp6e5")
 [node name="PathFollow2D" type="PathFollow2D" parent="Player/Path2D"]
 unique_name_in_owner = true
 position = Vector2(-1055, -697)
+
+[node name="InventoryGroup" type="Node" parent="Player" node_paths=PackedStringArray("_inventorySystems")]
+unique_name_in_owner = true
+script = ExtResource("3_fk7m3")
+_inventorySystems = [NodePath("Hotbar"), NodePath("Inventory")]
+metadata/_custom_type_script = "uid://h4ykjed6htlo"
+
+[node name="Hotbar" type="Node" parent="Player/InventoryGroup"]
+unique_name_in_owner = true
+script = ExtResource("4_eua6o")
+_items = Array[Object]([null, null, null, null, null, null])
+metadata/_custom_type_script = "uid://7y2hiyadxpq1"
+
+[node name="Inventory" type="Node" parent="Player/InventoryGroup"]
+unique_name_in_owner = true
+script = ExtResource("4_eua6o")
+_items = Array[Object]([null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null])
+metadata/_custom_type_script = "uid://7y2hiyadxpq1"
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Player"]
+shape = SubResource("CircleShape2D_v0jmy")
 
 [node name="GameOver" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
@@ -58,48 +94,107 @@ text = "Game Over"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
 layer = -32
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer2"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="TransferSlot" parent="UI" instance=ExtResource("6_8o5cv")]
+z_index = 99
+offset_right = 64.0
+offset_bottom = 64.0
+
+[node name="UIControler" type="Control" parent="UI"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_qxpe7")
+
+[node name="UIPlayerHotbar" parent="UI/UIControler" instance=ExtResource("6_v0jmy")]
+layout_mode = 1
+offset_right = 404.0
+offset_bottom = 64.0
+_isActiveOnStart = true
+
+[node name="UIPlayerInventory" parent="UI/UIControler" instance=ExtResource("7_qxpe7")]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -100.0
+offset_right = 404.0
+offset_bottom = 100.0
+grow_vertical = 2
+_inputEventAction = SubResource("InputEventAction_v0jmy")
+
 [node name="PineTree" parent="." instance=ExtResource("3_eua6o")]
 position = Vector2(66, 591)
+collision_layer = 2
+collision_mask = 0
 
 [node name="PineTree2" parent="." instance=ExtResource("3_eua6o")]
 position = Vector2(155, 643)
+collision_layer = 2
+collision_mask = 0
 
 [node name="PineTree3" parent="." instance=ExtResource("3_eua6o")]
 position = Vector2(-9.99997, 687)
+collision_layer = 2
+collision_mask = 0
 
 [node name="PineTree4" parent="." instance=ExtResource("3_eua6o")]
 position = Vector2(682, 254)
+collision_layer = 2
+collision_mask = 0
 
 [node name="PineTree5" parent="." instance=ExtResource("3_eua6o")]
 position = Vector2(829, 384)
+collision_layer = 2
+collision_mask = 0
 
 [node name="PineTree11" parent="." instance=ExtResource("3_eua6o")]
 position = Vector2(781, -296)
+collision_layer = 2
+collision_mask = 0
 
 [node name="PineTree6" parent="." instance=ExtResource("3_eua6o")]
 position = Vector2(-677, 313)
+collision_layer = 2
+collision_mask = 0
 
 [node name="PineTree7" parent="." instance=ExtResource("3_eua6o")]
 position = Vector2(-788, 370)
+collision_layer = 2
+collision_mask = 0
 
 [node name="PineTree8" parent="." instance=ExtResource("3_eua6o")]
 position = Vector2(-829, 229)
+collision_layer = 2
+collision_mask = 0
 
 [node name="PineTree9" parent="." instance=ExtResource("3_eua6o")]
 position = Vector2(-346, -355)
+collision_layer = 2
+collision_mask = 0
 
 [node name="PineTree10" parent="." instance=ExtResource("3_eua6o")]
 position = Vector2(-573, -231)
+collision_layer = 2
+collision_mask = 0
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="health_depleted" from="Player" to="." method="_on_player_health_depleted"]
+
+[editable path="Player"]
+[editable path="UI/UIControler/UIPlayerHotbar"]
+[editable path="UI/UIControler/UIPlayerInventory"]

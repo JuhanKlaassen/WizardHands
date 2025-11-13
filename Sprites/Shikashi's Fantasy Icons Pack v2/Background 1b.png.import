@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bu4jhtx4uquo7"
-path="res://.godot/imported/icon.png-487276ed1e3a0c39cad0279d744ee560.ctex"
+uid="uid://b6xtybpvfo6up"
+path="res://.godot/imported/Background 1b.png-93264f722c1186026e0cf4f744e15334.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://icon.png"
-dest_files=["res://.godot/imported/icon.png-487276ed1e3a0c39cad0279d744ee560.ctex"]
+source_file="res://Sprites/Shikashi's Fantasy Icons Pack v2/Background 1b.png"
+dest_files=["res://.godot/imported/Background 1b.png-93264f722c1186026e0cf4f744e15334.ctex"]
 
 [params]
 
