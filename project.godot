@@ -74,10 +74,9 @@ Settings/Show_Tooltips=true
 
 [application]
 
-config/name="Your First 2D Game With Godot 4 (GDQuest)"
-run/main_scene="res://Scenes/survivors_game.tscn"
+config/name="WizardHands"
+run/main_scene="res://Scenes/Main.tscn"
 config/features=PackedStringArray("4.5", "C#", "Forward Plus")
-config/icon="res://icon.png"
 
 [autoload]
 
@@ -92,7 +91,7 @@ window/stretch/mode="viewport"
 
 [dotnet]
 
-project/assembly_name="Getting started with Godot 4"
+project/assembly_name="WizardHands"
 
 [editor_plugins]
 
