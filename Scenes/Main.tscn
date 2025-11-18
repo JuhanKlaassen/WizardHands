@@ -27,7 +27,6 @@ y_sort_enabled = true
 script = ExtResource("1_kavro")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.3
 autostart = true
 
 [node name="Player" parent="." instance=ExtResource("2_fk7m3")]

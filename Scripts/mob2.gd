@@ -5,16 +5,18 @@ signal died
 var speed = randf_range(200, 300)
 var health = 3
 
-@onready var Player = get_node("/root/Game/Player")
+@onready var player = get_node("/root/Game/Player")
 @onready var itemsController: ItemsController = get_node("/root/ItemsController")
 @onready var hitArea: Area2D = get_node("Area2D")
 
 func _ready():
-	%Slime.play_walk()
+	pass
 
 
 func _physics_process(_delta):
-	var direction = global_position.direction_to(Player.global_position)
+	look_at(player.global_position)
+	
+	var direction = global_position.direction_to(player.global_position)
 	velocity = direction * speed
 	move_and_slide()
 	
@@ -27,7 +29,7 @@ func try_attack(body):
 		body.Damage(1.0)
 
 func take_damage():
-	%Slime.play_hurt()
+	%Rat.play_hurt()
 	health -= 1
 
 	if health == 0:

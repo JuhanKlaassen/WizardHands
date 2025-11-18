@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://dwahmlapvpc1f"]
+
+[ext_resource type="Script" uid="uid://dodsuitvinj6y" path="res://Scripts/mob2.gd" id="1_1yudo"]
+[ext_resource type="PackedScene" uid="uid://um40wnpg7y0w" path="res://Assets/characters/rat/rat.tscn" id="2_bxcrp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ypitm"]
+radius = 50.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3ue3y"]
+radius = 55.0
+
+[node name="Mob2" type="CharacterBody2D"]
+collision_layer = 16
+collision_mask = 26
+script = ExtResource("1_1yudo")
+
+[node name="Rat" parent="." instance=ExtResource("2_bxcrp")]
+unique_name_in_owner = true
+position = Vector2(-404.99994, -29)
+rotation = 4.712389
+scale = Vector2(5, 5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -28)
+shape = SubResource("CircleShape2D_ypitm")
+debug_color = Color(0.701961, 0.282353, 0.352941, 0.419608)
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -28)
+shape = SubResource("CircleShape2D_3ue3y")
