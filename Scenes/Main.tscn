@@ -17,7 +17,7 @@ _data = {
 point_count = 5
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v0jmy"]
-radius = 100.0
+radius = 51.009804
 
 [sub_resource type="InputEventAction" id="InputEventAction_v0jmy"]
 action = &"inventory_toggle"

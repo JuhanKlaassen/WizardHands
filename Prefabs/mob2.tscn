@@ -16,9 +16,9 @@ script = ExtResource("1_1yudo")
 
 [node name="Rat" parent="." instance=ExtResource("2_bxcrp")]
 unique_name_in_owner = true
-position = Vector2(-404.99994, -29)
+position = Vector2(-23.000061, -28.000002)
 rotation = 4.712389
-scale = Vector2(5, 5)
+scale = Vector2(6, 6)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -28)

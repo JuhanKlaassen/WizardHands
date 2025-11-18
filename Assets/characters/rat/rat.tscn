@@ -9,7 +9,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Anchor/SlimeBody:scale")
+tracks/0/path = NodePath("Anchor/Rat:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -61,7 +61,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Anchor/SlimeBody/SlimeBodyHurt:modulate:a")
+tracks/1/path = NodePath("Anchor/Rat/RatHurt:modulate:a")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -77,7 +77,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Anchor/SlimeBody:scale")
+tracks/0/path = NodePath("Anchor/Rat:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -118,7 +118,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Anchor/SlimeBody:scale")
+tracks/1/path = NodePath("Anchor/Rat:scale")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -141,16 +141,14 @@ script = ExtResource("1_vgpnu")
 
 [node name="Anchor" type="Marker2D" parent="."]
 
-[node name="SlimeBody" type="Sprite2D" parent="Anchor"]
-position = Vector2(-0.49999908, 84.124985)
+[node name="Rat" type="Sprite2D" parent="Anchor"]
 texture = ExtResource("2_7mmlg")
-offset = Vector2(0, -36)
+offset = Vector2(0, 1)
 
-[node name="SlimeBodyHurt" type="Sprite2D" parent="Anchor/SlimeBody"]
+[node name="RatHurt" type="Sprite2D" parent="Anchor/Rat"]
 modulate = Color(1, 1, 1, 0)
-position = Vector2(0, -1.777853)
+position = Vector2(0, 1)
 texture = ExtResource("3_qndlj")
-offset = Vector2(0, -36)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
