@@ -2,8 +2,8 @@ extends CharacterBody2D
 
 signal died
 
-var speed = randf_range(200, 300)
-var health = 3
+var speed = randf_range(350, 400)
+var health = 2
 
 @onready var player = get_node("/root/Game/Player")
 @onready var itemsController: ItemsController = get_node("/root/ItemsController")
