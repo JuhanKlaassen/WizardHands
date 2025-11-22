@@ -11,4 +11,4 @@ region = Rect2(224, 384, 32, 32)
 script = ExtResource("1_khkyv")
 name = "Coin"
 icon = SubResource("AtlasTexture_dncya")
-metadata/_custom_type_script = "uid://dxr4okieismck"
+max_stack = 16

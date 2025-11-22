@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0qy2i37m717q"]
+
+[ext_resource type="Script" uid="uid://c2bstocyx73r4" path="res://Scripts/Wand.gd" id="1_i3vt2"]
+[ext_resource type="Texture2D" uid="uid://cswb5do8rrj7q" path="res://Assets/pistol/wand.png" id="2_idur6"]
+
+[node name="Wand" type="Node2D"]
+script = ExtResource("1_i3vt2")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+texture = ExtResource("2_idur6")
+offset = Vector2(16, 0)
+
+[node name="ShootingPoint" type="Marker2D" parent="."]
+unique_name_in_owner = true
+show_behind_parent = true
+position = Vector2(51, -12)
+gizmo_extents = 30.6

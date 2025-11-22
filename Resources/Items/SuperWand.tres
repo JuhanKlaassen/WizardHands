@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="WandData" load_steps=6 format=3 uid="uid://ddaerj7lg2fm5"]
+
+[ext_resource type="PackedScene" uid="uid://c6ta6nik6n751" path="res://Prefabs/Projectiles/SuperProjectile.tscn" id="2_2onjc"]
+[ext_resource type="Texture2D" uid="uid://wl1cle7bkqu4" path="res://Sprites/Shikashi's Fantasy Icons Pack v2/#1 - Transparent Icons.png" id="2_82v37"]
+[ext_resource type="Texture2D" uid="uid://dft3nj3xd3sxb" path="res://Assets/pistol/wand2.png" id="3_umlrl"]
+[ext_resource type="Script" uid="uid://bs2pvbdvnbai0" path="res://Scripts/WandData.gd" id="3_vjval"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_abilu"]
+atlas = ExtResource("2_82v37")
+region = Rect2(288, 192, 32, 32)
+
+[resource]
+script = ExtResource("3_vjval")
+damage = 100
+projectile_speed = 400
+projectile_range = 500
+projectile_prefab = ExtResource("2_2onjc")
+wand_sprite = ExtResource("3_umlrl")
+name = "Super Wand"
+icon = SubResource("AtlasTexture_abilu")
+item_type = 1
+metadata/_custom_type_script = "uid://bs2pvbdvnbai0"

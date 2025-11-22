@@ -7,6 +7,7 @@ signal on_slot_clicked(input_event: InputEvent)
 var _icon: TextureRect
 var _amount_label: Label
 @export var _item: Item
+@export var _slot_type: ItemData.ItemType = ItemData.ItemType.UNSET
 
 var icon: TextureRect:
 	get:
@@ -20,6 +21,9 @@ var item: Item:
 	get:
 		return _item
 
+var slot_type: ItemData.ItemType:
+	get:
+		return _slot_type
 
 func _ready() -> void:
 	_icon = get_node("MarginContainer/TextureRect")

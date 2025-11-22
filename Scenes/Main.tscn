@@ -1,25 +1,35 @@
-[gd_scene load_steps=15 format=3 uid="uid://bc6wwmcjvdkky"]
+[gd_scene load_steps=17 format=3 uid="uid://bc6wwmcjvdkky"]
 
 [ext_resource type="Script" uid="uid://duhg01ib15pvu" path="res://Scripts/game.gd" id="1_kavro"]
 [ext_resource type="PackedScene" uid="uid://dsw8raqgacxsc" path="res://Prefabs/player.tscn" id="2_fk7m3"]
 [ext_resource type="PackedScene" uid="uid://c2qg1nuvfnd4q" path="res://Assets/trees/pine_tree.tscn" id="3_eua6o"]
+[ext_resource type="Resource" uid="uid://18knp5812ewg" path="res://Resources/Items/BasicWand.tres" id="4_4kpch"]
 [ext_resource type="Script" uid="uid://vk087g6hsy7f" path="res://Scripts/Item.gd" id="4_bmxlf"]
-[ext_resource type="Script" uid="uid://dva3gu8fbivsr" path="res://Scripts/InventorySystem.gd" id="4_eua6o"]
 [ext_resource type="Texture2D" uid="uid://dhiv8vklngiko" path="res://Assets/Sprite-0002.png" id="5_bmxlf"]
+[ext_resource type="Resource" uid="uid://ddaerj7lg2fm5" path="res://Resources/Items/SuperWand.tres" id="5_grg3l"]
 [ext_resource type="Script" uid="uid://bscyo3sxdpknv" path="res://Scripts/UI/UIControler.gd" id="5_qxpe7"]
 [ext_resource type="PackedScene" uid="uid://dv7nnwo6fsxpd" path="res://Prefabs/UI/UITransferSlot.tscn" id="6_8o5cv"]
 [ext_resource type="PackedScene" uid="uid://uota1sk3cua3" path="res://Prefabs/UI/UIPlayerHotbar.tscn" id="6_v0jmy"]
 [ext_resource type="PackedScene" uid="uid://gy141ydha6p2" path="res://Prefabs/UI/UIPlayerInventory.tscn" id="7_qxpe7"]
 [ext_resource type="PackedScene" uid="uid://btx1418xypjlp" path="res://Prefabs/UI/UIPauseMenu.tscn" id="10_4kpch"]
 
+[sub_resource type="Resource" id="Resource_grg3l"]
+script = ExtResource("4_bmxlf")
+_item_data = ExtResource("4_4kpch")
+_amount = 1
+metadata/_custom_type_script = "uid://vk087g6hsy7f"
+
+[sub_resource type="Resource" id="Resource_frkhe"]
+script = ExtResource("4_bmxlf")
+_item_data = ExtResource("5_grg3l")
+_amount = 1
+metadata/_custom_type_script = "uid://vk087g6hsy7f"
+
 [sub_resource type="Curve2D" id="Curve2D_cp6e5"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -1055, -697, 0, 0, 0, 0, 1057, -697, 0, 0, 0, 0, 1057, 671, 0, 0, 0, 0, -1055, 663, 0, 0, 0, 0, -1055, -689)
 }
 point_count = 5
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_v0jmy"]
-radius = 51.009804
 
 [sub_resource type="InputEventAction" id="InputEventAction_1p5hy"]
 action = &"inventory_toggle"
@@ -34,25 +44,18 @@ autostart = true
 [node name="Player" parent="." instance=ExtResource("2_fk7m3")]
 unique_name_in_owner = true
 
+[node name="Hotbar" parent="Player" index="4"]
+_items = Array[ExtResource("4_bmxlf")]([SubResource("Resource_grg3l"), null])
+
+[node name="Inventory" parent="Player" index="5"]
+_items = Array[ExtResource("4_bmxlf")]([null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, SubResource("Resource_frkhe")])
+
 [node name="Path2D" type="Path2D" parent="Player"]
 curve = SubResource("Curve2D_cp6e5")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Player/Path2D"]
 unique_name_in_owner = true
 position = Vector2(-1055, -697)
-
-[node name="Hotbar" type="Node" parent="Player"]
-unique_name_in_owner = true
-script = ExtResource("4_eua6o")
-_items = Array[ExtResource("4_bmxlf")]([null, null, null, null, null, null])
-
-[node name="Inventory" type="Node" parent="Player"]
-unique_name_in_owner = true
-script = ExtResource("4_eua6o")
-_items = Array[ExtResource("4_bmxlf")]([null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null])
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Player"]
-shape = SubResource("CircleShape2D_v0jmy")
 
 [node name="GameOver" type="CanvasLayer" parent="."]
 unique_name_in_owner = true

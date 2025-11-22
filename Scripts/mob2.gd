@@ -26,11 +26,11 @@ func try_attack(body):
 	if body.has_method("damage"):
 		body.damage(1.0)
 
-func take_damage():
+func take_damage(damage: float):
 	%Rat.play_hurt()
-	health -= 1
+	health -= damage
 
-	if health == 0:
+	if health <= 0:
 		var smoke_scene = preload("res://Assets/smoke_explosion/smoke_explosion.tscn")
 		var smoke = smoke_scene.instantiate()
 		var item_data: ItemData = preload("res://Resources/Items/Coin.tres")

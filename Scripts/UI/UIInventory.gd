@@ -21,6 +21,8 @@ func set_inventory_data(inventory_data: InventorySystem) -> void:
 		_inventory_system = null
 	reload()
 
+func set_slot_scene(new_slot_scene: PackedScene) -> void:
+	_slot_scene = new_slot_scene
 
 func reload() -> void:
 	for child in _slots_container.get_children():
@@ -43,32 +45,34 @@ func reload() -> void:
 				var mouse_button: InputEventMouseButton = input_event as InputEventMouseButton
 				if mouse_button.pressed and mouse_button.button_index == MOUSE_BUTTON_LEFT:
 					if _transfer_slot.is_transfering:
-						if slot_scene.item.item_data == _transfer_slot.transfered_data:
-							if slot_scene.item.amount + _transfer_slot.transfered_amount > slot_scene.item.item_data.max_stack:
-								_transfer_slot.swap_with(slot_scene)
-							else:
+						if slot_scene.slot_type == _transfer_slot.transfered_data.item_type || slot_scene.slot_type == ItemData.ItemType.UNSET:
+							if slot_scene.item.item_data == _transfer_slot.transfered_data:
+								if slot_scene.item.amount + _transfer_slot.transfered_amount > slot_scene.item.item_data.max_stack:
+									_transfer_slot.swap_with(slot_scene)
+								else:
+									_transfer_slot.transfer_to(slot_scene)
+							elif slot_scene.item.item_data == null:
 								_transfer_slot.transfer_to(slot_scene)
-						elif slot_scene.item.item_data == null:
-							_transfer_slot.transfer_to(slot_scene)
-						else:
-							_transfer_slot.swap_with(slot_scene)
+							else:
+								_transfer_slot.swap_with(slot_scene)
 					else:
 						_transfer_slot.start_transfer(slot_scene)
 					_inventory_system.on_inventory_changed.emit()
 				elif mouse_button.pressed and mouse_button.button_index == MOUSE_BUTTON_RIGHT:
 					if _transfer_slot.is_transfering:
-						if slot_scene.item.item_data == _transfer_slot.transfered_data:
-							if slot_scene.item.amount + _transfer_slot.transfered_amount >= slot_scene.item.item_data.max_stack:
-								_transfer_slot.swap_with(slot_scene)
-							else:
+						if slot_scene.slot_type == _transfer_slot.transfered_data.item_type || slot_scene.slot_type == ItemData.ItemType.UNSET:
+							if slot_scene.item.item_data == _transfer_slot.transfered_data:
+								if slot_scene.item.amount + _transfer_slot.transfered_amount >= slot_scene.item.item_data.max_stack:
+									_transfer_slot.swap_with(slot_scene)
+								else:
+									_transfer_slot.transfer_to(slot_scene, 1)
+								_inventory_system.on_inventory_changed.emit()
+							elif slot_scene.item.item_data == null:
 								_transfer_slot.transfer_to(slot_scene, 1)
-							_inventory_system.on_inventory_changed.emit()
-						elif slot_scene.item.item_data == null:
-							_transfer_slot.transfer_to(slot_scene, 1)
-							_inventory_system.on_inventory_changed.emit()
-						else:
-							_transfer_slot.swap_with(slot_scene)
-							_inventory_system.on_inventory_changed.emit()
+								_inventory_system.on_inventory_changed.emit()
+							else:
+								_transfer_slot.swap_with(slot_scene)
+								_inventory_system.on_inventory_changed.emit()
 					else:
 						var split_amount: int = 1
 						if slot_scene.item.amount > 1:
