@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://uota1sk3cua3"]
 
-[ext_resource type="Script" uid="uid://dw5jf4jt8srfn" path="res://Scripts/UI/UIPlayerHotbar.cs" id="2_kl1r5"]
+[ext_resource type="Script" uid="uid://bvaq1ww2d0qp7" path="res://Scripts/UI/UIPlayerHotbar.gd" id="2_kl1r5"]
 [ext_resource type="PackedScene" uid="uid://cctnbpxcvlymi" path="res://Prefabs/UI/UISlot.tscn" id="3_fesw3"]
 
 [node name="UIPlayerHotbar" type="PanelContainer"]

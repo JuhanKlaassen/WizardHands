@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://dsw8raqgacxsc"]
 
-[ext_resource type="Script" uid="uid://bbdd42vjoeula" path="res://Scripts/Player.cs" id="1_y5hcb"]
+[ext_resource type="Script" uid="uid://donv1hujqvup3" path="res://Scripts/Player.gd" id="1_y5hcb"]
 [ext_resource type="PackedScene" uid="uid://pbmyh1qru7p" path="res://Assets/characters/happy_boo/happy_boo.tscn" id="2_bl5ih"]
 [ext_resource type="PackedScene" uid="uid://cphcr81upg72i" path="res://Prefabs/gun.tscn" id="3_bt0kc"]
 
@@ -12,6 +12,8 @@ height = 68.42
 bg_color = Color(0.623529, 0.866667, 0.317647, 1)
 
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 2
 script = ExtResource("1_y5hcb")
 
 [node name="HappyBoo" parent="." instance=ExtResource("2_bl5ih")]

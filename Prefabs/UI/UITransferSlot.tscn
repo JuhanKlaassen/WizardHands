@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dv7nnwo6fsxpd"]
 
-[ext_resource type="Script" path="res://Scripts/UI/UITransferSlot.cs" id="1_vjdh8"]
+[ext_resource type="Script" uid="uid://b4cvsdubfn5ku" path="res://Scripts/UI/UITransferSlot.gd" id="1_vjdh8"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3y4vs"]
 

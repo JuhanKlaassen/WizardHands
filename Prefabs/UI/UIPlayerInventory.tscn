@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://gy141ydha6p2"]
 
-[ext_resource type="Script" uid="uid://dqjcrennrwbhc" path="res://Scripts/UI/UIPlayerInventory.cs" id="2_bmfe6"]
+[ext_resource type="Script" uid="uid://bqxt6u8ry6n16" path="res://Scripts/UI/UIPlayerInventory.gd" id="2_bmfe6"]
 [ext_resource type="PackedScene" uid="uid://cctnbpxcvlymi" path="res://Prefabs/UI/UISlot.tscn" id="3_f1imk"]
 
 [node name="UIPlayerInventory" type="PanelContainer"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://btx1418xypjlp"]
 
-[ext_resource type="Script" uid="uid://ipsxd2tri2uj" path="res://Scripts/UI/UIPauseMenu.cs" id="2_2yobf"]
+[ext_resource type="Script" uid="uid://d1dlp5etk3j5g" path="res://Scripts/UI/UIPauseMenu.gd" id="1_rnh56"]
 
 [node name="UIPauseMenu" type="PanelContainer"]
 process_mode = 2
@@ -9,7 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("2_2yobf")
+script = ExtResource("1_rnh56")
 
 [node name="Paused" type="Control" parent="."]
 layout_mode = 2
@@ -63,5 +63,5 @@ text = "Main menu"
 visible = false
 layout_mode = 2
 
-[connection signal="pressed" from="Paused/CenterContainer/VBoxContainer/Resume" to="." method="Resume"]
+[connection signal="pressed" from="Paused/CenterContainer/VBoxContainer/Resume" to="." method="resume"]
 [connection signal="pressed" from="Paused/CenterContainer/VBoxContainer/Main menu" to="." method="Quit"]

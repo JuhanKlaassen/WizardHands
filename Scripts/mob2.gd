@@ -1,7 +1,5 @@
 extends CharacterBody2D
 
-signal died
-
 var speed = randf_range(350, 400)
 var health = 2
 
@@ -25,8 +23,8 @@ func _physics_process(_delta):
 		try_attack(body);
 
 func try_attack(body):
-	if body is Player:
-		body.Damage(1.0)
+	if body.has_method("damage"):
+		body.damage(1.0)
 
 func take_damage():
 	%Rat.play_hurt()
@@ -37,8 +35,8 @@ func take_damage():
 		var smoke = smoke_scene.instantiate()
 		var item_data: ItemData = preload("res://Resources/Items/Coin.tres")
 		var item = Item.new()
-		item.Set(item_data, 1)
-		itemsController.call_deferred("Spawn", item_data, 1, position)
+		item.set_item_data(item_data, 1)
+		itemsController.spawn(item_data, 1, position)
 		
 		get_parent().add_child(smoke)
 		smoke.global_position = global_position

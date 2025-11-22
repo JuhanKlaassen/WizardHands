@@ -1,15 +1,16 @@
-[gd_scene load_steps=14 format=3 uid="uid://bc6wwmcjvdkky"]
+[gd_scene load_steps=15 format=3 uid="uid://bc6wwmcjvdkky"]
 
 [ext_resource type="Script" uid="uid://duhg01ib15pvu" path="res://Scripts/game.gd" id="1_kavro"]
 [ext_resource type="PackedScene" uid="uid://dsw8raqgacxsc" path="res://Prefabs/player.tscn" id="2_fk7m3"]
 [ext_resource type="PackedScene" uid="uid://c2qg1nuvfnd4q" path="res://Assets/trees/pine_tree.tscn" id="3_eua6o"]
-[ext_resource type="Script" uid="uid://h4ykjed6htlo" path="res://Scripts/InventorySystemGroup.cs" id="3_fk7m3"]
-[ext_resource type="Script" uid="uid://7y2hiyadxpq1" path="res://Scripts/InventorySystem.cs" id="4_eua6o"]
+[ext_resource type="Script" uid="uid://vk087g6hsy7f" path="res://Scripts/Item.gd" id="4_bmxlf"]
+[ext_resource type="Script" uid="uid://dva3gu8fbivsr" path="res://Scripts/InventorySystem.gd" id="4_eua6o"]
 [ext_resource type="Texture2D" uid="uid://dhiv8vklngiko" path="res://Assets/Sprite-0002.png" id="5_bmxlf"]
-[ext_resource type="Script" uid="uid://bqu3mpqqm7s21" path="res://Scripts/UI/UIControler.cs" id="5_qxpe7"]
+[ext_resource type="Script" uid="uid://bscyo3sxdpknv" path="res://Scripts/UI/UIControler.gd" id="5_qxpe7"]
 [ext_resource type="PackedScene" uid="uid://dv7nnwo6fsxpd" path="res://Prefabs/UI/UITransferSlot.tscn" id="6_8o5cv"]
 [ext_resource type="PackedScene" uid="uid://uota1sk3cua3" path="res://Prefabs/UI/UIPlayerHotbar.tscn" id="6_v0jmy"]
 [ext_resource type="PackedScene" uid="uid://gy141ydha6p2" path="res://Prefabs/UI/UIPlayerInventory.tscn" id="7_qxpe7"]
+[ext_resource type="PackedScene" uid="uid://btx1418xypjlp" path="res://Prefabs/UI/UIPauseMenu.tscn" id="10_4kpch"]
 
 [sub_resource type="Curve2D" id="Curve2D_cp6e5"]
 _data = {
@@ -20,7 +21,7 @@ point_count = 5
 [sub_resource type="CircleShape2D" id="CircleShape2D_v0jmy"]
 radius = 51.009804
 
-[sub_resource type="InputEventAction" id="InputEventAction_v0jmy"]
+[sub_resource type="InputEventAction" id="InputEventAction_1p5hy"]
 action = &"inventory_toggle"
 
 [node name="Game" type="Node2D"]
@@ -31,9 +32,7 @@ script = ExtResource("1_kavro")
 autostart = true
 
 [node name="Player" parent="." instance=ExtResource("2_fk7m3")]
-collision_layer = 8
-collision_mask = 2
-_speed = 500.0
+unique_name_in_owner = true
 
 [node name="Path2D" type="Path2D" parent="Player"]
 curve = SubResource("Curve2D_cp6e5")
@@ -42,23 +41,15 @@ curve = SubResource("Curve2D_cp6e5")
 unique_name_in_owner = true
 position = Vector2(-1055, -697)
 
-[node name="InventoryGroup" type="Node" parent="Player" node_paths=PackedStringArray("_inventorySystems")]
-unique_name_in_owner = true
-script = ExtResource("3_fk7m3")
-_inventorySystems = [NodePath("Hotbar"), NodePath("Inventory")]
-metadata/_custom_type_script = "uid://h4ykjed6htlo"
-
-[node name="Hotbar" type="Node" parent="Player/InventoryGroup"]
+[node name="Hotbar" type="Node" parent="Player"]
 unique_name_in_owner = true
 script = ExtResource("4_eua6o")
-_items = Array[Object]([null, null, null, null, null, null])
-metadata/_custom_type_script = "uid://7y2hiyadxpq1"
+_items = Array[ExtResource("4_bmxlf")]([null, null, null, null, null, null])
 
-[node name="Inventory" type="Node" parent="Player/InventoryGroup"]
+[node name="Inventory" type="Node" parent="Player"]
 unique_name_in_owner = true
 script = ExtResource("4_eua6o")
-_items = Array[Object]([null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null])
-metadata/_custom_type_script = "uid://7y2hiyadxpq1"
+_items = Array[ExtResource("4_bmxlf")]([null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null])
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Player"]
 shape = SubResource("CircleShape2D_v0jmy")
@@ -106,13 +97,13 @@ texture = ExtResource("5_bmxlf")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="TransferSlot" parent="UI" instance=ExtResource("6_8o5cv")]
+[node name="UITransferSlot" parent="UI" instance=ExtResource("6_8o5cv")]
+unique_name_in_owner = true
 z_index = 99
 offset_right = 64.0
 offset_bottom = 64.0
 
 [node name="UIControler" type="Control" parent="UI"]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -125,7 +116,25 @@ script = ExtResource("5_qxpe7")
 layout_mode = 1
 offset_right = 404.0
 offset_bottom = 64.0
-_isActiveOnStart = true
+_is_active_on_start = true
+
+[node name="Slot" parent="UI/UIControler/UIPlayerHotbar/MarginContainer/ItemGrid" index="0"]
+script = null
+
+[node name="Slot2" parent="UI/UIControler/UIPlayerHotbar/MarginContainer/ItemGrid" index="1"]
+script = null
+
+[node name="Slot3" parent="UI/UIControler/UIPlayerHotbar/MarginContainer/ItemGrid" index="2"]
+script = null
+
+[node name="Slot4" parent="UI/UIControler/UIPlayerHotbar/MarginContainer/ItemGrid" index="3"]
+script = null
+
+[node name="Slot5" parent="UI/UIControler/UIPlayerHotbar/MarginContainer/ItemGrid" index="4"]
+script = null
+
+[node name="Slot6" parent="UI/UIControler/UIPlayerHotbar/MarginContainer/ItemGrid" index="5"]
+script = null
 
 [node name="UIPlayerInventory" parent="UI/UIControler" instance=ExtResource("7_qxpe7")]
 layout_mode = 1
@@ -136,7 +145,64 @@ offset_top = -100.0
 offset_right = 404.0
 offset_bottom = 100.0
 grow_vertical = 2
-_inputEventAction = SubResource("InputEventAction_v0jmy")
+_input_event_action = SubResource("InputEventAction_1p5hy")
+
+[node name="Slot" parent="UI/UIControler/UIPlayerInventory/MarginContainer/ItemGrid" index="0"]
+script = null
+
+[node name="Slot2" parent="UI/UIControler/UIPlayerInventory/MarginContainer/ItemGrid" index="1"]
+script = null
+
+[node name="Slot3" parent="UI/UIControler/UIPlayerInventory/MarginContainer/ItemGrid" index="2"]
+script = null
+
+[node name="Slot4" parent="UI/UIControler/UIPlayerInventory/MarginContainer/ItemGrid" index="3"]
+script = null
+
+[node name="Slot5" parent="UI/UIControler/UIPlayerInventory/MarginContainer/ItemGrid" index="4"]
+script = null
+
+[node name="Slot6" parent="UI/UIControler/UIPlayerInventory/MarginContainer/ItemGrid" index="5"]
+script = null
+
+[node name="Slot7" parent="UI/UIControler/UIPlayerInventory/MarginContainer/ItemGrid" index="6"]
+script = null
+
+[node name="Slot8" parent="UI/UIControler/UIPlayerInventory/MarginContainer/ItemGrid" index="7"]
+script = null
+
+[node name="Slot9" parent="UI/UIControler/UIPlayerInventory/MarginContainer/ItemGrid" index="8"]
+script = null
+
+[node name="Slot10" parent="UI/UIControler/UIPlayerInventory/MarginContainer/ItemGrid" index="9"]
+script = null
+
+[node name="Slot11" parent="UI/UIControler/UIPlayerInventory/MarginContainer/ItemGrid" index="10"]
+script = null
+
+[node name="Slot12" parent="UI/UIControler/UIPlayerInventory/MarginContainer/ItemGrid" index="11"]
+script = null
+
+[node name="Slot13" parent="UI/UIControler/UIPlayerInventory/MarginContainer/ItemGrid" index="12"]
+script = null
+
+[node name="Slot14" parent="UI/UIControler/UIPlayerInventory/MarginContainer/ItemGrid" index="13"]
+script = null
+
+[node name="Slot15" parent="UI/UIControler/UIPlayerInventory/MarginContainer/ItemGrid" index="14"]
+script = null
+
+[node name="Slot16" parent="UI/UIControler/UIPlayerInventory/MarginContainer/ItemGrid" index="15"]
+script = null
+
+[node name="Slot17" parent="UI/UIControler/UIPlayerInventory/MarginContainer/ItemGrid" index="16"]
+script = null
+
+[node name="Slot18" parent="UI/UIControler/UIPlayerInventory/MarginContainer/ItemGrid" index="17"]
+script = null
+
+[node name="UIPauseMenu" parent="UI/UIControler" instance=ExtResource("10_4kpch")]
+layout_mode = 1
 
 [node name="PineTree" parent="." instance=ExtResource("3_eua6o")]
 position = Vector2(66, 591)

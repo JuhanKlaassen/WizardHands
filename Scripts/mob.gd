@@ -1,11 +1,9 @@
 extends CharacterBody2D
 
-signal died
-
 var speed = randf_range(200, 300)
 var health = 3
 
-@onready var Player = get_node("/root/Game/Player")
+@onready var player = get_node("/root/Game/Player")
 @onready var itemsController: ItemsController = get_node("/root/ItemsController")
 @onready var hitArea: Area2D = get_node("Area2D")
 
@@ -14,7 +12,7 @@ func _ready():
 
 
 func _physics_process(_delta):
-	var direction = global_position.direction_to(Player.global_position)
+	var direction = global_position.direction_to(player.global_position)
 	velocity = direction * speed
 	move_and_slide()
 	
@@ -23,8 +21,8 @@ func _physics_process(_delta):
 		try_attack(body);
 
 func try_attack(body):
-	if body is Player:
-		body.Damage(1.0)
+	if body.has_method("damage"):
+		body.damage(1.0)
 
 func take_damage():
 	%Slime.play_hurt()
@@ -35,8 +33,8 @@ func take_damage():
 		var smoke = smoke_scene.instantiate()
 		var item_data: ItemData = preload("res://Resources/Items/Coin.tres")
 		var item = Item.new()
-		item.Set(item_data, 1)
-		itemsController.call_deferred("Spawn", item_data, 1, position)
+		item.set_item_data(item_data, 1)
+		itemsController.spawn(item_data, 1, position)
 		
 		get_parent().add_child(smoke)
 		smoke.global_position = global_position
