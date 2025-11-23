@@ -1,7 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://bc6wwmcjvdkky"]
+[gd_scene load_steps=18 format=3 uid="uid://bc6wwmcjvdkky"]
 
 [ext_resource type="Script" uid="uid://duhg01ib15pvu" path="res://Scripts/game.gd" id="1_kavro"]
 [ext_resource type="PackedScene" uid="uid://dsw8raqgacxsc" path="res://Prefabs/player.tscn" id="2_fk7m3"]
+[ext_resource type="Script" uid="uid://cf8tw24i4jagj" path="res://Scenes/waves.gd" id="2_frkhe"]
 [ext_resource type="PackedScene" uid="uid://c2qg1nuvfnd4q" path="res://Assets/trees/pine_tree.tscn" id="3_eua6o"]
 [ext_resource type="Resource" uid="uid://18knp5812ewg" path="res://Resources/Items/BasicWand.tres" id="4_4kpch"]
 [ext_resource type="Script" uid="uid://vk087g6hsy7f" path="res://Scripts/Item.gd" id="4_bmxlf"]
@@ -37,6 +38,9 @@ action = &"inventory_toggle"
 [node name="Game" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_kavro")
+
+[node name="Waves" type="Node2D" parent="."]
+script = ExtResource("2_frkhe")
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
@@ -89,6 +93,8 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Parallax2D" type="Parallax2D" parent="."]
+z_index = -50
+y_sort_enabled = true
 texture_filter = 1
 repeat_size = Vector2(360, 360)
 repeat_times = 6
@@ -99,6 +105,25 @@ scale = Vector2(3, 3)
 texture = ExtResource("5_bmxlf")
 
 [node name="UI" type="CanvasLayer" parent="."]
+
+[node name="WaveLabel" type="Label" parent="UI"]
+visible = false
+z_index = 10
+z_as_relative = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -25.0
+offset_right = 20.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.8496667, 1, 0.78, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 36
 
 [node name="UITransferSlot" parent="UI" instance=ExtResource("6_8o5cv")]
 unique_name_in_owner = true
