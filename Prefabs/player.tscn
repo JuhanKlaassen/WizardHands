@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://dsw8raqgacxsc"]
+[gd_scene load_steps=10 format=3 uid="uid://dsw8raqgacxsc"]
 
 [ext_resource type="Script" uid="uid://donv1hujqvup3" path="res://Scripts/Player.gd" id="1_y5hcb"]
 [ext_resource type="PackedScene" uid="uid://pbmyh1qru7p" path="res://Assets/characters/happy_boo/happy_boo.tscn" id="2_bl5ih"]
+[ext_resource type="AudioStream" uid="uid://bdjbp7b0lfktj" path="res://Assets/Walk.mp3" id="3_knrd4"]
 [ext_resource type="Script" uid="uid://dva3gu8fbivsr" path="res://Scripts/InventorySystem.gd" id="4_knrd4"]
 [ext_resource type="Script" uid="uid://vk087g6hsy7f" path="res://Scripts/Item.gd" id="5_hck1p"]
 
@@ -31,6 +32,9 @@ rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_2nftw")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Walk" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_knrd4")
 
 [node name="HealthBar" type="ProgressBar" parent="."]
 unique_name_in_owner = true

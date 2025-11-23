@@ -21,7 +21,7 @@ var _mana_regen_accumulator: float = 0.0
 @onready var _right_hand: Node2D = %RightHand
 @onready var _inventory: InventorySystem = %Inventory
 @onready var _hotbar: InventorySystem = %Hotbar
-
+@onready var Walk_Sound = $Walk
 const WAND = preload("res://Prefabs/Wand.tscn")
 
 func _ready():
@@ -107,6 +107,7 @@ func _physics_process(delta):
 	
 	if velocity.length() > 0.0:
 		%HappyBoo.play_walk_animation()
+		Walk_Sound.play()
 	else:
 		%HappyBoo.play_idle_animation()
 

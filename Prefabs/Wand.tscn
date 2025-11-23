@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://d0qy2i37m717q"]
+[gd_scene load_steps=4 format=3 uid="uid://d0qy2i37m717q"]
 
 [ext_resource type="Script" uid="uid://c2bstocyx73r4" path="res://Scripts/Wand.gd" id="1_i3vt2"]
 [ext_resource type="Texture2D" uid="uid://cswb5do8rrj7q" path="res://Assets/pistol/wand.png" id="2_idur6"]
+[ext_resource type="AudioStream" uid="uid://c73f2qul2kil6" path="res://Assets/ShootingSound.mp3" id="3_blq0c"]
 
 [node name="Wand" type="Node2D"]
 script = ExtResource("1_i3vt2")
@@ -10,6 +11,9 @@ script = ExtResource("1_i3vt2")
 unique_name_in_owner = true
 texture = ExtResource("2_idur6")
 offset = Vector2(16, 0)
+
+[node name="ShootingSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_blq0c")
 
 [node name="ShootingPoint" type="Marker2D" parent="."]
 unique_name_in_owner = true
