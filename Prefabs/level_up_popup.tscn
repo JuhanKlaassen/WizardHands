@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://ii5dplb40sax"]
+
+[ext_resource type="Script" uid="uid://kp38rivcarnb" path="res://Scripts/level_up_popup.gd" id="1_lcm6v"]
+
+[node name="LevelUpPopup" type="RichTextLabel"]
+offset_right = 300.0
+offset_bottom = 161.0
+text = "test test test test test test test "
+fit_content = true
+scroll_active = false
+script = ExtResource("1_lcm6v")

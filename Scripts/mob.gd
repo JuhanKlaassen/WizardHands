@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 var speed = randf_range(200, 300)
 var health = 3
+var xp = 10
+
 
 @onready var player = get_node("/root/Game/Player")
 @onready var itemsController: ItemsController = get_node("/root/ItemsController")
@@ -35,7 +37,8 @@ func take_damage(damage: float):
 		var item = Item.new()
 		item.set_item_data(item_data, 1)
 		itemsController.spawn(item_data, 1, position)
-		
+		if player != null and player.has_method("gain_xp"):
+			player.gain_xp(xp)
 		get_parent().add_child(smoke)
 		smoke.global_position = global_position
 		queue_free()
