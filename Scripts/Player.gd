@@ -6,10 +6,16 @@ class_name Player
 @export var _health: int = 100
 @export var level: int = 1
 @export var xp: int = 0
-var _hp_regen_accumulator: float = 0.0
+
 @export var hp_regen_rate: float = 1.0 # HP per second
+@export var mana:int = 0
+@export var max_mana:int = 10
+@export var mana_regen:int = 1
 #ajutine prg
 @export var xp_to_next_level: int = 50
+
+var _hp_regen_accumulator: float = 0.0
+var _mana_regen_accumulator: float = 0.0
 
 @onready var _left_hand: Node2D = %LeftHand
 @onready var _right_hand: Node2D = %RightHand
@@ -47,9 +53,7 @@ func gain_xp(amount: int) -> void:
 func level_up() -> void:
 	level += 1
 	print("Level UP! Now level ", level)
-
-	# Choose a random bonus: 0 = max HP, 1 = speed, 2 = HP regen
-	var bonus = randi() % 3
+	var bonus = randi() % 5
 	var popup_text = ""
 
 	match bonus:
@@ -68,6 +72,18 @@ func level_up() -> void:
 			var regen_increase = 1
 			hp_regen_rate += regen_increase
 			popup_text = "+%d HP Regen/sec" % regen_increase
+		3:
+			var mana_increase = 5
+			max_mana += mana_increase
+			mana += mana_increase
+			%manabar.max_value = max_mana
+			$manabar.value = mana
+			$manabar/Label.text = str(mana)+'/'+str(max_mana)
+			popup_text = "+%d Max Mana" % mana_increase
+		4:
+			var mana_regen_increase = 1
+			mana_regen += mana_regen_increase
+			popup_text = "+%d Mana Regen/sec" % mana_regen_increase
 
 	# Spawn smoke effect on player
 	var smoke_scene = preload("res://Assets/smoke_explosion/smoke_explosion.tscn")
@@ -83,10 +99,10 @@ func level_up() -> void:
 	popup.text = popup_text
 
 
+
 func _physics_process(delta):
 	var direction = Input.get_vector("movement_left", "movement_right", "movement_up", "movement_down")
 	velocity = direction * _speed * delta * 100
-
 	move_and_slide()
 	
 	if velocity.length() > 0.0:
@@ -98,10 +114,26 @@ func _physics_process(delta):
 	_left_hand.look_at(mouse_pos)
 	_right_hand.look_at(mouse_pos)
 	
+	# HP regen
 	_hp_regen_accumulator += delta
 	if _hp_regen_accumulator >= 1.0:
 		_hp_regen_accumulator -= 1.0
-		heal(1) # heal 1 HP per second
+		heal(hp_regen_rate)
+
+	# Mana regen
+	_mana_regen_accumulator += delta
+	if _mana_regen_accumulator >= 1.0:
+		_mana_regen_accumulator -= 1.0
+		restore_mana(mana_regen)
+
+func restore_mana(amount: int) -> void:
+	mana += amount
+	if mana > max_mana:
+		mana = max_mana
+	
+	%manabar.value = mana
+	$manabar/Label.text = str(mana)+'/'+str(max_mana)
+
 
 func heal(amount: int) -> void:
 	_health += amount

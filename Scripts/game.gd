@@ -1,7 +1,7 @@
 extends Node2D
 
 var entitySpawn := 0
-
+	
 func spawn_mob():
 	%PathFollow2D.progress_ratio = randf()
 	var new_mob = preload("res://Prefabs/mob.tscn").instantiate()
