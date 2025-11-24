@@ -12,7 +12,7 @@ class_name WandData
 var wand_instance: Wand
 
 func action(item: Item, player: Player, mouse_pos: Vector2) -> void:
-    if wand_instance == null:
-        return
+	if wand_instance == null:
+		return
 
-    wand_instance.shoot()
+	wand_instance.shoot()

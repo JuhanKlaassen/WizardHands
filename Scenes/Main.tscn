@@ -48,10 +48,10 @@ autostart = true
 [node name="Player" parent="." instance=ExtResource("2_fk7m3")]
 unique_name_in_owner = true
 
-[node name="Hotbar" parent="Player" index="4"]
+[node name="Hotbar" parent="Player" index="7"]
 _items = Array[ExtResource("4_bmxlf")]([SubResource("Resource_grg3l"), null])
 
-[node name="Inventory" parent="Player" index="5"]
+[node name="Inventory" parent="Player" index="8"]
 _items = Array[ExtResource("4_bmxlf")]([null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, SubResource("Resource_frkhe")])
 
 [node name="Path2D" type="Path2D" parent="Player"]
@@ -121,7 +121,7 @@ offset_right = 20.0
 offset_bottom = 25.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(0.8496667, 1, 0.78, 1)
+theme_override_colors/font_color = Color(0.21537966, 0.7072492, 0.8018889, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 36
 

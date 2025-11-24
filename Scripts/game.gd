@@ -1,6 +1,5 @@
 extends Node2D
 
-<<<<<<< Updated upstream
 var entitySpawn := 0
 	
 func spawn_mob():
@@ -8,14 +7,14 @@ func spawn_mob():
 	var new_mob = preload("res://Prefabs/mob.tscn").instantiate()
 	new_mob.global_position = %PathFollow2D.global_position
 	add_child(new_mob)
-=======
+
 @onready var waves = $Waves
 @onready var wave_label = $"/root/Game/UI/WaveLabel"
 
 var between_waves := false
 var delay_timer := 0.0
 const WAVE_DELAY = 3.0   # seconds between waves
->>>>>>> Stashed changes
+
 
 func _ready():
 	start_wave()
