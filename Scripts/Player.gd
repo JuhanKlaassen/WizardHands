@@ -8,9 +8,9 @@ class_name Player
 @export var xp: int = 0
 
 @export var hp_regen_rate: float = 1.0 # HP per second
-@export var mana:int = 0
-@export var max_mana:int = 10
-@export var mana_regen:int = 1
+@export var mana: int = 0
+@export var max_mana: int = 10
+@export var mana_regen: int = 1
 #ajutine prg
 @export var xp_to_next_level: int = 50
 
@@ -21,6 +21,7 @@ var _mana_regen_accumulator: float = 0.0
 @onready var _right_hand: Node2D = %RightHand
 @onready var _inventory: InventorySystem = %Inventory
 @onready var _hotbar: InventorySystem = %Hotbar
+@onready var _ui_hotbar: UIPlayerHotbar = get_tree().root.get_node("Game/UI/UIControler/UIPlayerHotbar")
 @onready var Walk_Sound = $Walk
 const WAND = preload("res://Prefabs/Wand.tscn")
 
@@ -39,7 +40,7 @@ func gain_xp(amount: int) -> void:
 	
 	# Update the XP bar
 	%xpbar.value = xp
-	$xpbar/Label.text = str(xp)+'/'+str(xp_to_next_level)
+	$xpbar/Label.text = str(xp) + '/' + str(xp_to_next_level)
 	
 	while xp >= xp_to_next_level:
 		xp -= xp_to_next_level
@@ -48,7 +49,7 @@ func gain_xp(amount: int) -> void:
 		# Reset XP bar for next level
 		%xpbar.max_value = xp_to_next_level
 		%xpbar.value = xp
-		$xpbar/Label.text = str(xp)+'/'+str(xp_to_next_level)
+		$xpbar/Label.text = str(xp) + '/' + str(xp_to_next_level)
 
 func level_up() -> void:
 	level += 1
@@ -62,7 +63,7 @@ func level_up() -> void:
 			_health += hp_increase
 			%HealthBar.max_value += hp_increase
 			%HealthBar.value += hp_increase
-			$HealthBar/Label.text = str(_health)+'/'+str(%HealthBar.max_value)
+			$HealthBar/Label.text = str(_health) + '/' + str(%HealthBar.max_value)
 			popup_text = "+%d Max HP" % hp_increase
 		1:
 			var speed_increase = 30
@@ -78,7 +79,7 @@ func level_up() -> void:
 			mana += mana_increase
 			%manabar.max_value = max_mana
 			$manabar.value = mana
-			$manabar/Label.text = str(mana)+'/'+str(max_mana)
+			$manabar/Label.text = str(mana) + '/' + str(max_mana)
 			popup_text = "+%d Max Mana" % mana_increase
 		4:
 			var mana_regen_increase = 1
@@ -97,7 +98,6 @@ func level_up() -> void:
 	get_parent().add_child(popup)
 	popup.global_position = global_position + Vector2(0, -40) # above player
 	popup.text = popup_text
-
 
 
 func _physics_process(delta):
@@ -133,7 +133,7 @@ func restore_mana(amount: int) -> void:
 		mana = max_mana
 	
 	%manabar.value = mana
-	$manabar/Label.text = str(mana)+'/'+str(max_mana)
+	$manabar/Label.text = str(mana) + '/' + str(max_mana)
 
 
 func heal(amount: int) -> void:
@@ -142,7 +142,7 @@ func heal(amount: int) -> void:
 		_health = %HealthBar.max_value
 	
 	$HealthBar.value = _health
-	$HealthBar/Label.text = str(_health)+'/'+str(%HealthBar.max_value)
+	$HealthBar/Label.text = str(_health) + '/' + str(%HealthBar.max_value)
 
 
 func damage(damage_amount: float) -> void:
@@ -153,7 +153,7 @@ func damage(damage_amount: float) -> void:
 	else:
 		_health -= damage_amount
 
-	$HealthBar/Label.text = str(_health)+'/'+str(%HealthBar.max_value)
+	$HealthBar/Label.text = str(_health) + '/' + str(%HealthBar.max_value)
 	get_node("%HealthBar").value = _health
 
 
@@ -169,6 +169,7 @@ func on_hotbar_item_changed():
 		if _hotbar.items[0] != null and _hotbar.items[0].item_data != null:
 			wand = WAND.instantiate()
 			wand.set_data(_hotbar.items[0].item_data)
+			_ui_hotbar.get_slot(0).on_slot_action_called.connect(wand.shoot)
 
 		if _left_item != null:
 			_left_hand.remove_child(_left_item)
@@ -185,6 +186,7 @@ func on_hotbar_item_changed():
 		if _hotbar.items[1] != null and _hotbar.items[1].item_data != null:
 			wand = WAND.instantiate()
 			wand.set_data(_hotbar.items[1].item_data)
+			_ui_hotbar.get_slot(1).on_slot_action_called.connect(wand.shoot)
 
 		if _right_item != null:
 			_right_hand.remove_child(_right_item)

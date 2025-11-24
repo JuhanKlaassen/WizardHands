@@ -25,14 +25,10 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("action1"):
-		var item: Item = get_slot(0).item
-		if item != null and item.item_data is WandData:
-			item.item_data.action(item, _player, _player.get_global_mouse_position())
+		get_slot(0).on_slot_action_called.emit()
 	
 	if event.is_action_pressed("action2"):
-		var item: Item = get_slot(1).item
-		if item != null and item.item_data != null and item.item_data.has_method("action"):
-			item.item_data.action(item, _player, _player.get_global_mouse_position())
+		get_slot(1).on_slot_action_called.emit()
 
 
 func close() -> void:

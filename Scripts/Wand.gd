@@ -12,7 +12,6 @@ var _wand_data: WandData
 
 func set_data(new_wand_data: WandData) -> void:
 	_wand_data = new_wand_data
-	new_wand_data.wand_instance = self
 
 func _ready() -> void:
 	if _wand_data != null:

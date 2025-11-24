@@ -3,6 +3,7 @@ extends Panel
 class_name UISlot
 
 signal on_slot_clicked(input_event: InputEvent)
+signal on_slot_action_called
 
 var _icon: TextureRect
 var _amount_label: Label
