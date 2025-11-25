@@ -169,7 +169,9 @@ func on_hotbar_item_changed():
 		if _hotbar.items[0] != null and _hotbar.items[0].item_data != null:
 			wand = WAND.instantiate()
 			wand.set_data(_hotbar.items[0].item_data)
-			_ui_hotbar.get_slot(0).on_slot_action_called.connect(wand.shoot)
+			var slot = _ui_hotbar.get_slot(0)
+			wand.on_cooldown_changed.connect(slot.set_cooldown)
+			slot.on_slot_action_called.connect(wand.shoot)
 
 		if _left_item != null:
 			_left_hand.remove_child(_left_item)
@@ -186,7 +188,9 @@ func on_hotbar_item_changed():
 		if _hotbar.items[1] != null and _hotbar.items[1].item_data != null:
 			wand = WAND.instantiate()
 			wand.set_data(_hotbar.items[1].item_data)
-			_ui_hotbar.get_slot(1).on_slot_action_called.connect(wand.shoot)
+			var slot = _ui_hotbar.get_slot(1)
+			wand.on_cooldown_changed.connect(slot.set_cooldown)
+			slot.on_slot_action_called.connect(wand.shoot)
 
 		if _right_item != null:
 			_right_hand.remove_child(_right_item)

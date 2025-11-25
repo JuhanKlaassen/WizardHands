@@ -3,6 +3,7 @@ extends ItemData
 class_name WandData
 
 @export var damage: int = 1
+@export var cooldown_ms: int = 1000
 @export var projectile_speed: int = 1000
 @export var projectile_range: int = 1200
 @export var projectile_prefab: PackedScene

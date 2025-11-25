@@ -5,8 +5,9 @@ class_name UISlot
 signal on_slot_clicked(input_event: InputEvent)
 signal on_slot_action_called
 
-var _icon: TextureRect
-var _amount_label: Label
+@onready var _icon: TextureRect = get_node("MarginContainer/TextureRect")
+@onready var _amount_label: Label = get_node("MarginContainer/AmountLabel")
+@onready var _cooldown_label: Label = $CooldownLabel
 @export var _item: Item
 @export var _slot_type: ItemData.ItemType = ItemData.ItemType.UNSET
 
@@ -27,8 +28,6 @@ var slot_type: ItemData.ItemType:
 		return _slot_type
 
 func _ready() -> void:
-	_icon = get_node("MarginContainer/TextureRect")
-	_amount_label = get_node("MarginContainer/AmountLabel")
 	gui_input.connect(_on_gui_input)
 
 
@@ -37,6 +36,12 @@ func set_item(new_item: Item) -> void:
 	reload()
 	new_item.item_changed.connect(reload)
 
+func set_cooldown(new_cooldown: float) -> void:
+	if new_cooldown > 0.0:
+		_cooldown_label.visible = true
+		_cooldown_label.text = str(new_cooldown)
+	else:
+		_cooldown_label.visible = false
 
 func reload() -> void:
 	if _item != null and _item.item_data != null:

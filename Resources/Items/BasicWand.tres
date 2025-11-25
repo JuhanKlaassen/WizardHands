@@ -11,6 +11,7 @@ region = Rect2(256, 192, 32, 32)
 
 [resource]
 script = ExtResource("1_aq7vn")
+cooldown_ms = 100
 projectile_prefab = ExtResource("2_jbfmr")
 wand_sprite = ExtResource("4_ximmi")
 name = "Basic wand"
