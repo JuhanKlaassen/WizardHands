@@ -15,6 +15,7 @@ var item: Item:
 
 
 func _ready() -> void:
+	add_to_group("ground_items")
 	_pickup_collider = get_node("Area2D")
 	_pickup_collider.body_entered.connect(_on_body_entered)
 
