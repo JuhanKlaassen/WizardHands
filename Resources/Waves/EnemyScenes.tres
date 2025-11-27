@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="EnemyScenes" load_steps=4 format=3 uid="uid://d3flh5kqlx6ky"]
+
+[ext_resource type="Script" uid="uid://u2fty12k0mtg" path="res://Resources/Waves/enemy_scenes_resource.gd" id="1_lme00"]
+[ext_resource type="PackedScene" uid="uid://d2m608gyssept" path="res://Prefabs/mob.tscn" id="1_ygmfa"]
+[ext_resource type="PackedScene" uid="uid://dwahmlapvpc1f" path="res://Prefabs/mob2.tscn" id="2_j0on7"]
+
+[resource]
+script = ExtResource("1_lme00")
+mob = ExtResource("1_ygmfa")
+mob2 = ExtResource("2_j0on7")
