@@ -66,3 +66,36 @@ func _on_gui_input(event: InputEvent) -> void:
 		var mouse_button: InputEventMouseButton = event as InputEventMouseButton
 		if mouse_button.pressed:
 			on_slot_clicked.emit(event)
+
+func transfer_to(to_slot: UISlot, amount: int = -1) -> void:
+	if amount == -1:
+		amount = _item.amount
+	
+	if to_slot.item.item_data != null and to_slot.item.item_data != _item.item_data:
+		push_error("UITransferSlot.transfer_to | Can't transfer items of different types")
+		return
+	
+	if to_slot.item.item_data == null:
+		to_slot.item.set_item_data(_item.item_data, amount)
+	else:
+		if to_slot.item.amount + amount > to_slot.item.item_data.max_stack:
+			push_error("UITransferSlot.transfer_to | Can't transfer items, target slot will be overflown")
+			return
+		
+		to_slot.item.add(amount)
+	
+	if _item.amount - amount > 0:
+		_item.amount -= amount
+		reload()
+	else:
+		_item.amount = 0
+		_item.item_data = null
+
+func swap_with(slot: UISlot) -> void:
+	var temp_data: ItemData = slot.item.item_data
+	var temp_amount: int = slot.item.amount
+	
+	slot.item.set_item_data(_item._item_data, _item.amount)
+	_item._item_data = temp_data
+	_item.amount = temp_amount
+	reload()

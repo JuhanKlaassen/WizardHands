@@ -125,8 +125,8 @@ _items = Array[ExtResource("5_hck1p")]([null, null, null, null, null, null, null
 
 [node name="LeftHand" type="Node2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(50, -30)
+position = Vector2(-50, -30)
 
 [node name="RightHand" type="Node2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(-50, -30)
+position = Vector2(50, -30)
