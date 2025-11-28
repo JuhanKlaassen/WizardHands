@@ -170,6 +170,10 @@ func damage(damage_amount: float) -> void:
 func pick_up_item(item: Item) -> bool:
 	return _inventory.add_items(item.item_data, item.amount)
 
+var shoot_lambda = func(wand):
+	if consume_mana(wand.get_mana_cost()):
+		wand.shoot()
+
 func on_hotbar_item_changed():
 	var _left_item = null
 	if _left_hand.get_child_count() != 0:
@@ -181,10 +185,9 @@ func on_hotbar_item_changed():
 			wand.set_data(_hotbar.items[0].item_data)
 			var slot = _ui_hotbar.get_slot(0)
 			wand.on_cooldown_changed.connect(slot.set_cooldown)
-			slot.on_slot_action_called.connect(func():
-				if consume_mana(wand.get_mana_cost()):
-					wand.shoot()
-			)
+			var shoot_lambda_func = shoot_lambda.bind(wand)
+			slot.on_slot_action_called.connect(shoot_lambda_func)
+			wand.tree_exiting.connect(slot.on_slot_action_called.disconnect.bind(shoot_lambda_func))
 
 		if _left_item != null:
 			_left_hand.remove_child(_left_item)
@@ -203,7 +206,9 @@ func on_hotbar_item_changed():
 			wand.set_data(_hotbar.items[1].item_data)
 			var slot = _ui_hotbar.get_slot(1)
 			wand.on_cooldown_changed.connect(slot.set_cooldown)
-			slot.on_slot_action_called.connect(wand.shoot)
+			var shoot_lambda_func = shoot_lambda.bind(wand)
+			slot.on_slot_action_called.connect(shoot_lambda_func)
+			wand.tree_exiting.connect(slot.on_slot_action_called.disconnect.bind(shoot_lambda_func))
 
 		if _right_item != null:
 			_right_hand.remove_child(_right_item)

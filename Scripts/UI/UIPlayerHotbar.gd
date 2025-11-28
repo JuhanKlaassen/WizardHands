@@ -23,7 +23,7 @@ func _ready() -> void:
 	_inventory_system.on_inventory_changed.emit()
 
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("action1"):
 		get_slot(0).on_slot_action_called.emit()
 	
