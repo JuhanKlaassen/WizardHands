@@ -136,6 +136,16 @@ func restore_mana(amount: int) -> void:
 	$manabar/Label.text = str(mana) + '/' + str(max_mana)
 
 
+func consume_mana(amount: int) -> bool:
+	if mana >= amount:
+		mana -= amount
+		%manabar.value = mana
+		$manabar/Label.text = str(mana) + '/' + str(max_mana)
+		return true
+	else:
+		return false
+
+
 func heal(amount: int) -> void:
 	_health += amount
 	if _health > %HealthBar.max_value:
@@ -171,7 +181,10 @@ func on_hotbar_item_changed():
 			wand.set_data(_hotbar.items[0].item_data)
 			var slot = _ui_hotbar.get_slot(0)
 			wand.on_cooldown_changed.connect(slot.set_cooldown)
-			slot.on_slot_action_called.connect(wand.shoot)
+			slot.on_slot_action_called.connect(func():
+				if consume_mana(wand.get_mana_cost()):
+					wand.shoot()
+			)
 
 		if _left_item != null:
 			_left_hand.remove_child(_left_item)

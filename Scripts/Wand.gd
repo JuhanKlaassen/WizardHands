@@ -27,6 +27,9 @@ func _process(_delta: float) -> void:
 func set_data(new_wand_data: WandData) -> void:
 	_wand_data = new_wand_data
 
+func get_mana_cost() -> int:
+	return _wand_data.mana_cost
+
 func shoot():
 	if cooldown > 0.0:
 		return
