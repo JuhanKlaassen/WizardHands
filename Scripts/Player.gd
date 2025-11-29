@@ -191,47 +191,47 @@ func on_hotbar_item_changed():
 	if _left_hand.get_child_count() != 0:
 		_left_item = _left_hand.get_child(0)
 	if _left_item != _hotbar.items[0]:
-		var wand: Wand = null;
-		if _hotbar.items[0] != null and _hotbar.items[0].item_data != null:
-			wand = WAND.instantiate()
-			wand.set_data(_hotbar.items[0].item_data)
-			var slot = _ui_hotbar.get_slot(0)
-			wand.on_cooldown_changed.connect(slot.set_cooldown)
-			var shoot_lambda_func = shoot_lambda.bind(wand)
-			if !slot.on_slot_action_called.is_connected(shoot_lambda_func):
-				slot.on_slot_action_called.connect(shoot_lambda_func)
-			wand.tree_exiting.connect(slot.on_slot_action_called.disconnect.bind(shoot_lambda_func))
-
 		if _left_item != null:
 			_left_hand.remove_child(_left_item)
 			_left_item.queue_free()
+			
+		if _hotbar.items[0] == null or _hotbar.items[0].item_data == null:
+			return
 
-		if wand != null:
-			_left_hand.add_child(wand)
-	
+		var wand: Wand = WAND.instantiate()
+		wand.set_data(_hotbar.items[0].item_data)
+		var slot = _ui_hotbar.get_slot(0)
+		wand.on_cooldown_changed.connect(slot.set_cooldown)
+		var shoot_lambda_func = shoot_lambda.bind(wand)
+		if !slot.on_slot_action_called.is_connected(shoot_lambda_func):
+			slot.on_slot_action_called.connect(shoot_lambda_func)
+		wand.tree_exiting.connect(func():
+			slot.on_slot_action_called.disconnect(shoot_lambda_func)
+		)
+		_left_hand.add_child(wand)
+
 	var _right_item = null
 	if _right_hand.get_child_count() != 0:
 		_right_item = _right_hand.get_child(0)
 	if _right_item != _hotbar.items[1]:
-		var wand: Wand = null;
-		if _hotbar.items[1] != null and _hotbar.items[1].item_data != null:
-			wand = WAND.instantiate()
-			wand.set_data(_hotbar.items[1].item_data)
-			var slot = _ui_hotbar.get_slot(1)
-			wand.on_cooldown_changed.connect(slot.set_cooldown)
-			var shoot_lambda_func = shoot_lambda.bind(wand)
-			if !slot.on_slot_action_called.is_connected(shoot_lambda_func):
-				slot.on_slot_action_called.connect(shoot_lambda_func)
-			wand.tree_exiting.connect(slot.on_slot_action_called.disconnect.bind(shoot_lambda_func))
-
 		if _right_item != null:
 			_right_hand.remove_child(_right_item)
 			_right_item.queue_free()
+			
+		if _hotbar.items[1] == null or _hotbar.items[1].item_data == null:
+			return
 
-		if wand != null:
-			_right_hand.add_child(wand)
-
-
+		var wand: Wand = WAND.instantiate()
+		wand.set_data(_hotbar.items[1].item_data)
+		var slot = _ui_hotbar.get_slot(1)
+		wand.on_cooldown_changed.connect(slot.set_cooldown)
+		var shoot_lambda_func = shoot_lambda.bind(wand)
+		if !slot.on_slot_action_called.is_connected(shoot_lambda_func):
+			slot.on_slot_action_called.connect(shoot_lambda_func)
+		wand.tree_exiting.connect(func():
+			slot.on_slot_action_called.disconnect(shoot_lambda_func)
+		)
+		_right_hand.add_child(wand)
 func update_health_ui() -> void:
 	$HealthBar.value = health
 	$HealthBar.max_value = max_health
