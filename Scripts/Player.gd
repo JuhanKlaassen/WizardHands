@@ -2,17 +2,29 @@ extends CharacterBody2D
 
 class_name Player
 
-@export var _speed: float = 250.0
-@export var _health: int = 100
+
+
 @export var level: int = 1
 @export var xp: int = 0
+@export var gold:int = 0
 
+
+###PLAYER STATS
+#HP
+@export var _health: int = 100
 @export var hp_regen_rate: float = 1.0 # HP per second
+#MANA
 @export var mana: int = 0
 @export var max_mana: int = 10
 @export var mana_regen: int = 1
+#MISC
+@export var _speed: float = 250.0
+@export var dodge:float = 0.0
+
+const LEVELUP_MENU = preload("res://Scenes/level_up_menu.tscn") # adjust path
+var levelup_menu: LevelUpMenu = null
 #ajutine prg
-@export var xp_to_next_level: int = 50
+@export var xp_to_next_level: int = 40
 
 var _hp_regen_accumulator: float = 0.0
 var _mana_regen_accumulator: float = 0.0
@@ -26,6 +38,8 @@ var _mana_regen_accumulator: float = 0.0
 const WAND = preload("res://Prefabs/Wand.tscn")
 
 func _ready():
+	%xpbar.max_value = xp_to_next_level
+	
 	_hotbar.on_inventory_changed.connect(on_hotbar_item_changed)
 	for child in _left_hand.get_children():
 		_left_hand.remove_child(child)
@@ -38,66 +52,90 @@ func gain_xp(amount: int) -> void:
 	xp += amount
 	print("Gained XP: ", amount, " | Total XP: ", xp)
 	
-	# Update the XP bar
+	# Update XP bar
 	%xpbar.value = xp
+	%xpbar.max_value = xp_to_next_level
 	$xpbar/Label.text = str(xp) + '/' + str(xp_to_next_level)
 	
 	while xp >= xp_to_next_level:
 		xp -= xp_to_next_level
-		level_up()
+		level_up()  # xp_to_next_level will be updated here
 		
-		# Reset XP bar for next level
+		# Immediately refresh XP bar with the new xp_to_next_level
 		%xpbar.max_value = xp_to_next_level
 		%xpbar.value = xp
 		$xpbar/Label.text = str(xp) + '/' + str(xp_to_next_level)
 
+
 func level_up() -> void:
 	level += 1
-	print("Level UP! Now level ", level)
-	var bonus = randi() % 5
-	var popup_text = ""
+	print("LEVEL UP!")
+	
+	# Update XP required
+	var base_xp = 40
+	var exponent = 1.3
+	xp_to_next_level = int(base_xp * pow(level, exponent))
+	
+	# Pause the game
+	get_tree().paused = true
 
-	match bonus:
+	# Create menu
+	levelup_menu = LEVELUP_MENU.instantiate()
+	get_parent().add_child(levelup_menu)
+
+	# Randomly generate 3 options
+	var choices = [
+		{ "id": 0, "text": "+20 Max HP" },
+		{ "id": 1, "text": "+30 Speed" },
+		{ "id": 2, "text": "+1 HP Regen/sec" },
+		{ "id": 3, "text": "+5 Max Mana" },
+		{ "id": 4, "text": "+1 Mana Regen" },
+		{ "id": 5, "text": "+5% Dodge" }
+	]
+
+	choices.shuffle()
+
+	# show 3
+	levelup_menu.set_options(
+		choices[0].text,
+		choices[1].text,
+		choices[2].text
+	)
+
+	# Wait for a click
+	levelup_menu.option_selected.connect(
+		func(option_id):
+			_apply_levelup_bonus(choices[option_id].id)
+	)
+
+
+func _apply_levelup_bonus(bonus_id: int):
+	match bonus_id:
 		0:
-			var hp_increase = 20
-			_health += hp_increase
-			%HealthBar.max_value += hp_increase
-			%HealthBar.value += hp_increase
-			$HealthBar/Label.text = str(_health) + '/' + str(%HealthBar.max_value)
-			popup_text = "+%d Max HP" % hp_increase
+			_health += 20
+			%HealthBar.max_value += 20
 		1:
-			var speed_increase = 30
-			_speed += speed_increase
-			popup_text = "+%d Speed" % speed_increase
+			_speed += 30
 		2:
-			var regen_increase = 1
-			hp_regen_rate += regen_increase
-			popup_text = "+%d HP Regen/sec" % regen_increase
+			hp_regen_rate += 1
 		3:
-			var mana_increase = 5
-			max_mana += mana_increase
-			mana += mana_increase
+			max_mana += 5
 			%manabar.max_value = max_mana
-			$manabar.value = mana
-			$manabar/Label.text = str(mana) + '/' + str(max_mana)
-			popup_text = "+%d Max Mana" % mana_increase
+			mana += 5
 		4:
-			var mana_regen_increase = 1
-			mana_regen += mana_regen_increase
-			popup_text = "+%d Mana Regen/sec" % mana_regen_increase
+			mana_regen += 1
+		5:
+			dodge += 0.05
 
-	# Spawn smoke effect on player
-	var smoke_scene = preload("res://Assets/smoke_explosion/smoke_explosion.tscn")
-	var smoke = smoke_scene.instantiate()
-	get_parent().add_child(smoke)
-	smoke.global_position = global_position
+	# Close menu
+	levelup_menu.queue_free()
+	levelup_menu = null
 
-	# Spawn popup above player
-	var popup_scene = preload("res://Prefabs/level_up_popup.tscn")
-	var popup = popup_scene.instantiate()
-	get_parent().add_child(popup)
-	popup.global_position = global_position + Vector2(0, -40) # above player
-	popup.text = popup_text
+	# Unpause game
+	get_tree().paused = false
+
+	print("Applied bonus: ", bonus_id)
+
 
 
 func _physics_process(delta):
@@ -156,6 +194,12 @@ func heal(amount: int) -> void:
 
 
 func damage(damage_amount: float) -> void:
+	# Check dodge first
+	if randf() < dodge:   # _dodge = 0.0 → 0% dodge, 1.0 → 100% dodge
+		print("Attack dodged!")
+		
+		return  # no damage applied
+		
 	if _health - damage_amount <= 0.0:
 		_health = 0.0
 		get_node("%GameOver").show()
@@ -166,6 +210,10 @@ func damage(damage_amount: float) -> void:
 	$HealthBar/Label.text = str(_health) + '/' + str(%HealthBar.max_value)
 	get_node("%HealthBar").value = _health
 
+
+func add_gold(amount):
+	gold += amount
+	$gold.text = str(gold)
 
 func pick_up_item(item: Item) -> bool:
 	return _inventory.add_items(item.item_data, item.amount)

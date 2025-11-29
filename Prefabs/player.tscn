@@ -86,7 +86,7 @@ offset_right = 20.0
 offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
-text = "0/50"
+text = "0/40"
 
 [node name="manabar" type="ProgressBar" parent="."]
 unique_name_in_owner = true
@@ -96,6 +96,7 @@ offset_top = -177.0
 offset_right = 87.0
 offset_bottom = -142.0
 theme_override_styles/fill = SubResource("StyleBoxFlat_knrd4")
+max_value = 10.0
 show_percentage = false
 
 [node name="Label" type="Label" parent="manabar"]
@@ -130,3 +131,10 @@ position = Vector2(-50, -30)
 [node name="RightHand" type="Node2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(50, -30)
+
+[node name="gold" type="Label" parent="."]
+offset_left = 107.0
+offset_top = -210.0
+offset_right = 147.0
+offset_bottom = -187.0
+text = "GOLD"
