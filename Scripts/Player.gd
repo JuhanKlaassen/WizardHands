@@ -1,23 +1,19 @@
-extends CharacterBody2D
+extends Character
 
 class_name Player
 
+signal on_mana_changed
+signal on_xp_changed
 
 @export var level: int = 1
 @export var xp: int = 0
 @export var gold: int = 0
 
 
-###PLAYER STATS
-#HP
-@export var _health: int = 100
-@export var hp_regen_rate: float = 1.0 # HP per second
-#MANA
 @export var mana: int = 0
-@export var max_mana: int = 10
-@export var mana_regen: int = 1
+@export var max_mana: int = 100
+@export var mana_regen: int = 5
 #MISC
-@export var _speed: float = 250.0
 @export var dodge: float = 0.0
 
 const LEVELUP_MENU = preload("res://Scenes/level_up_menu.tscn") # adjust path
@@ -25,21 +21,27 @@ var levelup_menu: LevelUpMenu = null
 #ajutine prg
 @export var xp_to_next_level: int = 40
 
-var _hp_regen_accumulator: float = 0.0
-var _mana_regen_accumulator: float = 0.0
 
 @onready var _left_hand: Node2D = %LeftHand
 @onready var _right_hand: Node2D = %RightHand
 @onready var _inventory: InventorySystem = %Inventory
 @onready var _hotbar: InventorySystem = %Hotbar
 @onready var _ui_hotbar: UIPlayerHotbar = get_tree().root.get_node("Game/UI/UIControler/UIPlayerHotbar")
-@onready var Walk_Sound = $Walk
 const WAND = preload("res://Prefabs/Wand.tscn")
 
 func _ready():
-	%xpbar.max_value = xp_to_next_level
-	
 	_hotbar.on_inventory_changed.connect(on_hotbar_item_changed)
+	on_health_changed.connect(update_health_ui)
+	on_mana_changed.connect(update_mana_ui)
+	on_xp_changed.connect(update_xp_ui)
+	update_health_ui()
+	update_mana_ui()
+	update_xp_ui()
+	on_death.connect(func():
+		get_node("%GameOver").show()
+		get_tree().paused = true
+	)
+	
 	for child in _left_hand.get_children():
 		_left_hand.remove_child(child)
 		child.queue_free()
@@ -52,18 +54,14 @@ func gain_xp(amount: int) -> void:
 	print("Gained XP: ", amount, " | Total XP: ", xp)
 	
 	# Update XP bar
-	%xpbar.value = xp
-	%xpbar.max_value = xp_to_next_level
-	$xpbar/Label.text = str(xp) + '/' + str(xp_to_next_level)
+	on_xp_changed.emit()
 	
 	while xp >= xp_to_next_level:
 		xp -= xp_to_next_level
 		level_up() # xp_to_next_level will be updated here
 		
 		# Immediately refresh XP bar with the new xp_to_next_level
-		%xpbar.max_value = xp_to_next_level
-		%xpbar.value = xp
-		$xpbar/Label.text = str(xp) + '/' + str(xp_to_next_level)
+		on_xp_changed.emit()
 
 
 func level_up() -> void:
@@ -111,16 +109,18 @@ func level_up() -> void:
 func _apply_levelup_bonus(bonus_id: int):
 	match bonus_id:
 		0:
-			_health += 20
-			%HealthBar.max_value += 20
+			if health == max_health:
+				health += 20
+			max_health += 20
+			on_health_changed.emit()
 		1:
-			_speed += 30
+			speed += 30
 		2:
-			hp_regen_rate += 1
+			health_regen_per_second += 1
 		3:
 			max_mana += 5
-			%manabar.max_value = max_mana
 			mana += 5
+			on_mana_changed.emit()
 		4:
 			mana_regen += 1
 		5:
@@ -136,9 +136,10 @@ func _apply_levelup_bonus(bonus_id: int):
 	print("Applied bonus: ", bonus_id)
 
 
+var _mana_regen_accumulator: float = 0.0
 func _physics_process(delta):
 	var direction = Input.get_vector("movement_left", "movement_right", "movement_up", "movement_down")
-	velocity = direction * _speed * delta * 100
+	velocity = direction * speed * delta * 100
 	move_and_slide()
 	
 	if velocity.length() > 0.0:
@@ -150,12 +151,6 @@ func _physics_process(delta):
 	var mouse_pos = get_global_mouse_position()
 	_left_hand.look_at(mouse_pos)
 	_right_hand.look_at(mouse_pos)
-	
-	# HP regen
-	_hp_regen_accumulator += delta
-	if _hp_regen_accumulator >= 1.0:
-		_hp_regen_accumulator -= 1.0
-		heal(hp_regen_rate)
 
 	# Mana regen
 	_mana_regen_accumulator += delta
@@ -168,45 +163,16 @@ func restore_mana(amount: int) -> void:
 	if mana > max_mana:
 		mana = max_mana
 	
-	%manabar.value = mana
-	$manabar/Label.text = str(mana) + '/' + str(max_mana)
+	on_mana_changed.emit()
 
 
 func consume_mana(amount: int) -> bool:
 	if mana >= amount:
 		mana -= amount
-		%manabar.value = mana
-		$manabar/Label.text = str(mana) + '/' + str(max_mana)
+		on_mana_changed.emit()
 		return true
 	else:
 		return false
-
-
-func heal(amount: int) -> void:
-	_health += amount
-	if _health > %HealthBar.max_value:
-		_health = %HealthBar.max_value
-	
-	$HealthBar.value = _health
-	$HealthBar/Label.text = str(_health) + '/' + str(%HealthBar.max_value)
-
-
-func damage(damage_amount: float) -> void:
-	# Check dodge first
-	if randf() < dodge: # _dodge = 0.0 → 0% dodge, 1.0 → 100% dodge
-		print("Attack dodged!")
-		
-		return # no damage applied
-		
-	if _health - damage_amount <= 0.0:
-		_health = 0.0
-		get_node("%GameOver").show()
-		get_tree().paused = true
-	else:
-		_health -= damage_amount
-
-	$HealthBar/Label.text = str(_health) + '/' + str(%HealthBar.max_value)
-	get_node("%HealthBar").value = _health
 
 
 func add_gold(amount):
@@ -264,3 +230,19 @@ func on_hotbar_item_changed():
 
 		if wand != null:
 			_right_hand.add_child(wand)
+
+
+func update_health_ui() -> void:
+	$HealthBar.value = health
+	$HealthBar.max_value = max_health
+	$HealthBar/Label.text = str(health) + '/' + str(max_health)
+
+func update_mana_ui() -> void:
+	$ManaBar.value = mana
+	$ManaBar.max_value = max_mana
+	$ManaBar/Label.text = str(mana) + '/' + str(max_mana)
+
+func update_xp_ui() -> void:
+	$XpBar.value = xp
+	$XpBar.max_value = xp_to_next_level
+	$XpBar/Label.text = str(xp) + '/' + str(xp_to_next_level)

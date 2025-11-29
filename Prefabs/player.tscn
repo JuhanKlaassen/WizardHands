@@ -62,7 +62,7 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "100/100"
 
-[node name="xpbar" type="ProgressBar" parent="."]
+[node name="XpBar" type="ProgressBar" parent="."]
 unique_name_in_owner = true
 z_index = 100
 offset_left = -83.0
@@ -73,7 +73,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_2nftw")
 max_value = 10.0
 show_percentage = false
 
-[node name="Label" type="Label" parent="xpbar"]
+[node name="Label" type="Label" parent="XpBar"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -88,7 +88,7 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "0/40"
 
-[node name="manabar" type="ProgressBar" parent="."]
+[node name="ManaBar" type="ProgressBar" parent="."]
 unique_name_in_owner = true
 z_index = 100
 offset_left = -83.0
@@ -99,7 +99,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_knrd4")
 max_value = 10.0
 show_percentage = false
 
-[node name="Label" type="Label" parent="manabar"]
+[node name="Label" type="Label" parent="ManaBar"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
