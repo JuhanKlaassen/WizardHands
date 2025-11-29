@@ -3,10 +3,9 @@ extends CharacterBody2D
 class_name Player
 
 
-
 @export var level: int = 1
 @export var xp: int = 0
-@export var gold:int = 0
+@export var gold: int = 0
 
 
 ###PLAYER STATS
@@ -19,7 +18,7 @@ class_name Player
 @export var mana_regen: int = 1
 #MISC
 @export var _speed: float = 250.0
-@export var dodge:float = 0.0
+@export var dodge: float = 0.0
 
 const LEVELUP_MENU = preload("res://Scenes/level_up_menu.tscn") # adjust path
 var levelup_menu: LevelUpMenu = null
@@ -59,7 +58,7 @@ func gain_xp(amount: int) -> void:
 	
 	while xp >= xp_to_next_level:
 		xp -= xp_to_next_level
-		level_up()  # xp_to_next_level will be updated here
+		level_up() # xp_to_next_level will be updated here
 		
 		# Immediately refresh XP bar with the new xp_to_next_level
 		%xpbar.max_value = xp_to_next_level
@@ -85,12 +84,12 @@ func level_up() -> void:
 
 	# Randomly generate 3 options
 	var choices = [
-		{ "id": 0, "text": "+20 Max HP" },
-		{ "id": 1, "text": "+30 Speed" },
-		{ "id": 2, "text": "+1 HP Regen/sec" },
-		{ "id": 3, "text": "+5 Max Mana" },
-		{ "id": 4, "text": "+1 Mana Regen" },
-		{ "id": 5, "text": "+5% Dodge" }
+		{"id": 0, "text": "+20 Max HP"},
+		{"id": 1, "text": "+30 Speed"},
+		{"id": 2, "text": "+1 HP Regen/sec"},
+		{"id": 3, "text": "+5 Max Mana"},
+		{"id": 4, "text": "+1 Mana Regen"},
+		{"id": 5, "text": "+5% Dodge"}
 	]
 
 	choices.shuffle()
@@ -135,7 +134,6 @@ func _apply_levelup_bonus(bonus_id: int):
 	get_tree().paused = false
 
 	print("Applied bonus: ", bonus_id)
-
 
 
 func _physics_process(delta):
@@ -195,10 +193,10 @@ func heal(amount: int) -> void:
 
 func damage(damage_amount: float) -> void:
 	# Check dodge first
-	if randf() < dodge:   # _dodge = 0.0 → 0% dodge, 1.0 → 100% dodge
+	if randf() < dodge: # _dodge = 0.0 → 0% dodge, 1.0 → 100% dodge
 		print("Attack dodged!")
 		
-		return  # no damage applied
+		return # no damage applied
 		
 	if _health - damage_amount <= 0.0:
 		_health = 0.0
@@ -234,7 +232,8 @@ func on_hotbar_item_changed():
 			var slot = _ui_hotbar.get_slot(0)
 			wand.on_cooldown_changed.connect(slot.set_cooldown)
 			var shoot_lambda_func = shoot_lambda.bind(wand)
-			slot.on_slot_action_called.connect(shoot_lambda_func)
+			if !slot.on_slot_action_called.is_connected(shoot_lambda_func):
+				slot.on_slot_action_called.connect(shoot_lambda_func)
 			wand.tree_exiting.connect(slot.on_slot_action_called.disconnect.bind(shoot_lambda_func))
 
 		if _left_item != null:
@@ -255,7 +254,8 @@ func on_hotbar_item_changed():
 			var slot = _ui_hotbar.get_slot(1)
 			wand.on_cooldown_changed.connect(slot.set_cooldown)
 			var shoot_lambda_func = shoot_lambda.bind(wand)
-			slot.on_slot_action_called.connect(shoot_lambda_func)
+			if !slot.on_slot_action_called.is_connected(shoot_lambda_func):
+				slot.on_slot_action_called.connect(shoot_lambda_func)
 			wand.tree_exiting.connect(slot.on_slot_action_called.disconnect.bind(shoot_lambda_func))
 
 		if _right_item != null:

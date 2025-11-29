@@ -34,7 +34,8 @@ func _ready() -> void:
 func set_item(new_item: Item) -> void:
 	_item = new_item
 	reload()
-	new_item.item_changed.connect(reload)
+	if !new_item.item_changed.is_connected(reload):
+		new_item.item_changed.connect(reload)
 
 func set_cooldown(new_cooldown: float) -> void:
 	if new_cooldown > 0.0:
