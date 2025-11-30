@@ -54,9 +54,13 @@ func _unhandled_input(event: InputEvent) -> void:
 		_is_open = false
 		get_tree().root.set_input_as_handled()
 	elif event.is_action_pressed("pause_toggle") and not _is_open and _pause_menu != null:
+		_pause_menu.update()
+		
 		_pause_menu.visible = true
 		get_tree().paused = true
 		get_tree().root.set_input_as_handled()
+		
+
 	else:
 		for ui_action_group in _togglable_ui_elements:
 			if event.is_action_pressed(ui_action_group.action.action):

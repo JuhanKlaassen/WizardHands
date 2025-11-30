@@ -1,10 +1,34 @@
-[gd_scene load_steps=2 format=3 uid="uid://8wd5jntm1udq"]
+[gd_scene load_steps=4 format=3 uid="uid://8wd5jntm1udq"]
 
 [ext_resource type="Script" uid="uid://bv7dvfem5rg7o" path="res://Scripts/level_up_menu.gd" id="1_not7j"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_not7j"]
+bg_color = Color(0.44291073, 0.4429108, 0.4429106, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.2051174, 0.20511746, 0.20511726, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="Theme" id="Theme_ofv6y"]
+Button/font_sizes/font_size = 32
+Button/styles/normal = SubResource("StyleBoxFlat_not7j")
 
 [node name="LevelUpMenu" type="CanvasLayer"]
 process_mode = 3
 script = ExtResource("1_not7j")
+
+[node name="Panel2" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Panel" type="Panel" parent="."]
 anchors_preset = 8
@@ -22,18 +46,24 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Option1" type="Button" parent="Panel/HBoxContainer"]
 layout_mode = 2
+theme = SubResource("Theme_ofv6y")
 text = "test"
 
 [node name="Option2" type="Button" parent="Panel/HBoxContainer"]
 layout_mode = 2
+theme = SubResource("Theme_ofv6y")
 text = "test"
 
 [node name="Option3" type="Button" parent="Panel/HBoxContainer"]
 layout_mode = 2
+theme = SubResource("Theme_ofv6y")
 text = "test"

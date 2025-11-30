@@ -63,5 +63,30 @@ text = "Main menu"
 visible = false
 layout_mode = 2
 
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+
+[node name="level" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "LEVEL"
+
+[node name="dodge" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "DODGE:"
+
+[node name="mana_reg" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "MANA REGEN:"
+
+[node name="hp_reg" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "HP REGEN:"
+
+[node name="speed" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "SPEED"
+
 [connection signal="pressed" from="Paused/CenterContainer/VBoxContainer/Resume" to="." method="resume"]
 [connection signal="pressed" from="Paused/CenterContainer/VBoxContainer/Main menu" to="." method="Quit"]
