@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://duhg01ib15pvu" path="res://Scripts/game.gd" id="1_kavro"]
 [ext_resource type="PackedScene" uid="uid://dsw8raqgacxsc" path="res://Prefabs/player.tscn" id="2_fk7m3"]
-[ext_resource type="Script" path="res://Scripts/waves.gd" id="2_frkhe"]
+[ext_resource type="Script" uid="uid://cf8tw24i4jagj" path="res://Scripts/waves.gd" id="2_frkhe"]
 [ext_resource type="PackedScene" uid="uid://c2qg1nuvfnd4q" path="res://Assets/trees/pine_tree.tscn" id="3_eua6o"]
 [ext_resource type="Resource" uid="uid://b2bo4qnof11j0" path="res://Resources/Waves/WaveCollection.tres" id="3_h1m7h"]
 [ext_resource type="Resource" uid="uid://18knp5812ewg" path="res://Resources/Items/BasicWand.tres" id="4_4kpch"]
@@ -77,24 +77,37 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.439216)
 
-[node name="Label" type="Label" parent="GameOver/ColorRect"]
-unique_name_in_owner = true
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOver/ColorRect"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -358.0
-offset_top = -107.0
-offset_right = 358.0
-offset_bottom = 107.0
+offset_left = -336.5
+offset_top = -98.5
+offset_right = 336.5
+offset_bottom = 98.5
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Label" type="Label" parent="GameOver/ColorRect/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
 theme_override_font_sizes/font_size = 124
 text = "Game Over"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GameOver/ColorRect/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="LinkButton" type="LinkButton" parent="GameOver/ColorRect/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 32
+text = "reset"
 
 [node name="Parallax2D" type="Parallax2D" parent="."]
 z_index = -50

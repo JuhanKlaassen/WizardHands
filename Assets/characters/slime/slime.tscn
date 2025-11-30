@@ -28,10 +28,10 @@ tracks/1/path = NodePath("Anchor/SlimeBody:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
+"times": PackedFloat32Array(0.2),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(1, 1)]
+"values": [Vector2(3, 3)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -147,7 +147,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.5, 1),
 "transitions": PackedFloat32Array(-2, -2, -2),
 "update": 0,
-"values": [Vector2(1, 1), Vector2(1.05, 0.95), Vector2(1, 1)]
+"values": [Vector2(3, 3), Vector2(3.05, 2.76), Vector2(3, 3)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -188,7 +188,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0.1, 0.3, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(0.9, 1.1), Vector2(1.1, 0.9), Vector2(0.9, 1.1)]
+"values": [Vector2(2.9, 3.544), Vector2(3.1, 2.536), Vector2(2.9, 3.544)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -215,7 +215,7 @@ _data = {
 script = ExtResource("1_87y5x")
 
 [node name="GroundShadow" type="Sprite2D" parent="."]
-modulate = Color(0.898039, 0.878431, 0.831373, 1)
+modulate = Color(2.0954525, 2.2900522, 1.9657195, 1)
 z_index = -1
 z_as_relative = false
 scale = Vector2(0.8, 0.8)
@@ -224,6 +224,8 @@ texture = ExtResource("1_cq7ej")
 [node name="Anchor" type="Marker2D" parent="."]
 
 [node name="SlimeBody" type="Sprite2D" parent="Anchor"]
+position = Vector2(0, 82)
+scale = Vector2(3, 3)
 texture = ExtResource("1_3j35h")
 offset = Vector2(0, -36)
 
@@ -241,5 +243,5 @@ texture = ExtResource("2_ygydt")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 libraries = {
-"": SubResource("AnimationLibrary_j6cum")
+&"": SubResource("AnimationLibrary_j6cum")
 }

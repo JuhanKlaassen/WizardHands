@@ -35,5 +35,5 @@ texture = ExtResource("1_g7t2f")
 [node name="PineTree" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_puf3d")
 position = Vector2(0, -90)
-scale = Vector2(1.25, 1.25)
+scale = Vector2(10, 10)
 texture = ExtResource("2_hd1ds")

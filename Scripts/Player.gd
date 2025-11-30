@@ -144,7 +144,8 @@ func _physics_process(delta):
 	
 	if velocity.length() > 0.0:
 		%HappyBoo.play_walk_animation()
-		Walk_Sound.play()
+		if not Walk_Sound.playing:
+			Walk_Sound.play()
 	else:
 		%HappyBoo.play_idle_animation()
 

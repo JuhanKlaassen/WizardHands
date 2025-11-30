@@ -5,10 +5,12 @@
 [ext_resource type="AudioStream" uid="uid://c73f2qul2kil6" path="res://Assets/ShootingSound.mp3" id="3_blq0c"]
 
 [node name="Wand" type="Node2D"]
+scale = Vector2(2, 2)
 script = ExtResource("1_i3vt2")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
+scale = Vector2(2, 2)
 texture = ExtResource("2_idur6")
 offset = Vector2(16, 0)
 
