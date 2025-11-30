@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="PlayerModifier" load_steps=2 format=3 uid="uid://l2lw1fy068bm"]
+
+[ext_resource type="Script" uid="uid://dox5h7bbn17vr" path="res://Scripts/PlayerModifier.gd" id="1_pu4ht"]
+
+[resource]
+script = ExtResource("1_pu4ht")
+name = "+1 HP Regen/sec"
+type = 1
+value = 1.0
+metadata/_custom_type_script = "uid://dox5h7bbn17vr"

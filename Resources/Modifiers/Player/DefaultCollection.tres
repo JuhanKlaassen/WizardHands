@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="PlayerModifierCollection" load_steps=9 format=3 uid="uid://iwec1hjvmvxl"]
+
+[ext_resource type="Script" uid="uid://dox5h7bbn17vr" path="res://Scripts/PlayerModifier.gd" id="1_wb8hy"]
+[ext_resource type="Resource" uid="uid://bmnooh8j4mucg" path="res://Resources/Modifiers/Player/MaxHp.tres" id="2_yr176"]
+[ext_resource type="Resource" uid="uid://bvmo2m2vbjy4y" path="res://Resources/Modifiers/Player/HpRegen.tres" id="3_lxeis"]
+[ext_resource type="Resource" uid="uid://l2lw1fy068bm" path="res://Resources/Modifiers/Player/MaxMana.tres" id="4_fb5l6"]
+[ext_resource type="Resource" uid="uid://cc4njwk5fgydu" path="res://Resources/Modifiers/Player/ManaRegen.tres" id="5_ni13j"]
+[ext_resource type="Resource" uid="uid://cnksgewch6ht8" path="res://Resources/Modifiers/Player/Speed.tres" id="6_bil31"]
+[ext_resource type="Resource" uid="uid://bsendyi54prq8" path="res://Resources/Modifiers/Player/Dodge.tres" id="7_e2uos"]
+[ext_resource type="Script" uid="uid://cj6t1v30jqk60" path="res://Scripts/PlayerModifierCollection.gd" id="8_20q6s"]
+
+[resource]
+script = ExtResource("8_20q6s")
+modifiers = Array[ExtResource("1_wb8hy")]([ExtResource("2_yr176"), ExtResource("3_lxeis"), ExtResource("4_fb5l6"), ExtResource("5_ni13j"), ExtResource("6_bil31"), ExtResource("7_e2uos")])

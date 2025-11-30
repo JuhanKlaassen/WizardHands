@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="PlayerModifier" load_steps=2 format=3 uid="uid://cc4njwk5fgydu"]
+
+[ext_resource type="Script" uid="uid://dox5h7bbn17vr" path="res://Scripts/PlayerModifier.gd" id="1_yx30k"]
+
+[resource]
+script = ExtResource("1_yx30k")
+name = "+1 Mana Regen"
+type = 3
+value = 1.0
+metadata/_custom_type_script = "uid://dox5h7bbn17vr"

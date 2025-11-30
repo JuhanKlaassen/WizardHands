@@ -21,6 +21,7 @@ var levelup_menu: LevelUpMenu = null
 #ajutine prg
 @export var xp_to_next_level: int = 40
 
+@export var modifier_collection: PlayerModifierCollection
 
 @onready var _left_hand: Node2D = %LeftHand
 @onready var _right_hand: Node2D = %RightHand
@@ -81,59 +82,28 @@ func level_up() -> void:
 	get_parent().add_child(levelup_menu)
 
 	# Randomly generate 3 options
-	var choices = [
-		{"id": 0, "text": "+20 Max HP"},
-		{"id": 1, "text": "+30 Speed"},
-		{"id": 2, "text": "+1 HP Regen/sec"},
-		{"id": 3, "text": "+5 Max Mana"},
-		{"id": 4, "text": "+1 Mana Regen"},
-		{"id": 5, "text": "+5% Dodge"}
-	]
+	var choices = modifier_collection.modifiers
 
 	choices.shuffle()
 
 	# show 3
 	levelup_menu.set_options(
-		choices[0].text,
-		choices[1].text,
-		choices[2].text
+		choices[0].name,
+		choices[1].name,
+		choices[2].name
 	)
 
 	# Wait for a click
 	levelup_menu.option_selected.connect(
 		func(option_id):
-			_apply_levelup_bonus(choices[option_id].id)
+			choices[option_id].apply(self)
+			levelup_menu.queue_free()
+			levelup_menu = null
+
+			# Unpause game
+			get_tree().paused = false
+			print("Applied bonus: ", choices[option_id].name)
 	)
-
-
-func _apply_levelup_bonus(bonus_id: int):
-	match bonus_id:
-		0:
-			if health == max_health:
-				health += 20
-			max_health += 20
-			on_health_changed.emit()
-		1:
-			speed += 30
-		2:
-			health_regen_per_second += 1
-		3:
-			max_mana += 5
-			mana += 5
-			on_mana_changed.emit()
-		4:
-			mana_regen += 1
-		5:
-			dodge += 0.05
-
-	# Close menu
-	levelup_menu.queue_free()
-	levelup_menu = null
-
-	# Unpause game
-	get_tree().paused = false
-
-	print("Applied bonus: ", bonus_id)
 
 
 var _mana_regen_accumulator: float = 0.0

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="PlayerModifier" load_steps=2 format=3 uid="uid://bvmo2m2vbjy4y"]
+
+[ext_resource type="Script" uid="uid://dox5h7bbn17vr" path="res://Scripts/PlayerModifier.gd" id="1_gx5c6"]
+
+[resource]
+script = ExtResource("1_gx5c6")
+name = "+5 Max Mana"
+type = 2
+value = 5.0
+metadata/_custom_type_script = "uid://dox5h7bbn17vr"
