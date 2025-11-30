@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dsw8raqgacxsc"]
+[gd_scene load_steps=13 format=3 uid="uid://dsw8raqgacxsc"]
 
 [ext_resource type="Script" uid="uid://donv1hujqvup3" path="res://Scripts/Player.gd" id="1_y5hcb"]
 [ext_resource type="PackedScene" uid="uid://pbmyh1qru7p" path="res://Assets/characters/happy_boo/happy_boo.tscn" id="2_bl5ih"]
@@ -10,11 +10,32 @@
 radius = 21.0
 height = 68.42
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hck1p"]
+bg_color = Color(0.15127608, 0.15127608, 0.15127605, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_juxdh"]
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="Theme" id="Theme_juxdh"]
+ProgressBar/styles/background = SubResource("StyleBoxFlat_hck1p")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_juxdh")
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a5sny"]
 bg_color = Color(0.7283238, 0.31187874, 2.8878452e-07, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2nftw"]
-bg_color = Color(1.8289685e-06, 0.6869361, 0.68452287, 1)
+bg_color = Color(0, 0.71685433, 0.38103318, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_knrd4"]
 bg_color = Color(0, 0.699084, 0.5890259, 1)
@@ -40,9 +61,10 @@ stream = ExtResource("3_knrd4")
 unique_name_in_owner = true
 z_index = 100
 offset_left = -83.0
-offset_top = -212.0
+offset_top = -238.0
 offset_right = 87.0
-offset_bottom = -177.0
+offset_bottom = -203.0
+theme = SubResource("Theme_juxdh")
 theme_override_styles/fill = SubResource("StyleBoxFlat_a5sny")
 value = 100.0
 show_percentage = false
@@ -69,6 +91,7 @@ offset_left = -83.0
 offset_top = -142.0
 offset_right = 87.0
 offset_bottom = -107.0
+theme = SubResource("Theme_juxdh")
 theme_override_styles/fill = SubResource("StyleBoxFlat_2nftw")
 max_value = 10.0
 show_percentage = false
@@ -92,9 +115,10 @@ text = "0/40"
 unique_name_in_owner = true
 z_index = 100
 offset_left = -83.0
-offset_top = -177.0
+offset_top = -194.0
 offset_right = 87.0
-offset_bottom = -142.0
+offset_bottom = -159.0
+theme = SubResource("Theme_juxdh")
 theme_override_styles/fill = SubResource("StyleBoxFlat_knrd4")
 max_value = 10.0
 show_percentage = false
@@ -133,8 +157,8 @@ unique_name_in_owner = true
 position = Vector2(50, -30)
 
 [node name="gold" type="Label" parent="."]
-offset_left = 107.0
-offset_top = -210.0
-offset_right = 147.0
-offset_bottom = -187.0
+offset_left = -26.0
+offset_top = -290.0
+offset_right = 19.0
+offset_bottom = -267.0
 text = "GOLD"
