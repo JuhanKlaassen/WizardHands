@@ -10,11 +10,11 @@ radius = 22.4571
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_puf3d"]
 shader = ExtResource("2_xglxc")
 shader_parameter/speed = 0.8
-shader_parameter/minStrength = 0.050000002375
-shader_parameter/maxStrength = 0.10000000475
+shader_parameter/minStrength = 0.030000001425
+shader_parameter/maxStrength = 0.0090000004275
 shader_parameter/strengthScale = 150.0
 shader_parameter/interval = 5.0
-shader_parameter/detail = 1.0
+shader_parameter/detail = 3.0
 shader_parameter/distortion = 1.0
 shader_parameter/heightOffset = 0.0
 shader_parameter/offset = 0.0

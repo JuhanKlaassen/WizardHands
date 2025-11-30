@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://8wd5jntm1udq"]
+[gd_scene load_steps=5 format=3 uid="uid://8wd5jntm1udq"]
 
 [ext_resource type="Script" uid="uid://bv7dvfem5rg7o" path="res://Scripts/level_up_menu.gd" id="1_not7j"]
+[ext_resource type="FontFile" uid="uid://bdw4cp37sssxr" path="res://Resources/BoldPixels.ttf" id="2_ofv6y"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_not7j"]
 bg_color = Color(0.44291073, 0.4429108, 0.4429106, 1)
@@ -56,14 +57,23 @@ grow_vertical = 2
 [node name="Option1" type="Button" parent="Panel/HBoxContainer"]
 layout_mode = 2
 theme = SubResource("Theme_ofv6y")
+theme_override_constants/outline_size = 16
+theme_override_fonts/font = ExtResource("2_ofv6y")
+theme_override_font_sizes/font_size = 64
 text = "test"
 
 [node name="Option2" type="Button" parent="Panel/HBoxContainer"]
 layout_mode = 2
 theme = SubResource("Theme_ofv6y")
+theme_override_constants/outline_size = 16
+theme_override_fonts/font = ExtResource("2_ofv6y")
+theme_override_font_sizes/font_size = 64
 text = "test"
 
 [node name="Option3" type="Button" parent="Panel/HBoxContainer"]
 layout_mode = 2
 theme = SubResource("Theme_ofv6y")
+theme_override_constants/outline_size = 16
+theme_override_fonts/font = ExtResource("2_ofv6y")
+theme_override_font_sizes/font_size = 64
 text = "test"

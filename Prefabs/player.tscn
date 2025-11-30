@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://dsw8raqgacxsc"]
+[gd_scene load_steps=15 format=3 uid="uid://dsw8raqgacxsc"]
 
 [ext_resource type="Script" uid="uid://donv1hujqvup3" path="res://Scripts/Player.gd" id="1_y5hcb"]
 [ext_resource type="PackedScene" uid="uid://pbmyh1qru7p" path="res://Assets/characters/happy_boo/happy_boo.tscn" id="2_bl5ih"]
 [ext_resource type="Resource" uid="uid://iwec1hjvmvxl" path="res://Resources/Modifiers/Player/DefaultCollection.tres" id="2_hck1p"]
 [ext_resource type="AudioStream" uid="uid://bdjbp7b0lfktj" path="res://Assets/Walk.mp3" id="3_knrd4"]
+[ext_resource type="FontFile" uid="uid://bdw4cp37sssxr" path="res://Resources/BoldPixels.ttf" id="4_hck1p"]
 [ext_resource type="Script" uid="uid://dva3gu8fbivsr" path="res://Scripts/InventorySystem.gd" id="4_knrd4"]
 [ext_resource type="Script" uid="uid://vk087g6hsy7f" path="res://Scripts/Item.gd" id="5_hck1p"]
 
@@ -42,6 +43,7 @@ bg_color = Color(0, 0.71685433, 0.38103318, 1)
 bg_color = Color(0, 0.699084, 0.5890259, 1)
 
 [node name="Player" type="CharacterBody2D"]
+position = Vector2(1, 0)
 collision_layer = 8
 collision_mask = 2
 script = ExtResource("1_y5hcb")
@@ -49,6 +51,7 @@ modifier_collection = ExtResource("2_hck1p")
 
 [node name="HappyBoo" parent="." instance=ExtResource("2_bl5ih")]
 unique_name_in_owner = true
+position = Vector2(-1, 16)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5707964
@@ -63,9 +66,9 @@ stream = ExtResource("3_knrd4")
 unique_name_in_owner = true
 z_index = 100
 offset_left = -83.0
-offset_top = -238.0
+offset_top = -328.0
 offset_right = 87.0
-offset_bottom = -203.0
+offset_bottom = -293.0
 theme = SubResource("Theme_juxdh")
 theme_override_styles/fill = SubResource("StyleBoxFlat_a5sny")
 value = 100.0
@@ -84,15 +87,18 @@ offset_right = 20.0
 offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("4_hck1p")
+theme_override_font_sizes/font_size = 18
 text = "100/100"
 
 [node name="XpBar" type="ProgressBar" parent="."]
 unique_name_in_owner = true
 z_index = 100
 offset_left = -83.0
-offset_top = -142.0
+offset_top = -241.0
 offset_right = 87.0
-offset_bottom = -107.0
+offset_bottom = -204.0
 theme = SubResource("Theme_juxdh")
 theme_override_styles/fill = SubResource("StyleBoxFlat_2nftw")
 max_value = 10.0
@@ -111,15 +117,18 @@ offset_right = 20.0
 offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("4_hck1p")
+theme_override_font_sizes/font_size = 18
 text = "0/40"
 
 [node name="ManaBar" type="ProgressBar" parent="."]
 unique_name_in_owner = true
 z_index = 100
 offset_left = -83.0
-offset_top = -194.0
+offset_top = -284.0
 offset_right = 87.0
-offset_bottom = -159.0
+offset_bottom = -249.0
 theme = SubResource("Theme_juxdh")
 theme_override_styles/fill = SubResource("StyleBoxFlat_knrd4")
 max_value = 10.0
@@ -138,6 +147,9 @@ offset_right = 20.0
 offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("4_hck1p")
+theme_override_font_sizes/font_size = 18
 text = "0/10"
 
 [node name="Hotbar" type="Node" parent="."]
@@ -152,15 +164,18 @@ _items = Array[ExtResource("5_hck1p")]([null, null, null, null, null, null, null
 
 [node name="LeftHand" type="Node2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(-50, -30)
+position = Vector2(-27, -42)
 
 [node name="RightHand" type="Node2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(50, -30)
+position = Vector2(34, -42)
 
 [node name="gold" type="Label" parent="."]
-offset_left = -26.0
-offset_top = -290.0
-offset_right = 19.0
-offset_bottom = -267.0
+offset_left = 107.0
+offset_top = -321.0
+offset_right = 152.0
+offset_bottom = -298.0
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("4_hck1p")
+theme_override_font_sizes/font_size = 18
 text = "GOLD"

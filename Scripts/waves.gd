@@ -2,8 +2,11 @@ extends Node2D
 class_name Waves
 
 # Preload resource classes
+@warning_ignore("shadowed_global_identifier")
 const WaveData = preload("res://Resources/Waves/wave_data_resource.gd")
+@warning_ignore("shadowed_global_identifier")
 const WaveCollection = preload("res://Resources/Waves/wave_collection_resource.gd")
+@warning_ignore("shadowed_global_identifier")
 const EnemyScenes = preload("res://Resources/Waves/enemy_scenes_resource.gd")
 
 # Runtime variables

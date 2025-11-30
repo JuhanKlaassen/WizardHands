@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://btx1418xypjlp"]
+[gd_scene load_steps=3 format=3 uid="uid://btx1418xypjlp"]
 
 [ext_resource type="Script" uid="uid://d1dlp5etk3j5g" path="res://Scripts/UI/UIPauseMenu.gd" id="1_rnh56"]
+[ext_resource type="FontFile" uid="uid://bdw4cp37sssxr" path="res://Resources/BoldPixels.ttf" id="2_d1ra8"]
 
 [node name="UIPauseMenu" type="PanelContainer"]
 process_mode = 2
@@ -28,6 +29,9 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 theme_type_variation = &"Heading"
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("2_d1ra8")
+theme_override_font_sizes/font_size = 20
 text = "Paused
 "
 
@@ -46,17 +50,26 @@ theme_type_variation = &"VButtonContainer"
 [node name="Resume" type="Button" parent="Paused/CenterContainer/VBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"VMenuButton"
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("2_d1ra8")
+theme_override_font_sizes/font_size = 20
 text = "Resume"
 
 [node name="Options" type="Button" parent="Paused/CenterContainer/VBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"VMenuButton"
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("2_d1ra8")
+theme_override_font_sizes/font_size = 20
 text = "Options
 "
 
 [node name="Main menu" type="Button" parent="Paused/CenterContainer/VBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"VMenuButton"
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("2_d1ra8")
+theme_override_font_sizes/font_size = 20
 text = "Main menu"
 
 [node name="Options" type="Control" parent="."]
