@@ -22,11 +22,17 @@ var spawn_timer := 0.0
 # Constants
 const WAVE_DELAY = 3.0   # seconds between waves
 
-# Resources (assign these in the inspector)
+# enemy scaling settings per wave
+@export var health_per_wave := 1.15
+@export var speed_per_wave := 1.05
+@export var scale_per_wave := 1.02
+
+# resources
 @export var wave_collection: WaveCollection
 @export var enemy_scenes: EnemyScenes
 
 @onready var wave_label = $"/root/Game/UI/WaveLabel"
+@onready var difficulty_label = $"/root/Game/UI/DifficultyScalingLabel"
 
 func _ready():
 	start_wave()
@@ -34,7 +40,11 @@ func _ready():
 func start_wave():
 	wave_label.text = "Wave " + str(display_wave_count)
 	wave_label.visible = true
-
+	
+	var diff = get_current_difficulty_multiplier()
+	difficulty_label.text = "Enemy difficulty scale x" + str(round(diff * 100) / 100.0)
+	difficulty_label.visible = true
+	
 	# show label for some seconds
 	delay_timer = WAVE_DELAY
 	between_waves = true
@@ -87,6 +97,10 @@ func spawn_enemy():
 	%PathFollow2D.progress_ratio = randf()
 	var enemy = scene.instantiate()
 	enemy.global_position = %PathFollow2D.global_position
+	
+	# enemy scaling
+	apply_wave_scaling(enemy)
+	
 	get_parent().add_child(enemy)
 
 func spawn_enemy_with_modifiers(enemy_type: String, modifiers := {}):
@@ -111,7 +125,10 @@ func spawn_enemy_with_modifiers(enemy_type: String, modifiers := {}):
 
 	if modifiers.has("speed_mult"):
 		enemy.speed *= modifiers["speed_mult"]
-
+	
+	# enemy scaling
+	apply_wave_scaling(enemy)
+	
 	get_parent().add_child(enemy)
 	return enemy
 
@@ -136,6 +153,29 @@ func next_wave():
 		current_wave = wave_collection.waves.size() - 1
 
 	load_wave(current_wave)
+
+func apply_wave_scaling(enemy):
+	var wave_multiplier = float(current_wave)
+
+	# health scaling
+	if "health" in enemy:
+		enemy.health *= pow(health_per_wave, wave_multiplier)
+
+	# speed scaling
+	if "speed" in enemy:
+		enemy.speed *= pow(speed_per_wave, wave_multiplier)
+
+	# size scaling
+	enemy.scale *= Vector2.ONE * pow(scale_per_wave, wave_multiplier)
+
+func get_current_difficulty_multiplier() -> float:
+	var wave = float(current_wave)
+	var h_mult = pow(health_per_wave, wave)
+	var s_mult = pow(speed_per_wave, wave)
+	var sc_mult = pow(scale_per_wave, wave)
+
+	# shown difficulty multiplier
+	return (h_mult + s_mult) / 2.0
 
 func _process(delta):
 	if between_waves:

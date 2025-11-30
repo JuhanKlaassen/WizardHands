@@ -16,6 +16,8 @@ script = ExtResource("1_xhyow")
 
 [node name="Slime" parent="." instance=ExtResource("3_n2uyc")]
 unique_name_in_owner = true
+position = Vector2(0, 11)
+scale = Vector2(1.5, 1.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -28)
