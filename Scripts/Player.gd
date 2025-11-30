@@ -138,6 +138,7 @@ func _apply_levelup_bonus(bonus_id: int):
 
 var _mana_regen_accumulator: float = 0.0
 func _physics_process(delta):
+	super._physics_process(delta)
 	var direction = Input.get_vector("movement_left", "movement_right", "movement_up", "movement_down")
 	velocity = direction * speed * delta * 100
 	move_and_slide()
