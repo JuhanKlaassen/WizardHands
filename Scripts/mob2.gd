@@ -27,7 +27,7 @@ func try_attack(body):
 	if body.has_method("damage"):
 		body.damage(1.0)
 
-func take_damage(damage: float):
+func damage(damage: float):
 	%Rat.play_hurt()
 	health -= damage
 

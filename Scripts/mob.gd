@@ -26,9 +26,9 @@ func try_attack(body):
 	if body.has_method("damage"):
 		body.damage(1.0)
 
-func take_damage(damage: float):
+func damage(amount: float):
 	%Slime.play_hurt()
-	health -= damage
+	health -= amount
 
 	if health <= 0:
 		var smoke_scene = preload("res://Assets/smoke_explosion/smoke_explosion.tscn")
