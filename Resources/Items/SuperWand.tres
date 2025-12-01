@@ -11,9 +11,10 @@ region = Rect2(288, 192, 32, 32)
 
 [resource]
 script = ExtResource("3_vjval")
-damage = 100
+damage = 10000
 projectile_speed = 400
 projectile_range = 500
+mana_cost = 100
 projectile_prefab = ExtResource("2_2onjc")
 wand_sprite = ExtResource("3_umlrl")
 name = "Super Wand"
