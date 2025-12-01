@@ -16,6 +16,7 @@ func _input(event):
 	#if OS.has_feature("editor"):
 
 	if event.is_action_pressed("dbg_reload_game"):
+		get_tree().paused = false
 		#get_tree().call_deferred("reload_current_scene")
 		var items_to_delete: Array[Node] = get_tree().get_nodes_in_group("ground_items")
 		print("Found %d ground items to delete." % items_to_delete.size())
