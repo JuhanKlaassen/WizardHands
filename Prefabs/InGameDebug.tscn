@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://dhglldjqa30et"]
 
-[ext_resource type="Script" uid="uid://droboofefjp1r" path="res://Prefabs/actions.gd" id="1_8scg8"]
+[ext_resource type="Script" uid="uid://ddgl0jpyv1eyu" path="res://Scripts/Actions.gd" id="1_ucusw"]
 
 [node name="InGameDebug" type="Node"]
 process_mode = 3
 
 [node name="Actions" type="Node" parent="."]
-script = ExtResource("1_8scg8")
+script = ExtResource("1_ucusw")

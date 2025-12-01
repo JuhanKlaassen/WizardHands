@@ -1,8 +1,7 @@
-[gd_scene load_steps=25 format=3 uid="uid://bc6wwmcjvdkky"]
+[gd_scene load_steps=23 format=3 uid="uid://bc6wwmcjvdkky"]
 
-[ext_resource type="Script" uid="uid://duhg01ib15pvu" path="res://Scripts/game.gd" id="1_kavro"]
-[ext_resource type="PackedScene" uid="uid://dsw8raqgacxsc" path="res://Prefabs/player.tscn" id="2_fk7m3"]
-[ext_resource type="Script" uid="uid://cf8tw24i4jagj" path="res://Scripts/waves.gd" id="2_frkhe"]
+[ext_resource type="Script" uid="uid://dsbq1ab0s18ho" path="res://Scripts/Waves.gd" id="1_h1m7h"]
+[ext_resource type="PackedScene" uid="uid://dsw8raqgacxsc" path="res://Prefabs/Player.tscn" id="2_fk7m3"]
 [ext_resource type="PackedScene" uid="uid://c2qg1nuvfnd4q" path="res://Assets/trees/pine_tree.tscn" id="3_eua6o"]
 [ext_resource type="Resource" uid="uid://b2bo4qnof11j0" path="res://Resources/Waves/WaveCollection.tres" id="3_h1m7h"]
 [ext_resource type="Resource" uid="uid://18knp5812ewg" path="res://Resources/Items/BasicWand.tres" id="4_4kpch"]
@@ -14,10 +13,9 @@
 [ext_resource type="PackedScene" uid="uid://dv7nnwo6fsxpd" path="res://Prefabs/UI/UITransferSlot.tscn" id="6_8o5cv"]
 [ext_resource type="PackedScene" uid="uid://uota1sk3cua3" path="res://Prefabs/UI/UIPlayerHotbar.tscn" id="6_v0jmy"]
 [ext_resource type="PackedScene" uid="uid://gy141ydha6p2" path="res://Prefabs/UI/UIPlayerInventory.tscn" id="7_qxpe7"]
-[ext_resource type="Script" uid="uid://dg088efdlioyf" path="res://Scenes/game_over.gd" id="9_346fj"]
 [ext_resource type="PackedScene" uid="uid://btx1418xypjlp" path="res://Prefabs/UI/UIPauseMenu.tscn" id="10_4kpch"]
 [ext_resource type="FontFile" uid="uid://bdw4cp37sssxr" path="res://Resources/BoldPixels.ttf" id="10_erwvk"]
-[ext_resource type="Script" uid="uid://droboofefjp1r" path="res://Prefabs/actions.gd" id="18_0sclb"]
+[ext_resource type="Script" uid="uid://ddgl0jpyv1eyu" path="res://Scripts/Actions.gd" id="15_h1m7h"]
 
 [sub_resource type="Resource" id="Resource_grg3l"]
 script = ExtResource("4_bmxlf")
@@ -47,10 +45,9 @@ action = &"inventory_toggle"
 
 [node name="Game" type="Node2D"]
 y_sort_enabled = true
-script = ExtResource("1_kavro")
 
 [node name="Waves" type="Node2D" parent="."]
-script = ExtResource("2_frkhe")
+script = ExtResource("1_h1m7h")
 wave_collection = ExtResource("3_h1m7h")
 enemy_scenes = ExtResource("4_erwvk")
 
@@ -76,7 +73,6 @@ position = Vector2(-1055, -697)
 [node name="GameOver" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
 visible = false
-script = ExtResource("9_346fj")
 
 [node name="ColorRect" type="ColorRect" parent="GameOver"]
 anchors_preset = 15
@@ -815,7 +811,7 @@ theme_override_font_sizes/font_size = 36
 text = "PLAY GAME"
 
 [node name="Node" type="Node" parent="."]
-script = ExtResource("18_0sclb")
+script = ExtResource("15_h1m7h")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 

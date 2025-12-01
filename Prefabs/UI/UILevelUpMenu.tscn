@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://8wd5jntm1udq"]
+[gd_scene load_steps=5 format=3 uid="uid://37hg6ubcyiwx"]
 
-[ext_resource type="Script" uid="uid://bv7dvfem5rg7o" path="res://Scripts/level_up_menu.gd" id="1_not7j"]
+[ext_resource type="Script" uid="uid://b6xppbmtvi18u" path="res://Scripts/LevelUpMenu.gd" id="1_meg87"]
 [ext_resource type="FontFile" uid="uid://bdw4cp37sssxr" path="res://Resources/BoldPixels.ttf" id="2_ofv6y"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_not7j"]
@@ -22,7 +22,7 @@ Button/styles/normal = SubResource("StyleBoxFlat_not7j")
 
 [node name="LevelUpMenu" type="CanvasLayer"]
 process_mode = 3
-script = ExtResource("1_not7j")
+script = ExtResource("1_meg87")
 
 [node name="Panel2" type="Panel" parent="."]
 anchors_preset = 15

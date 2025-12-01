@@ -16,7 +16,7 @@ signal on_xp_changed
 #MISC
 @export var dodge: float = 0.0
 
-const LEVELUP_MENU = preload("res://Scenes/level_up_menu.tscn") # adjust path
+const LEVELUP_MENU = preload("res://Prefabs/UI/UILevelUpMenu.tscn") # adjust path
 var levelup_menu: LevelUpMenu = null
 #ajutine prg
 @export var xp_to_next_level: int = 40

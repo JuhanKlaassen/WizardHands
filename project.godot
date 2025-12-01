@@ -80,7 +80,7 @@ config/features=PackedStringArray("4.5", "Forward Plus")
 
 [autoload]
 
-InGameDebug="*res://Prefabs/in_game_debug.tscn"
+InGameDebug="*res://Prefabs/InGameDebug.tscn"
 ItemsController="*res://Prefabs/ItemsController.tscn"
 
 [display]

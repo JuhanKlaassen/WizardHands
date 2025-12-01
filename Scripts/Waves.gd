@@ -1,13 +1,6 @@
 extends Node2D
 class_name Waves
 
-# Preload resource classes
-@warning_ignore("shadowed_global_identifier")
-const WaveData = preload("res://Resources/Waves/wave_data_resource.gd")
-@warning_ignore("shadowed_global_identifier")
-const WaveCollection = preload("res://Resources/Waves/wave_collection_resource.gd")
-@warning_ignore("shadowed_global_identifier")
-const EnemyScenes = preload("res://Resources/Waves/enemy_scenes_resource.gd")
 
 # Runtime variables
 var entitySpawn := 0
@@ -20,7 +13,7 @@ var enemies_to_spawn := 0
 var spawn_timer := 0.0
 
 # Constants
-const WAVE_DELAY = 3.0   # seconds between waves
+const WAVE_DELAY = 3.0 # seconds between waves
 
 # enemy scaling settings per wave
 @export var health_per_wave := 1.15
@@ -142,7 +135,7 @@ func next_wave():
 	
 	if wave_data.get("spawn_special_at_end"):
 		var sp = wave_data.spawn_special_at_end
-		var enemy_type = sp.get("type", "mob")  # default to "mob" if not found
+		var enemy_type = sp.get("type", "mob") # default to "mob" if not found
 		spawn_enemy_with_modifiers(enemy_type, sp)
 	
 	current_wave += 1
@@ -183,7 +176,7 @@ func _process(delta):
 		if delay_timer <= 0:
 			wave_label.visible = false
 			between_waves = false
-			start_waves()   # load first wave or continue waves
+			start_waves() # load first wave or continue waves
 		return
 
 	process_wave(delta)

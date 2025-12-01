@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="WaveData" load_steps=2 format=3 uid="uid://fs1pwmdkergt"]
+
+[ext_resource type="Script" uid="uid://20bspsnmgdyb" path="res://Scripts/WaveData.gd" id="1_4ucac"]
+
+[resource]
+script = ExtResource("1_4ucac")
+count = 20
+spawn_rate = 0.8
+enemies = Array[String](["mob", "mob2"])
+spawn_special_at_end = {
+"health_mult": 6.0,
+"scale_mult": 2.0,
+"speed_mult": 0.8,
+"type": "mob2"
+}
