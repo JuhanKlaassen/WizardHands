@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 var speed = randf_range(200, 300)
 var health = 3.0
-var xp = 30
+var xp = 5
 
 
 @onready var player = get_node("/root/Game/Player")
