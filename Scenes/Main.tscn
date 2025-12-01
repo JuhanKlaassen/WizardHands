@@ -150,7 +150,7 @@ theme_override_fonts/font = ExtResource("10_erwvk")
 theme_override_font_sizes/font_size = 36
 
 [node name="DifficultyScalingLabel" type="Label" parent="UI"]
-anchors_preset = -1
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -274,57 +274,504 @@ script = null
 [node name="UIPauseMenu" parent="UI/UIControler" instance=ExtResource("10_4kpch")]
 layout_mode = 1
 
-[node name="PineTree" parent="." instance=ExtResource("3_eua6o")]
+[node name="Trees" type="Node2D" parent="."]
+
+[node name="PineTree" parent="Trees" instance=ExtResource("3_eua6o")]
 position = Vector2(66, 591)
 collision_layer = 2
 collision_mask = 0
 
-[node name="PineTree2" parent="." instance=ExtResource("3_eua6o")]
+[node name="PineTree15" parent="Trees" instance=ExtResource("3_eua6o")]
+position = Vector2(66, 591)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree2" parent="Trees" instance=ExtResource("3_eua6o")]
 position = Vector2(155, 643)
 collision_layer = 2
 collision_mask = 0
 
-[node name="PineTree3" parent="." instance=ExtResource("3_eua6o")]
-position = Vector2(-9.99997, 687)
+[node name="PineTree3" parent="Trees" instance=ExtResource("3_eua6o")]
+position = Vector2(-1401, 887)
 collision_layer = 2
 collision_mask = 0
 
-[node name="PineTree4" parent="." instance=ExtResource("3_eua6o")]
+[node name="PineTree16" parent="Trees" instance=ExtResource("3_eua6o")]
+position = Vector2(-1068, 1768)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree17" parent="Trees" instance=ExtResource("3_eua6o")]
+position = Vector2(-1527, 1435)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree18" parent="Trees" instance=ExtResource("3_eua6o")]
+position = Vector2(-2020, -858)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree19" parent="Trees" instance=ExtResource("3_eua6o")]
+position = Vector2(-1687, 23)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree20" parent="Trees" instance=ExtResource("3_eua6o")]
+position = Vector2(-2146, -310)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree6" parent="Trees/PineTree20" instance=ExtResource("3_eua6o")]
+position = Vector2(83, 1008)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree7" parent="Trees/PineTree20" instance=ExtResource("3_eua6o")]
+position = Vector2(83, 1008)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree8" parent="Trees/PineTree20" instance=ExtResource("3_eua6o")]
+position = Vector2(83, 1008)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree12" parent="Trees/PineTree20" instance=ExtResource("3_eua6o")]
+position = Vector2(83, 1008)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree12" parent="Trees/PineTree20/PineTree12" instance=ExtResource("3_eua6o")]
+position = Vector2(1400, -2754)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree13" parent="Trees/PineTree20/PineTree12" instance=ExtResource("3_eua6o")]
+position = Vector2(1289, -2697)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree14" parent="Trees/PineTree20/PineTree12" instance=ExtResource("3_eua6o")]
+position = Vector2(1215, -3021)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree12" parent="Trees/PineTree20/PineTree12/PineTree14" instance=ExtResource("3_eua6o")]
+position = Vector2(264, 1212)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree13" parent="Trees/PineTree20/PineTree12/PineTree14" instance=ExtResource("3_eua6o")]
+position = Vector2(153, 1269)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree14" parent="Trees/PineTree20/PineTree12/PineTree14" instance=ExtResource("3_eua6o")]
+position = Vector2(29, 872)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree13" parent="Trees/PineTree20" instance=ExtResource("3_eua6o")]
+position = Vector2(83, 1008)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree14" parent="Trees/PineTree20" instance=ExtResource("3_eua6o")]
+position = Vector2(83, 1008)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree9" parent="Trees/PineTree20" instance=ExtResource("3_eua6o")]
+position = Vector2(3715, 2712)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree10" parent="Trees/PineTree20" instance=ExtResource("3_eua6o")]
+position = Vector2(3715, 2712)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree11" parent="Trees/PineTree20" instance=ExtResource("3_eua6o")]
+position = Vector2(3715, 2712)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree15" parent="Trees/PineTree20" instance=ExtResource("3_eua6o")]
+position = Vector2(3715, 2712)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree12" parent="Trees/PineTree20/PineTree15" instance=ExtResource("3_eua6o")]
+position = Vector2(-1340, -538)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree13" parent="Trees/PineTree20/PineTree15" instance=ExtResource("3_eua6o")]
+position = Vector2(-1451, -481)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree14" parent="Trees/PineTree20/PineTree15" instance=ExtResource("3_eua6o")]
+position = Vector2(-1683, -547)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree12" parent="Trees/PineTree20/PineTree15/PineTree14" instance=ExtResource("3_eua6o")]
+position = Vector2(264, 1212)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree13" parent="Trees/PineTree20/PineTree15/PineTree14" instance=ExtResource("3_eua6o")]
+position = Vector2(153, 1269)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree14" parent="Trees/PineTree20/PineTree15/PineTree14" instance=ExtResource("3_eua6o")]
+position = Vector2(-89, 968)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree16" parent="Trees/PineTree20" instance=ExtResource("3_eua6o")]
+position = Vector2(3715, 2712)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree17" parent="Trees/PineTree20" instance=ExtResource("3_eua6o")]
+position = Vector2(3715, 2712)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree18" parent="Trees/PineTree20" instance=ExtResource("3_eua6o")]
+position = Vector2(2443, 4072)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree19" parent="Trees/PineTree20" instance=ExtResource("3_eua6o")]
+position = Vector2(2443, 4072)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree20" parent="Trees/PineTree20" instance=ExtResource("3_eua6o")]
+position = Vector2(2443, 4072)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree21" parent="Trees/PineTree20" instance=ExtResource("3_eua6o")]
+position = Vector2(2443, 4072)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree12" parent="Trees/PineTree20/PineTree21" instance=ExtResource("3_eua6o")]
+position = Vector2(-1340, -538)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree13" parent="Trees/PineTree20/PineTree21" instance=ExtResource("3_eua6o")]
+position = Vector2(-1451, -481)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree14" parent="Trees/PineTree20/PineTree21" instance=ExtResource("3_eua6o")]
+position = Vector2(-1683, -547)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree12" parent="Trees/PineTree20/PineTree21/PineTree14" instance=ExtResource("3_eua6o")]
+position = Vector2(264, 1212)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree13" parent="Trees/PineTree20/PineTree21/PineTree14" instance=ExtResource("3_eua6o")]
+position = Vector2(153, 1269)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree14" parent="Trees/PineTree20/PineTree21/PineTree14" instance=ExtResource("3_eua6o")]
+position = Vector2(-89, 968)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree22" parent="Trees/PineTree20" instance=ExtResource("3_eua6o")]
+position = Vector2(2443, 4072)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree23" parent="Trees/PineTree20" instance=ExtResource("3_eua6o")]
+position = Vector2(2443, 4072)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree21" parent="Trees" instance=ExtResource("3_eua6o")]
+position = Vector2(3672, 879)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree3" parent="Trees/PineTree21" instance=ExtResource("3_eua6o")]
+position = Vector2(-2128.4106, -3268.1946)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree17" parent="Trees/PineTree21" instance=ExtResource("3_eua6o")]
+position = Vector2(-2128.4106, -3268.1946)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree18" parent="Trees/PineTree21" instance=ExtResource("3_eua6o")]
+position = Vector2(-2128.4106, -3268.1946)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree19" parent="Trees/PineTree21" instance=ExtResource("3_eua6o")]
+position = Vector2(-2128.4106, -3268.1946)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree20" parent="Trees/PineTree21" instance=ExtResource("3_eua6o")]
+position = Vector2(-1453, -3208)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree6" parent="Trees/PineTree21/PineTree20" instance=ExtResource("3_eua6o")]
+position = Vector2(83, 1008)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree7" parent="Trees/PineTree21/PineTree20" instance=ExtResource("3_eua6o")]
+position = Vector2(83, 1008)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree8" parent="Trees/PineTree21/PineTree20" instance=ExtResource("3_eua6o")]
+position = Vector2(83, 1008)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree12" parent="Trees/PineTree21/PineTree20" instance=ExtResource("3_eua6o")]
+position = Vector2(83, 1008)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree12" parent="Trees/PineTree21/PineTree20/PineTree12" instance=ExtResource("3_eua6o")]
+position = Vector2(-1340, -538)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree13" parent="Trees/PineTree21/PineTree20/PineTree12" instance=ExtResource("3_eua6o")]
+position = Vector2(-1451, -481)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree14" parent="Trees/PineTree21/PineTree20/PineTree12" instance=ExtResource("3_eua6o")]
+position = Vector2(-1841.5894, -708.8054)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree12" parent="Trees/PineTree21/PineTree20/PineTree12/PineTree14" instance=ExtResource("3_eua6o")]
+position = Vector2(264, 1212)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree13" parent="Trees/PineTree21/PineTree20/PineTree12/PineTree14" instance=ExtResource("3_eua6o")]
+position = Vector2(153, 1269)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree14" parent="Trees/PineTree21/PineTree20/PineTree12/PineTree14" instance=ExtResource("3_eua6o")]
+position = Vector2(-76.589355, 1096.1946)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree13" parent="Trees/PineTree21/PineTree20" instance=ExtResource("3_eua6o")]
+position = Vector2(83, 1008)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree14" parent="Trees/PineTree21/PineTree20" instance=ExtResource("3_eua6o")]
+position = Vector2(-406, 1069)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree22" parent="Trees" instance=ExtResource("3_eua6o")]
+position = Vector2(3546, 1427)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree23" parent="Trees" instance=ExtResource("3_eua6o")]
+position = Vector2(3053, -866)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree24" parent="Trees" instance=ExtResource("3_eua6o")]
+position = Vector2(3386, 15)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree25" parent="Trees" instance=ExtResource("3_eua6o")]
+position = Vector2(2999, -211)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree6" parent="Trees/PineTree25" instance=ExtResource("3_eua6o")]
+position = Vector2(83, 1008)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree7" parent="Trees/PineTree25" instance=ExtResource("3_eua6o")]
+position = Vector2(83, 1008)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree8" parent="Trees/PineTree25" instance=ExtResource("3_eua6o")]
+position = Vector2(83, 1008)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree12" parent="Trees/PineTree25" instance=ExtResource("3_eua6o")]
+position = Vector2(83, 1008)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree12" parent="Trees/PineTree25/PineTree12" instance=ExtResource("3_eua6o")]
+position = Vector2(-1340, -538)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree13" parent="Trees/PineTree25/PineTree12" instance=ExtResource("3_eua6o")]
+position = Vector2(-1451, -481)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree14" parent="Trees/PineTree25/PineTree12" instance=ExtResource("3_eua6o")]
+position = Vector2(-1543, -810)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree12" parent="Trees/PineTree25/PineTree12/PineTree14" instance=ExtResource("3_eua6o")]
+position = Vector2(264, 1212)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree13" parent="Trees/PineTree25/PineTree12/PineTree14" instance=ExtResource("3_eua6o")]
+position = Vector2(153, 1269)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree14" parent="Trees/PineTree25/PineTree12/PineTree14" instance=ExtResource("3_eua6o")]
+position = Vector2(-168, 1192)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree13" parent="Trees/PineTree25" instance=ExtResource("3_eua6o")]
+position = Vector2(83, 1008)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree14" parent="Trees/PineTree25" instance=ExtResource("3_eua6o")]
+position = Vector2(83, 1008)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree4" parent="Trees" instance=ExtResource("3_eua6o")]
 position = Vector2(682, 254)
 collision_layer = 2
 collision_mask = 0
 
-[node name="PineTree5" parent="." instance=ExtResource("3_eua6o")]
+[node name="PineTree5" parent="Trees" instance=ExtResource("3_eua6o")]
 position = Vector2(829, 384)
 collision_layer = 2
 collision_mask = 0
 
-[node name="PineTree11" parent="." instance=ExtResource("3_eua6o")]
+[node name="PineTree11" parent="Trees" instance=ExtResource("3_eua6o")]
 position = Vector2(781, -296)
 collision_layer = 2
 collision_mask = 0
 
-[node name="PineTree6" parent="." instance=ExtResource("3_eua6o")]
+[node name="PineTree6" parent="Trees" instance=ExtResource("3_eua6o")]
 position = Vector2(-677, 313)
 collision_layer = 2
 collision_mask = 0
 
-[node name="PineTree7" parent="." instance=ExtResource("3_eua6o")]
+[node name="PineTree7" parent="Trees" instance=ExtResource("3_eua6o")]
 position = Vector2(-788, 370)
 collision_layer = 2
 collision_mask = 0
 
-[node name="PineTree8" parent="." instance=ExtResource("3_eua6o")]
-position = Vector2(-829, 229)
+[node name="PineTree8" parent="Trees" instance=ExtResource("3_eua6o")]
+position = Vector2(-944, 128)
 collision_layer = 2
 collision_mask = 0
 
-[node name="PineTree9" parent="." instance=ExtResource("3_eua6o")]
+[node name="PineTree12" parent="Trees" instance=ExtResource("3_eua6o")]
+position = Vector2(-363, 1142)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree13" parent="Trees" instance=ExtResource("3_eua6o")]
+position = Vector2(-474, 1199)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree14" parent="Trees" instance=ExtResource("3_eua6o")]
+position = Vector2(-726, 1076)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree26" parent="Trees" instance=ExtResource("3_eua6o")]
+position = Vector2(2231, 2591)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree27" parent="Trees" instance=ExtResource("3_eua6o")]
+position = Vector2(2564, 3472)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree28" parent="Trees" instance=ExtResource("3_eua6o")]
+position = Vector2(2105, 3139)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree29" parent="Trees" instance=ExtResource("3_eua6o")]
+position = Vector2(3158, 2903)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree30" parent="Trees" instance=ExtResource("3_eua6o")]
+position = Vector2(3117, 2762)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree31" parent="Trees" instance=ExtResource("3_eua6o")]
+position = Vector2(959, 3951)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree32" parent="Trees" instance=ExtResource("3_eua6o")]
+position = Vector2(1292, 4832)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree33" parent="Trees" instance=ExtResource("3_eua6o")]
+position = Vector2(833, 4499)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree34" parent="Trees" instance=ExtResource("3_eua6o")]
+position = Vector2(1886, 4263)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree35" parent="Trees" instance=ExtResource("3_eua6o")]
+position = Vector2(1845, 4122)
+collision_layer = 2
+collision_mask = 0
+
+[node name="PineTree9" parent="Trees" instance=ExtResource("3_eua6o")]
 position = Vector2(-346, -355)
 collision_layer = 2
 collision_mask = 0
 
-[node name="PineTree10" parent="." instance=ExtResource("3_eua6o")]
+[node name="PineTree10" parent="Trees" instance=ExtResource("3_eua6o")]
 position = Vector2(-573, -231)
 collision_layer = 2
 collision_mask = 0
