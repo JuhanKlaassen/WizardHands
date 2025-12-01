@@ -75,6 +75,7 @@ position = Vector2(-1055, -697)
 
 [node name="GameOver" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
+visible = false
 script = ExtResource("9_346fj")
 
 [node name="ColorRect" type="ColorRect" parent="GameOver"]
@@ -115,6 +116,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 
 [node name="LinkButton" type="Button" parent="GameOver/ColorRect/VBoxContainer/HBoxContainer"]
+z_index = 99
 layout_mode = 2
 size_flags_vertical = 4
 theme = SubResource("Theme_346fj")
