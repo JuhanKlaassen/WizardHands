@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bc6wwmcjvdkky"]
+[gd_scene load_steps=22 format=3 uid="uid://bc6wwmcjvdkky"]
 
 [ext_resource type="Script" uid="uid://dsbq1ab0s18ho" path="res://Scripts/Waves.gd" id="1_h1m7h"]
 [ext_resource type="PackedScene" uid="uid://dsw8raqgacxsc" path="res://Prefabs/Player.tscn" id="2_fk7m3"]
@@ -6,7 +6,6 @@
 [ext_resource type="Resource" uid="uid://b2bo4qnof11j0" path="res://Resources/Waves/WaveCollection.tres" id="3_h1m7h"]
 [ext_resource type="Resource" uid="uid://18knp5812ewg" path="res://Resources/Items/BasicWand.tres" id="4_4kpch"]
 [ext_resource type="Script" uid="uid://vk087g6hsy7f" path="res://Scripts/Item.gd" id="4_bmxlf"]
-[ext_resource type="Resource" uid="uid://d3flh5kqlx6ky" path="res://Resources/Waves/EnemyScenes.tres" id="4_erwvk"]
 [ext_resource type="Texture2D" uid="uid://dhiv8vklngiko" path="res://Assets/Sprite-0002.png" id="5_bmxlf"]
 [ext_resource type="Resource" uid="uid://ddaerj7lg2fm5" path="res://Resources/Items/SuperWand.tres" id="5_grg3l"]
 [ext_resource type="Script" uid="uid://bscyo3sxdpknv" path="res://Scripts/UI/UIControler.gd" id="5_qxpe7"]
@@ -49,7 +48,6 @@ y_sort_enabled = true
 [node name="Waves" type="Node2D" parent="."]
 script = ExtResource("1_h1m7h")
 wave_collection = ExtResource("3_h1m7h")
-enemy_scenes = ExtResource("4_erwvk")
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true

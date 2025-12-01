@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=3 format=3 uid="uid://btlqo00wklsws"]
+
+[ext_resource type="PackedScene" uid="uid://um40wnpg7y0w" path="res://Assets/characters/rat/rat.tscn" id="1_v48eq"]
+[ext_resource type="Script" uid="uid://cpjqunrr48jmv" path="res://Scripts/EnemyData.gd" id="2_qyhc6"]
+
+[resource]
+script = ExtResource("2_qyhc6")
+speed = 400
+health = 1
+xp = 10
+enemy_scene = ExtResource("1_v48eq")
+look_at = true
+offset = Vector2(-23, -28)
+rotation = 270.0
+scale = Vector2(6, 6)
+metadata/_custom_type_script = "uid://cpjqunrr48jmv"

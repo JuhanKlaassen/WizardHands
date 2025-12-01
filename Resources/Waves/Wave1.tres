@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="WaveData" load_steps=2 format=3 uid="uid://dibep21awo4j3"]
+[gd_resource type="Resource" script_class="WaveData" load_steps=4 format=3 uid="uid://dibep21awo4j3"]
 
+[ext_resource type="Script" uid="uid://cpjqunrr48jmv" path="res://Scripts/EnemyData.gd" id="1_1sc38"]
 [ext_resource type="Script" uid="uid://20bspsnmgdyb" path="res://Scripts/WaveData.gd" id="1_jqwoh"]
+[ext_resource type="Resource" uid="uid://didfatkyanhar" path="res://Resources/Mobs/Slime.tres" id="2_jl2wl"]
 
 [resource]
 script = ExtResource("1_jqwoh")
 count = 10
 spawn_rate = 1.0
-enemies = Array[String](["mob"])
+enemies = Array[ExtResource("1_1sc38")]([ExtResource("2_jl2wl")])

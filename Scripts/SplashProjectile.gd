@@ -11,18 +11,16 @@ func _physics_process(delta):
 	if travelled_distance > _range:
 		var entities_in_radius = get_collisions_in_circle(global_position, _explosion_radius)
 		for entity in entities_in_radius:
-			print("Entity: ", entity)
-			if entity.collider.has_method("damage"):
-				entity.collider.damage(_damage)
+			if entity.collider.has_method("take_damage"):
+				entity.collider.take_damage(_damage)
 		queue_free()
 
 
 func _on_body_entered(body):
 	var entities_in_radius = get_collisions_in_circle(global_position, _explosion_radius)
 	for entity in entities_in_radius:
-		print("Entity: ", entity)
-		if entity.collider.has_method("damage"):
-			entity.collider.damage(_damage)
+		if entity.collider.has_method("take_damage"):
+			entity.collider.take_damage(_damage)
 	queue_free()
 
 func get_collisions_in_circle(center: Vector2, radius: float) -> Array:

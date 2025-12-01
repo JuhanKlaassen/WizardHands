@@ -1,15 +1,14 @@
-[gd_resource type="Resource" script_class="WaveData" load_steps=2 format=3 uid="uid://fs1pwmdkergt"]
+[gd_resource type="Resource" script_class="WaveData" load_steps=6 format=3 uid="uid://fs1pwmdkergt"]
 
 [ext_resource type="Script" uid="uid://20bspsnmgdyb" path="res://Scripts/WaveData.gd" id="1_4ucac"]
+[ext_resource type="Script" uid="uid://cpjqunrr48jmv" path="res://Scripts/EnemyData.gd" id="1_7maa2"]
+[ext_resource type="Resource" uid="uid://didfatkyanhar" path="res://Resources/Mobs/Slime.tres" id="2_qc70f"]
+[ext_resource type="Resource" uid="uid://btlqo00wklsws" path="res://Resources/Mobs/Rat.tres" id="3_o7uw4"]
+[ext_resource type="Resource" uid="uid://bj1r60wf7np65" path="res://Resources/Mobs/RatBoss.tres" id="5_o7uw4"]
 
 [resource]
 script = ExtResource("1_4ucac")
 count = 20
 spawn_rate = 0.8
-enemies = Array[String](["mob", "mob2"])
-spawn_special_at_end = {
-"health_mult": 6.0,
-"scale_mult": 2.0,
-"speed_mult": 0.8,
-"type": "mob2"
-}
+enemies = Array[ExtResource("1_7maa2")]([ExtResource("2_qc70f"), ExtResource("3_o7uw4")])
+spawn_special_at_end = ExtResource("5_o7uw4")

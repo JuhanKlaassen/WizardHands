@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=3 format=3 uid="uid://didfatkyanhar"]
+
+[ext_resource type="PackedScene" uid="uid://ogik4s70pgwl" path="res://Assets/characters/slime/slime.tscn" id="1_h4abc"]
+[ext_resource type="Script" uid="uid://cpjqunrr48jmv" path="res://Scripts/EnemyData.gd" id="1_yh52o"]
+
+[resource]
+script = ExtResource("1_yh52o")
+xp = 5
+enemy_scene = ExtResource("1_h4abc")
+offset = Vector2(0, 11)
+scale = Vector2(1.5, 1.5)
+metadata/_custom_type_script = "uid://cpjqunrr48jmv"

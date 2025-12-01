@@ -22,7 +22,6 @@ const WAVE_DELAY = 3.0 # seconds between waves
 
 # resources
 @export var wave_collection: WaveCollection
-@export var enemy_scenes: EnemyScenes
 
 @onready var wave_label = $"/root/Game/UI/WaveLabel"
 @onready var difficulty_label = $"/root/Game/UI/DifficultyScalingLabel"
@@ -68,62 +67,20 @@ func process_wave(delta):
 	spawn_timer -= delta
 
 	if spawn_timer <= 0:
-		spawn_enemy()
+		spawn_random_enemy()
 		enemies_to_spawn -= 1
 
 		var rate = wave_collection.waves[current_wave].spawn_rate
 		spawn_timer = rate
 
-func spawn_enemy():
-	if not wave_collection or not enemy_scenes or wave_collection.waves.is_empty():
+func spawn_random_enemy():
+	if not wave_collection or wave_collection.waves.is_empty():
 		push_error("Resources not loaded for spawning!")
 		return
 	
 	var wave_data = wave_collection.waves[current_wave]
-	var enemy_type = wave_data.enemies.pick_random()
-	var scene = enemy_scenes.get_scene(enemy_type)
-
-	if not scene:
-		push_error("No scene found for enemy type: ", enemy_type)
-		return
-
-	%PathFollow2D.progress_ratio = randf()
-	var enemy = scene.instantiate()
-	enemy.global_position = %PathFollow2D.global_position
-	
-	# enemy scaling
-	apply_wave_scaling(enemy)
-	
-	get_parent().add_child(enemy)
-
-func spawn_enemy_with_modifiers(enemy_type: String, modifiers := {}):
-	if not enemy_scenes:
-		push_error("EnemyScenes resource not loaded!")
-		return null
-	
-	var scene = enemy_scenes.get_scene(enemy_type)
-	if not scene:
-		push_error("No scene found for enemy type: ", enemy_type)
-		return null
-
-	%PathFollow2D.progress_ratio = randf()
-	var enemy = scene.instantiate()
-	enemy.global_position = %PathFollow2D.global_position
-
-	if modifiers.has("health_mult"):
-		enemy.health *= modifiers["health_mult"]
-
-	if modifiers.has("scale_mult"):
-		enemy.scale *= Vector2.ONE * modifiers["scale_mult"]
-
-	if modifiers.has("speed_mult"):
-		enemy.speed *= modifiers["speed_mult"]
-	
-	# enemy scaling
-	apply_wave_scaling(enemy)
-	
-	get_parent().add_child(enemy)
-	return enemy
+	var enemy_data = wave_data.enemies.pick_random()
+	spawn_enemy(enemy_data)
 
 func next_wave():
 	if not wave_collection or wave_collection.waves.is_empty():
@@ -133,10 +90,8 @@ func next_wave():
 	# if current wave has a special enemy, spawn it
 	var wave_data = wave_collection.waves[current_wave]
 	
-	if wave_data.get("spawn_special_at_end"):
-		var sp = wave_data.spawn_special_at_end
-		var enemy_type = sp.get("type", "mob") # default to "mob" if not found
-		spawn_enemy_with_modifiers(enemy_type, sp)
+	if wave_data.spawn_special_at_end != null:
+		spawn_enemy(wave_data.spawn_special_at_end)
 	
 	current_wave += 1
 	display_wave_count += 1
@@ -147,12 +102,14 @@ func next_wave():
 
 	load_wave(current_wave)
 
-func apply_wave_scaling(enemy):
+func apply_wave_scaling(enemy: Enemy):
 	var wave_multiplier = float(current_wave)
 
 	# health scaling
 	if "health" in enemy:
-		enemy.health *= pow(health_per_wave, wave_multiplier)
+		var multiplier = pow(health_per_wave, wave_multiplier)
+		enemy.health *= multiplier
+		enemy.max_health *= multiplier
 
 	# speed scaling
 	if "speed" in enemy:
@@ -184,3 +141,13 @@ func _process(delta):
 	if enemies_to_spawn <= 0 and not between_waves:
 		next_wave()
 		start_wave()
+
+func spawn_enemy(enemy_data: EnemyData):
+	%PathFollow2D.progress_ratio = randf()
+	var scene = Enemy.new_enemy(enemy_data)
+	scene.global_position = %PathFollow2D.global_position
+	
+	# enemy scaling
+	apply_wave_scaling(scene)
+	
+	get_parent().add_child(scene)

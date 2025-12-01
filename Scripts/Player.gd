@@ -22,6 +22,7 @@ var levelup_menu: LevelUpMenu = null
 @export var xp_to_next_level: int = 40
 
 @export var modifier_collection: PlayerModifierCollection
+@export var modifiers: Array[PlayerModifier]
 
 @onready var _left_hand: Node2D = %LeftHand
 @onready var _right_hand: Node2D = %RightHand
@@ -32,7 +33,8 @@ const WAND = preload("res://Prefabs/Wand.tscn")
 
 func _ready():
 	_hotbar.on_inventory_changed.connect(on_hotbar_item_changed)
-	on_health_changed.connect(update_health_ui)
+	on_hurt.connect(update_health_ui)
+	on_heal.connect(update_health_ui)
 	on_mana_changed.connect(update_mana_ui)
 	on_xp_changed.connect(update_xp_ui)
 	update_health_ui()
@@ -96,6 +98,7 @@ func level_up() -> void:
 	# Wait for a click
 	levelup_menu.option_selected.connect(
 		func(option_id):
+			modifiers.append(choices[option_id])
 			choices[option_id].apply(self)
 			levelup_menu.queue_free()
 			levelup_menu = null

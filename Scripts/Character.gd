@@ -2,15 +2,19 @@ extends CharacterBody2D
 
 class_name Character
 
-signal on_health_changed
+signal on_hurt
+signal on_heal
 signal on_death
 
+var health: float
 @export var speed: float = 250.0
-@export var health: float = 100.0
 @export var health_regen_per_second: float = 0.0
 @export var max_health: float = 100.0
 
 @onready var Walk_Sound = $Walk
+
+func _init() -> void:
+	health = max_health
 
 var _hp_regen_accumulator: float = 0.0
 func _physics_process(delta):
@@ -24,14 +28,13 @@ func _physics_process(delta):
 		heal(health_regen_per_second)
 
 
-func damage(damage_amount: float) -> void:
-	if health - damage_amount <= 0.0:
+func take_damage(damage: float) -> void:
+	if health - damage <= 0.0:
 		health = 0.0
-		get_node("%GameOver").show()
-		get_tree().paused = true
+		on_death.emit()
 	else:
-		health -= damage_amount
-	on_health_changed.emit()
+		health -= damage
+	on_hurt.emit()
 
 
 func heal(amount: float) -> void:
@@ -39,4 +42,4 @@ func heal(amount: float) -> void:
 		health = max_health
 	else:
 		health += amount
-	on_health_changed.emit()
+	on_heal.emit()

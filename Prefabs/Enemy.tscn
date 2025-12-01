@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://dwahmlapvpc1f"]
+[gd_scene load_steps=4 format=3 uid="uid://7kq87lyq2sp"]
 
-[ext_resource type="Script" uid="uid://dodsuitvinj6y" path="res://Scripts/mob2.gd" id="1_1yudo"]
-[ext_resource type="PackedScene" uid="uid://um40wnpg7y0w" path="res://Assets/characters/rat/rat.tscn" id="2_bxcrp"]
+[ext_resource type="Script" uid="uid://df2ofi28xvtha" path="res://Scripts/Enemy.gd" id="1_gti1y"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ypitm"]
 radius = 50.0
@@ -9,16 +8,10 @@ radius = 50.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_3ue3y"]
 radius = 55.0
 
-[node name="Mob2" type="CharacterBody2D"]
+[node name="Enemy" type="CharacterBody2D"]
 collision_layer = 16
 collision_mask = 26
-script = ExtResource("1_1yudo")
-
-[node name="Rat" parent="." instance=ExtResource("2_bxcrp")]
-unique_name_in_owner = true
-position = Vector2(-23.000061, -28.000002)
-rotation = 4.712389
-scale = Vector2(6, 6)
+script = ExtResource("1_gti1y")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -28)

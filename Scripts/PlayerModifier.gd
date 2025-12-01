@@ -27,7 +27,7 @@ func apply(player: Player) -> void:
             if player.health == player.max_health:
                 player.health += value
             player.max_health += value
-            player.on_health_changed.emit()
+            player.on_heal.emit()
         PlayerModifierType.HEALTH_REGEN:
             player.health_regen_per_second += value
         PlayerModifierType.MANA:

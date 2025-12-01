@@ -3,8 +3,8 @@ class_name WaveData
 
 @export var count: int
 @export var spawn_rate: float
-@export var enemies: Array[String]
-@export var spawn_special_at_end: Dictionary
+@export var enemies: Array[EnemyData]
+@export var spawn_special_at_end: EnemyData
 
 # enemy scaling values
 @export var health_scale_per_wave := 0.10 # +10% per wave
