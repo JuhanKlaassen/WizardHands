@@ -20,5 +20,5 @@ stream = ExtResource("3_blq0c")
 [node name="ShootingPoint" type="Marker2D" parent="."]
 unique_name_in_owner = true
 show_behind_parent = true
-position = Vector2(51, -12)
+position = Vector2(53, 0)
 gizmo_extents = 30.6
