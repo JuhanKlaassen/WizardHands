@@ -14,7 +14,6 @@ monitorable = false
 script = ExtResource("1_c0hog")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-position = Vector2(-11, -1)
 texture = ExtResource("2_qhltg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -70,17 +70,15 @@ func transfer_to(to_slot: UISlot, amount: int = -1) -> void:
 		to_slot.item.add(amount)
 	
 	if item.amount - amount > 0:
-		item.amount -= amount
+		item.remove(amount)
 		reload()
 	else:
-		item.amount = 0
-		item.item_data = null
+		item.set_item_data(null, 0)
 
 func swap_with(slot: UISlot) -> void:
 	var temp_data: ItemData = slot.item.item_data
 	var temp_amount: int = slot.item.amount
 	
 	slot.item.set_item_data(item._item_data, item.amount)
-	item._item_data = temp_data
-	item.amount = temp_amount
+	item.set_item_data(temp_data, temp_amount)
 	reload()
