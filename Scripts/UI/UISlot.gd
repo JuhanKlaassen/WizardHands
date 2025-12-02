@@ -79,6 +79,6 @@ func swap_with(slot: UISlot) -> void:
 	var temp_data: ItemData = slot.item.item_data
 	var temp_amount: int = slot.item.amount
 	
-	slot.item.set_item_data(item._item_data, item.amount)
+	slot.item.set_item_data(item.item_data, item.amount)
 	item.set_item_data(temp_data, temp_amount)
 	reload()
