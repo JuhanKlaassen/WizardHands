@@ -82,7 +82,6 @@ func _on_gui_input(event: InputEvent) -> void:
 		var mouse_button: InputEventMouseButton = event as InputEventMouseButton
 		if mouse_button.pressed:
 			on_slot_clicked.emit(event)
-			print("on_slot_clicked.emit ", get_parent().get_parent().get_parent().name)
 
 func transfer_to(to_slot: UISlot, amount: int = -1) -> void:
 	if amount == -1:
