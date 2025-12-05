@@ -5,6 +5,7 @@ class_name ItemData
 enum ItemType {
 	UNSET,
 	WAND,
+	WAND_MODIFIER,
 }
 
 @export var name: String

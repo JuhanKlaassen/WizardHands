@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="WandModifier" load_steps=4 format=3 uid="uid://4faau1dywkh7"]
+
+[ext_resource type="Script" uid="uid://b8v4xrtb36wkc" path="res://Scripts/WandModifier.gd" id="1_38w8q"]
+[ext_resource type="Texture2D" uid="uid://wl1cle7bkqu4" path="res://Sprites/Shikashi's Fantasy Icons Pack v2/#1 - Transparent Icons.png" id="1_gbb02"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ps7t"]
+atlas = ExtResource("1_gbb02")
+region = Rect2(32, 416, 32, 32)
+
+[resource]
+script = ExtResource("1_38w8q")
+value = 1000.0
+name = "+1000 Damage"
+icon = SubResource("AtlasTexture_0ps7t")
+item_type = 2
+metadata/_custom_type_script = "uid://b8v4xrtb36wkc"
