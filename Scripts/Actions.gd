@@ -26,8 +26,8 @@ func _input(event):
 			item.queue_free()
 		get_tree().reload_current_scene()
 			
-		if event.is_action_pressed("dbg_end_game"):
-			get_tree().quit()
+	if event.is_action_pressed("dbg_end_game"):
+		get_tree().quit()
 	else:
 		pass
 

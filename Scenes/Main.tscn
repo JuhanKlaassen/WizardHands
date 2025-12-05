@@ -1,6 +1,6 @@
 [gd_scene load_steps=22 format=3 uid="uid://bc6wwmcjvdkky"]
 
-[ext_resource type="Script" path="res://Scripts/Waves.gd" id="1_h1m7h"]
+[ext_resource type="Script" uid="uid://dsbq1ab0s18ho" path="res://Scripts/Waves.gd" id="1_h1m7h"]
 [ext_resource type="PackedScene" uid="uid://dsw8raqgacxsc" path="res://Prefabs/Player.tscn" id="2_fk7m3"]
 [ext_resource type="PackedScene" uid="uid://c2qg1nuvfnd4q" path="res://Assets/trees/pine_tree.tscn" id="3_eua6o"]
 [ext_resource type="Resource" uid="uid://b2bo4qnof11j0" path="res://Resources/Waves/WaveCollection.tres" id="3_h1m7h"]
@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://gy141ydha6p2" path="res://Prefabs/UI/UIPlayerInventory.tscn" id="7_qxpe7"]
 [ext_resource type="PackedScene" uid="uid://btx1418xypjlp" path="res://Prefabs/UI/UIPauseMenu.tscn" id="10_4kpch"]
 [ext_resource type="FontFile" uid="uid://bdw4cp37sssxr" path="res://Resources/BoldPixels.ttf" id="10_erwvk"]
-[ext_resource type="Script" path="res://Scripts/Actions.gd" id="15_h1m7h"]
+[ext_resource type="Script" uid="uid://ddgl0jpyv1eyu" path="res://Scripts/Actions.gd" id="15_h1m7h"]
 
 [sub_resource type="Resource" id="Resource_grg3l"]
 script = ExtResource("4_bmxlf")
@@ -168,6 +168,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("10_erwvk")
+theme_override_font_sizes/font_size = 32
 text = "Enemy difficulty scale x1"
 metadata/_edit_use_anchors_ = true
 

@@ -104,7 +104,8 @@ func next_wave():
 
 func apply_wave_scaling(enemy: Enemy):
 	var wave_multiplier = float(current_wave)
-
+	var difficulty_multiplier = get_current_difficulty_multiplier()
+	
 	# health scaling
 	if "health" in enemy:
 		var multiplier = pow(health_per_wave, wave_multiplier)
@@ -114,6 +115,9 @@ func apply_wave_scaling(enemy: Enemy):
 	# speed scaling
 	if "speed" in enemy:
 		enemy.speed *= pow(speed_per_wave, wave_multiplier)
+	
+	if "xp" in enemy:
+		enemy.xp = int(enemy.xp * difficulty_multiplier)
 
 	# size scaling
 	enemy.scale *= Vector2.ONE * pow(scale_per_wave, wave_multiplier)

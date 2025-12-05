@@ -3,6 +3,7 @@ extends Character
 class_name Enemy
 
 @export var enemy_data: EnemyData
+@export var xp: int = 0
 
 @onready var player = get_node("/root/Game/Player")
 @onready var hit_area: Area2D = get_node("Area2D")
@@ -30,6 +31,7 @@ func set_data(data: EnemyData) -> void:
 	speed = data.speed
 	health = data.health
 	max_health = data.health
+	xp = data.xp
 	var enemy_scene = data.enemy_scene.instantiate()
 	enemy_scene.position = data.offset
 	enemy_scene.rotation_degrees = data.rotation
@@ -64,7 +66,7 @@ func die():
 	player.add_gold(1)
 	
 	if player != null and player.has_method("gain_xp"):
-		player.gain_xp(enemy_data.xp)
+		player.gain_xp(xp)
 	get_parent().add_child(smoke)
 	smoke.global_position = global_position
 	queue_free()
