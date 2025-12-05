@@ -2,15 +2,14 @@ extends PanelContainer
 
 class_name UIInventory
 
-var _slot_scene: PackedScene = load("res://Prefabs/UI/UISlot.tscn")
-var _slots_container: GridContainer
-var _inventory_system: InventorySystem
+var _slot_scene: PackedScene = preload("res://Prefabs/UI/UISlot.tscn")
+@export var _inventory_system: InventorySystem
 var _slots: Array[UISlot] = []
 @onready var _transfer_slot: UITransferSlot = get_node("/root/Game/UI/UITransferSlot")
+@onready var _slots_container: GridContainer = %ItemGrid
 
 
 func _ready() -> void:
-	_slots_container = get_node("MarginContainer/ItemGrid")
 	for child in _slots_container.get_children():
 		child.visible = false
 		child.queue_free()
@@ -24,6 +23,7 @@ func set_inventory_data(inventory_data: InventorySystem) -> void:
 		_inventory_system.on_inventory_changed.connect(reload)
 		for i in range(_inventory_system.items.size()):
 			var slot_scene: UISlot = _slot_scene.instantiate()
+			slot_scene.slot_type = inventory_data.inventory_type
 			slot_scene.name = "Slot " + str(i)
 			_slots_container.add_child(slot_scene)
 			_slots.append(slot_scene)
@@ -69,7 +69,8 @@ func handle_slot_click(input_event: InputEvent, slot_scene: UISlot) -> void:
 						_transfer_slot.swap_with(slot_scene)
 			else:
 				_transfer_slot.start_transfer(slot_scene)
-			_inventory_system.on_inventory_changed.emit()
+			if _inventory_system != null:
+				_inventory_system.on_inventory_changed.emit()
 		elif mouse_button.pressed and mouse_button.button_index == MOUSE_BUTTON_RIGHT:
 			if _transfer_slot.is_transfering:
 				if slot_scene.slot_type == _transfer_slot.transfered_data.item_type || slot_scene.slot_type == ItemData.ItemType.UNSET:
@@ -78,16 +79,20 @@ func handle_slot_click(input_event: InputEvent, slot_scene: UISlot) -> void:
 							_transfer_slot.swap_with(slot_scene)
 						else:
 							_transfer_slot.transfer_to(slot_scene, 1)
-						_inventory_system.on_inventory_changed.emit()
+						if _inventory_system != null:
+							_inventory_system.on_inventory_changed.emit()
 					elif slot_scene.item.item_data == null:
 						_transfer_slot.transfer_to(slot_scene, 1)
-						_inventory_system.on_inventory_changed.emit()
+						if _inventory_system != null:
+							_inventory_system.on_inventory_changed.emit()
 					else:
 						_transfer_slot.swap_with(slot_scene)
-						_inventory_system.on_inventory_changed.emit()
+						if _inventory_system != null:
+							_inventory_system.on_inventory_changed.emit()
 			else:
 				var split_amount: int = 1
 				if slot_scene.item.amount > 1:
 					split_amount = int(floor(slot_scene.item.amount / 2.0))
 				_transfer_slot.start_transfer(slot_scene, split_amount)
-				_inventory_system.on_inventory_changed.emit()
+				if _inventory_system != null:
+					_inventory_system.on_inventory_changed.emit()

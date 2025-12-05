@@ -29,6 +29,11 @@ var levelup_menu: LevelUpMenu = null
 @onready var _inventory: InventorySystem = %Inventory
 @onready var _hotbar: InventorySystem = %Hotbar
 @onready var _ui_hotbar: UIPlayerHotbar = get_tree().root.get_node("Game/UI/UIControler/UIPlayerHotbar")
+@onready var interaction_collider: Area2D = %InteractionCollider
+
+var interactable = null
+var interacting: bool = false
+
 const WAND = preload("res://Prefabs/Wand.tscn")
 
 func _ready():
@@ -44,13 +49,32 @@ func _ready():
 		get_node("%GameOver").show()
 		get_tree().paused = true
 	)
-	
+	interaction_collider.body_entered.connect(func(body):
+		if body.has_method("interact"):
+			if body != interactable and interactable != null:
+				if interacting:
+					return
+				interactable.hide_iteract_hint()
+				interactable = null
+			interactable = body
+			interactable.show_iteract_hint()
+	)
+	interaction_collider.body_exited.connect(func(body):
+		if interactable == body:
+			if interacting:
+				interacting = false
+				interactable.end_interaction()
+			interactable.hide_iteract_hint()
+			interactable = null
+	)
+
 	for child in _left_hand.get_children():
 		_left_hand.remove_child(child)
 		child.queue_free()
 	for child in _right_hand.get_children():
 		_right_hand.remove_child(child)
 		child.queue_free()
+
 
 func gain_xp(amount: int) -> void:
 	xp += amount
@@ -141,6 +165,16 @@ func restore_mana(amount: int) -> void:
 	on_mana_changed.emit()
 
 
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("interact"):
+		if interactable != null:
+			interacting = true
+			interactable.interact()
+	elif event.is_action_pressed("cancel"):
+		if interacting:
+			interacting = false
+			interactable.end_interaction()
+
 func consume_mana(amount: int) -> bool:
 	if mana >= amount:
 		mana -= amount
@@ -170,20 +204,18 @@ func on_hotbar_item_changed():
 			_left_hand.remove_child(_left_item)
 			_left_item.queue_free()
 			
-		if _hotbar.items[0] == null or _hotbar.items[0].item_data == null:
-			return
-
-		var wand: Wand = WAND.instantiate()
-		wand.set_data(_hotbar.items[0].item_data)
-		var slot = _ui_hotbar.get_slot(0)
-		wand.on_cooldown_changed.connect(slot.set_cooldown)
-		var shoot_lambda_func = shoot_lambda.bind(wand)
-		if !slot.on_slot_action_called.is_connected(shoot_lambda_func):
-			slot.on_slot_action_called.connect(shoot_lambda_func)
-		wand.tree_exiting.connect(func():
-			slot.on_slot_action_called.disconnect(shoot_lambda_func)
-		)
-		_left_hand.add_child(wand)
+		if _hotbar.items[0] != null and _hotbar.items[0].item_data != null:
+			var wand: Wand = WAND.instantiate()
+			wand.set_data(_hotbar.items[0].item_data)
+			var slot = _ui_hotbar.get_slot(0)
+			wand.on_cooldown_changed.connect(slot.set_cooldown)
+			var shoot_lambda_func = shoot_lambda.bind(wand)
+			if !slot.on_slot_action_called.is_connected(shoot_lambda_func):
+				slot.on_slot_action_called.connect(shoot_lambda_func)
+			wand.tree_exiting.connect(func():
+				slot.on_slot_action_called.disconnect(shoot_lambda_func)
+			)
+			_left_hand.add_child(wand)
 
 	var _right_item = null
 	if _right_hand.get_child_count() != 0:
@@ -193,20 +225,18 @@ func on_hotbar_item_changed():
 			_right_hand.remove_child(_right_item)
 			_right_item.queue_free()
 			
-		if _hotbar.items[1] == null or _hotbar.items[1].item_data == null:
-			return
-
-		var wand: Wand = WAND.instantiate()
-		wand.set_data(_hotbar.items[1].item_data)
-		var slot = _ui_hotbar.get_slot(1)
-		wand.on_cooldown_changed.connect(slot.set_cooldown)
-		var shoot_lambda_func = shoot_lambda.bind(wand)
-		if !slot.on_slot_action_called.is_connected(shoot_lambda_func):
-			slot.on_slot_action_called.connect(shoot_lambda_func)
-		wand.tree_exiting.connect(func():
-			slot.on_slot_action_called.disconnect(shoot_lambda_func)
-		)
-		_right_hand.add_child(wand)
+		if _hotbar.items[1] != null and _hotbar.items[1].item_data != null:
+			var wand: Wand = WAND.instantiate()
+			wand.set_data(_hotbar.items[1].item_data)
+			var slot = _ui_hotbar.get_slot(1)
+			wand.on_cooldown_changed.connect(slot.set_cooldown)
+			var shoot_lambda_func = shoot_lambda.bind(wand)
+			if !slot.on_slot_action_called.is_connected(shoot_lambda_func):
+				slot.on_slot_action_called.connect(shoot_lambda_func)
+			wand.tree_exiting.connect(func():
+				slot.on_slot_action_called.disconnect(shoot_lambda_func)
+			)
+			_right_hand.add_child(wand)
 func update_health_ui() -> void:
 	$HealthBar.value = health
 	$HealthBar.max_value = max_health

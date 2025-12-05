@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bc6wwmcjvdkky"]
+[gd_scene load_steps=32 format=3 uid="uid://bc6wwmcjvdkky"]
 
 [ext_resource type="Script" uid="uid://dsbq1ab0s18ho" path="res://Scripts/Waves.gd" id="1_h1m7h"]
 [ext_resource type="PackedScene" uid="uid://dsw8raqgacxsc" path="res://Prefabs/Player.tscn" id="2_fk7m3"]
@@ -10,15 +10,45 @@
 [ext_resource type="Resource" uid="uid://ddaerj7lg2fm5" path="res://Resources/Items/SuperWand.tres" id="5_grg3l"]
 [ext_resource type="Script" uid="uid://bscyo3sxdpknv" path="res://Scripts/UI/UIControler.gd" id="5_qxpe7"]
 [ext_resource type="PackedScene" uid="uid://dv7nnwo6fsxpd" path="res://Prefabs/UI/UITransferSlot.tscn" id="6_8o5cv"]
+[ext_resource type="Resource" uid="uid://bwe7qvdyyofcy" path="res://Resources/Modifiers/Wand/Range.tres" id="6_fq0cl"]
 [ext_resource type="PackedScene" uid="uid://uota1sk3cua3" path="res://Prefabs/UI/UIPlayerHotbar.tscn" id="6_v0jmy"]
+[ext_resource type="Resource" uid="uid://4faau1dywkh7" path="res://Resources/Modifiers/Wand/Damage.tres" id="7_hwpts"]
 [ext_resource type="PackedScene" uid="uid://gy141ydha6p2" path="res://Prefabs/UI/UIPlayerInventory.tscn" id="7_qxpe7"]
+[ext_resource type="Resource" uid="uid://dkljyuy1hasv5" path="res://Resources/Modifiers/Wand/Cooldown.tres" id="8_jyqft"]
+[ext_resource type="Resource" uid="uid://d2y7pc7qvp4ms" path="res://Resources/Modifiers/Wand/ProjectileSpeed.tres" id="9_3tgeq"]
 [ext_resource type="PackedScene" uid="uid://btx1418xypjlp" path="res://Prefabs/UI/UIPauseMenu.tscn" id="10_4kpch"]
 [ext_resource type="FontFile" uid="uid://bdw4cp37sssxr" path="res://Resources/BoldPixels.ttf" id="10_erwvk"]
+[ext_resource type="PackedScene" uid="uid://dn2a8dni3wcso" path="res://Prefabs/UI/UIAltarMenu.tscn" id="14_2w5on"]
 [ext_resource type="Script" uid="uid://ddgl0jpyv1eyu" path="res://Scripts/Actions.gd" id="15_h1m7h"]
+[ext_resource type="PackedScene" uid="uid://r5whp1ra7f3l" path="res://Prefabs/WandAltar.tscn" id="16_erwvk"]
 
 [sub_resource type="Resource" id="Resource_grg3l"]
 script = ExtResource("4_bmxlf")
 item_data = ExtResource("4_4kpch")
+amount = 1
+metadata/_custom_type_script = "uid://vk087g6hsy7f"
+
+[sub_resource type="Resource" id="Resource_c4ay3"]
+script = ExtResource("4_bmxlf")
+item_data = ExtResource("6_fq0cl")
+amount = 1
+metadata/_custom_type_script = "uid://vk087g6hsy7f"
+
+[sub_resource type="Resource" id="Resource_aht7i"]
+script = ExtResource("4_bmxlf")
+item_data = ExtResource("7_hwpts")
+amount = 1
+metadata/_custom_type_script = "uid://vk087g6hsy7f"
+
+[sub_resource type="Resource" id="Resource_5jffn"]
+script = ExtResource("4_bmxlf")
+item_data = ExtResource("8_jyqft")
+amount = 1
+metadata/_custom_type_script = "uid://vk087g6hsy7f"
+
+[sub_resource type="Resource" id="Resource_kpo4j"]
+script = ExtResource("4_bmxlf")
+item_data = ExtResource("9_3tgeq")
 amount = 1
 metadata/_custom_type_script = "uid://vk087g6hsy7f"
 
@@ -59,7 +89,7 @@ unique_name_in_owner = true
 _items = Array[ExtResource("4_bmxlf")]([SubResource("Resource_grg3l"), null])
 
 [node name="Inventory" parent="Player" index="8"]
-_items = Array[ExtResource("4_bmxlf")]([null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, SubResource("Resource_frkhe")])
+_items = Array[ExtResource("4_bmxlf")]([null, null, null, null, null, null, null, null, null, null, null, null, null, SubResource("Resource_c4ay3"), SubResource("Resource_aht7i"), SubResource("Resource_5jffn"), SubResource("Resource_kpo4j"), SubResource("Resource_frkhe")])
 
 [node name="Path2D" type="Path2D" parent="Player"]
 curve = SubResource("Curve2D_cp6e5")
@@ -200,18 +230,6 @@ script = null
 [node name="Slot2" parent="UI/UIControler/UIPlayerHotbar/MarginContainer/ItemGrid" index="1"]
 script = null
 
-[node name="Slot3" parent="UI/UIControler/UIPlayerHotbar/MarginContainer/ItemGrid" index="2"]
-script = null
-
-[node name="Slot4" parent="UI/UIControler/UIPlayerHotbar/MarginContainer/ItemGrid" index="3"]
-script = null
-
-[node name="Slot5" parent="UI/UIControler/UIPlayerHotbar/MarginContainer/ItemGrid" index="4"]
-script = null
-
-[node name="Slot6" parent="UI/UIControler/UIPlayerHotbar/MarginContainer/ItemGrid" index="5"]
-script = null
-
 [node name="UIPlayerInventory" parent="UI/UIControler" instance=ExtResource("7_qxpe7")]
 layout_mode = 1
 anchors_preset = 4
@@ -279,6 +297,11 @@ script = null
 
 [node name="UIPauseMenu" parent="UI/UIControler" instance=ExtResource("10_4kpch")]
 layout_mode = 1
+
+[node name="UIAltarMenu" parent="UI/UIControler" instance=ExtResource("14_2w5on")]
+layout_mode = 1
+offset_top = -79.5
+offset_bottom = 79.5
 
 [node name="Trees" type="Node2D" parent="."]
 
@@ -811,6 +834,9 @@ text = "PLAY GAME"
 
 [node name="Node" type="Node" parent="."]
 script = ExtResource("15_h1m7h")
+
+[node name="WandAltar" parent="." instance=ExtResource("16_erwvk")]
+position = Vector2(246, -267)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 

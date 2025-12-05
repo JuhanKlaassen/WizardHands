@@ -15,12 +15,12 @@ var is_active_on_start: bool:
 	get:
 		return _is_active_on_start
 
-
 func _ready() -> void:
 	super._ready()
 	set_inventory_data(get_node("/root/Game/%Player/%Inventory"))
 	for slot in _slots:
-		slot.on_slot_clicked.disconnect(handle_slot_click.bind(slot))
+		if slot.on_slot_clicked.is_connected(handle_slot_click.bind(slot)):
+			slot.on_slot_clicked.disconnect(handle_slot_click.bind(slot))
 		slot.on_slot_clicked.connect(func(event: InputEvent) -> void:
 			if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.shift_pressed:
 				if slot.item != null and slot.item.item_data != null and slot.item.item_data.item_type == ItemData.ItemType.WAND:

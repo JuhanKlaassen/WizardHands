@@ -13,6 +13,7 @@ layout_mode = 2
 theme_type_variation = &"InventoryMargin"
 
 [node name="ItemGrid" type="GridContainer" parent="MarginContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 columns = 6
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dsw8raqgacxsc"]
+[gd_scene load_steps=16 format=3 uid="uid://dsw8raqgacxsc"]
 
 [ext_resource type="Script" uid="uid://donv1hujqvup3" path="res://Scripts/Player.gd" id="1_y5hcb"]
 [ext_resource type="PackedScene" uid="uid://pbmyh1qru7p" path="res://Assets/characters/happy_boo/happy_boo.tscn" id="2_bl5ih"]
@@ -41,6 +41,9 @@ bg_color = Color(0, 0.71685433, 0.38103318, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_knrd4"]
 bg_color = Color(0, 0.699084, 0.5890259, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_javds"]
+radius = 200.0
 
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(1, 0)
@@ -179,3 +182,12 @@ theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("4_hck1p")
 theme_override_font_sizes/font_size = 18
 text = "GOLD"
+
+[node name="InteractionCollider" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionCollider"]
+position = Vector2(0, -32)
+shape = SubResource("CircleShape2D_javds")

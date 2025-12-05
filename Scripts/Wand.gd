@@ -5,7 +5,6 @@ class_name Wand
 signal on_cooldown_changed(cooldown: float)
 
 var _wand_data: WandData
-var modifier_inventory: InventorySystem
 
 @onready var shooting_sound = $ShootingSound
 @onready var shooting_point = %ShootingPoint
@@ -37,23 +36,13 @@ func recalculate_modifiers() -> void:
 	projectile_speed = _wand_data.base_projectile_speed
 	projectile_range = _wand_data.base_projectile_range
 	mana_cost = _wand_data.base_mana_cost
-	for modifier: Item in modifier_inventory.items:
-		if modifier.item_data is WandModifier:
-			modifier.item_data.apply(self)
+	for modifier: WandModifier in _wand_data.modifiers:
+		if modifier == null:
+			continue
+		modifier.apply(self)
 
 func set_data(new_wand_data: WandData) -> void:
 	_wand_data = new_wand_data
-	if modifier_inventory == null:
-		modifier_inventory = get_node("ModifierInventory")
-	print(modifier_inventory)
-	print(self.get_children())
-	var modifiers = new_wand_data.base_modifiers
-	modifiers.resize(new_wand_data.modifier_slot_count)
-	var modifier_slots: Array[Item] = []
-	for modifier in modifiers:
-		modifier_slots.append(Item.new(modifier, 1))
-	modifier_inventory._init(modifier_slots)
-	modifier_inventory.on_inventory_changed.connect(recalculate_modifiers)
 
 	
 func get_mana_cost() -> int:

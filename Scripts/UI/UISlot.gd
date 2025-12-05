@@ -1,3 +1,4 @@
+@tool
 extends Panel
 
 class_name UISlot
@@ -8,12 +9,38 @@ signal on_slot_action_called
 @onready var icon: TextureRect = get_node("MarginContainer/TextureRect")
 @onready var amount_label: Label = get_node("MarginContainer/AmountLabel")
 @onready var cooldown_label: Label = $CooldownLabel
+@onready var type_sprite: Sprite2D = $TypeSprite
 @export var item: Item
-@export var slot_type: ItemData.ItemType = ItemData.ItemType.UNSET
+@export var slot_type: ItemData.ItemType = ItemData.ItemType.UNSET:
+	set(value):
+		slot_type = value
+		_update_type_sprite()
 
 func _ready() -> void:
+	if Engine.is_editor_hint():
+		_update_type_sprite()
+		return
 	gui_input.connect(_on_gui_input)
+	if slot_type == ItemData.ItemType.UNSET:
+		type_sprite.visible = false
+	_update_type_sprite()
 
+
+func _update_type_sprite() -> void:
+	if not is_node_ready():
+		return
+
+	if slot_type == ItemData.ItemType.UNSET:
+		type_sprite.visible = false
+	else:
+		type_sprite.visible = true
+		match slot_type:
+			ItemData.ItemType.WAND:
+				type_sprite.texture = load("res://Sprites/BlueWand.png")
+			ItemData.ItemType.WAND_MODIFIER:
+				type_sprite.texture = load("res://Sprites/BlueBook.png")
+			_:
+				type_sprite.texture = null
 
 func set_item(new_item: Item) -> void:
 	item = new_item
@@ -39,11 +66,15 @@ func reload() -> void:
 			amount_label.visible = false
 		else:
 			amount_label.visible = true
+
+		type_sprite.visible = false
 	else:
 		icon.texture = null
 		amount_label.text = ""
 		amount_label.visible = false
 		tooltip_text = ""
+		if slot_type != ItemData.ItemType.UNSET:
+			type_sprite.visible = true
 
 
 func _on_gui_input(event: InputEvent) -> void:
@@ -51,6 +82,7 @@ func _on_gui_input(event: InputEvent) -> void:
 		var mouse_button: InputEventMouseButton = event as InputEventMouseButton
 		if mouse_button.pressed:
 			on_slot_clicked.emit(event)
+			print("on_slot_clicked.emit ", get_parent().get_parent().get_parent().name)
 
 func transfer_to(to_slot: UISlot, amount: int = -1) -> void:
 	if amount == -1:

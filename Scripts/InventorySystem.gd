@@ -5,6 +5,7 @@ class_name InventorySystem
 signal on_inventory_changed
 
 @export var _items: Array[Item]
+@export var inventory_type: ItemData.ItemType = ItemData.ItemType.UNSET
 
 var items: Array[Item]:
 	get:
@@ -16,6 +17,10 @@ func _init(new_items: Array[Item] = []) -> void:
 		_items = []
 	else:
 		_items = new_items
+
+	for i in range(_items.size()):
+		if _items[i] == null:
+			_items[i] = Item.new(null, 0)
 
 
 func _enter_tree() -> void:
