@@ -18,6 +18,10 @@ func _ready() -> void:
 
 
 func set_inventory_data(inventory_data: InventorySystem) -> void:
+	for child in _slots_container.get_children():
+		child.visible = false
+		child.queue_free()
+		_slots.clear()
 	if inventory_data != null:
 		_inventory_system = inventory_data
 		_inventory_system.on_inventory_changed.connect(reload)
@@ -29,10 +33,6 @@ func set_inventory_data(inventory_data: InventorySystem) -> void:
 			_slots.append(slot_scene)
 			slot_scene.on_slot_clicked.connect(handle_slot_click.bind(slot_scene))
 	else:
-		for child in _slots_container.get_children():
-			child.visible = false
-			child.queue_free()
-			_slots.clear()
 		_inventory_system = null
 
 	reload()

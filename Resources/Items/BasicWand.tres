@@ -1,6 +1,5 @@
-[gd_resource type="Resource" script_class="WandData" load_steps=7 format=3 uid="uid://18knp5812ewg"]
+[gd_resource type="Resource" script_class="WandData" load_steps=6 format=3 uid="uid://18knp5812ewg"]
 
-[ext_resource type="Script" uid="uid://b8v4xrtb36wkc" path="res://Scripts/WandModifier.gd" id="1_76jmu"]
 [ext_resource type="Script" uid="uid://bs2pvbdvnbai0" path="res://Scripts/WandData.gd" id="1_aq7vn"]
 [ext_resource type="Texture2D" uid="uid://wl1cle7bkqu4" path="res://Sprites/Shikashi's Fantasy Icons Pack v2/#1 - Transparent Icons.png" id="2_76jmu"]
 [ext_resource type="PackedScene" uid="uid://br65mgv2n0bbd" path="res://Prefabs/Projectiles/Projectile.tscn" id="2_jbfmr"]

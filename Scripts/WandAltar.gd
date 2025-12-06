@@ -22,11 +22,12 @@ func _ready() -> void:
 	
 func on_wand_changed() -> void:
 	var wand: WandData = wand_inventory.items[0].item_data as WandData
+	if wand_pivot.get_child_count() > 0:
+		wand_pivot.get_child(0).queue_free()
 	if wand == null:
 		if altar_ui.modifier_ui_inventory._inventory_system != null:
 			altar_ui.modifier_ui_inventory.set_inventory_data(null)
 		altar_ui.stats_label.text = "No wand equipped"
-		wand_pivot.get_child(0).queue_free()
 		return
 
 	var modifier_items: Array[Item] = []
