@@ -11,7 +11,10 @@ func update():
 	$VBoxContainer/dodge.text = 'DODGE: '+ str(player.dodge)
 	$VBoxContainer/mana_reg.text = 'MANA REGEN: '+ str(player.mana_regen)
 	$VBoxContainer/hp_reg.text = 'HP REGEN: '+ str(player.health_regen_per_second)
-	$VBoxContainer/speed.text = 'HP REGEN: '+ str(player.speed)
+	$VBoxContainer/speed.text = 'SPEED: '+ str(player.speed)
+	$VBoxContainer/xp_gain.text = 'XP GAIN: '+str(player.more_xp)
+	$VBoxContainer/gold_gain.text = 'GOLD GAIN: '+str(player.more_gold)
+	$VBoxContainer/luck.text = 'LUCK: '+str(player.luck)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause_toggle"):

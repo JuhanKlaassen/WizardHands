@@ -3,10 +3,12 @@ class_name LevelUpMenu
 
 signal option_selected(option_id)
 
-func set_options(text1: String, text2: String, text3: String):
-	$Panel/HBoxContainer/Option1.text = text1
-	$Panel/HBoxContainer/Option2.text = text2
-	$Panel/HBoxContainer/Option3.text = text3
+func set_options(names: Array, values: Array, colors: Array):
+	for i in range(3):
+		var button = $Panel/HBoxContainer.get_child(i)
+		button.text = "%s +%.2f" % [names[i], values[i]]
+		button.modulate = colors[i]
+
 
 func _ready():
 	$Panel/HBoxContainer/Option1.pressed.connect(self._on_option1)

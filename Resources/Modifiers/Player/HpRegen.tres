@@ -4,7 +4,9 @@
 
 [resource]
 script = ExtResource("1_gx5c6")
-name = "+5 Max Mana"
-type = 2
-value = 5.0
+name = "Hp Regen"
+type = 1
+value1 = 1.0
+value2 = 2.0
+value3 = 3.0
 metadata/_custom_type_script = "uid://dox5h7bbn17vr"

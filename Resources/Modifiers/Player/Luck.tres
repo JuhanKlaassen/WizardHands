@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="PlayerModifier" load_steps=2 format=3 uid="uid://cn8d57aiaf5ae"]
+
+[ext_resource type="Script" uid="uid://dox5h7bbn17vr" path="res://Scripts/PlayerModifier.gd" id="1_snsbh"]
+
+[resource]
+script = ExtResource("1_snsbh")
+name = "Luck"
+type = 8
+value1 = 2.0
+value2 = 4.0
+value3 = 6.0
+metadata/_custom_type_script = "uid://dox5h7bbn17vr"

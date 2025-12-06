@@ -101,5 +101,17 @@ text = "HP REGEN:"
 layout_mode = 2
 text = "SPEED"
 
+[node name="xp_gain" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "xp"
+
+[node name="gold_gain" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "gold"
+
+[node name="luck" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "luck"
+
 [connection signal="pressed" from="Paused/CenterContainer/VBoxContainer/Resume" to="." method="resume"]
 [connection signal="pressed" from="Paused/CenterContainer/VBoxContainer/Main menu" to="." method="Quit"]

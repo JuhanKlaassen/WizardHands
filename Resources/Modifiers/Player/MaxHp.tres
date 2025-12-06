@@ -4,6 +4,8 @@
 
 [resource]
 script = ExtResource("1_86hlh")
-name = "+20 Max HP"
-value = 20.0
+name = "Max HP"
+value1 = 5.0
+value2 = 10.0
+value3 = 15.0
 metadata/_custom_type_script = "uid://dox5h7bbn17vr"

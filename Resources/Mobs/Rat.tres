@@ -7,7 +7,7 @@
 script = ExtResource("2_qyhc6")
 speed = 400
 health = 1
-xp = 10
+xp = 100
 enemy_scene = ExtResource("1_v48eq")
 look_at = true
 offset = Vector2(-23, -28)

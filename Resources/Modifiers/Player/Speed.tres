@@ -4,7 +4,9 @@
 
 [resource]
 script = ExtResource("1_puemn")
-name = "+30 Speed"
+name = "Speed"
 type = 4
-value = 30.0
+value1 = 20.0
+value2 = 30.0
+value3 = 40.0
 metadata/_custom_type_script = "uid://dox5h7bbn17vr"

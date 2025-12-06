@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_yh52o")
-xp = 5
+xp = 50
 enemy_scene = ExtResource("1_h4abc")
 offset = Vector2(0, 11)
 scale = Vector2(1.5, 1.5)

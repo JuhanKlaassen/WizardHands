@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="PlayerModifierCollection" load_steps=9 format=3 uid="uid://iwec1hjvmvxl"]
+[gd_resource type="Resource" script_class="PlayerModifierCollection" load_steps=12 format=3 uid="uid://iwec1hjvmvxl"]
 
 [ext_resource type="Script" uid="uid://dox5h7bbn17vr" path="res://Scripts/PlayerModifier.gd" id="1_wb8hy"]
 [ext_resource type="Resource" uid="uid://bmnooh8j4mucg" path="res://Resources/Modifiers/Player/MaxHp.tres" id="2_yr176"]
@@ -8,7 +8,10 @@
 [ext_resource type="Resource" uid="uid://cnksgewch6ht8" path="res://Resources/Modifiers/Player/Speed.tres" id="6_bil31"]
 [ext_resource type="Resource" uid="uid://bsendyi54prq8" path="res://Resources/Modifiers/Player/Dodge.tres" id="7_e2uos"]
 [ext_resource type="Script" uid="uid://cj6t1v30jqk60" path="res://Scripts/PlayerModifierCollection.gd" id="8_20q6s"]
+[ext_resource type="Resource" uid="uid://u8sx1oa2hx6k" path="res://Resources/Modifiers/Player/MoreXp.tres" id="8_yr176"]
+[ext_resource type="Resource" uid="uid://cs26naglkd8vj" path="res://Resources/Modifiers/Player/MoreGold.tres" id="9_lxeis"]
+[ext_resource type="Resource" uid="uid://cn8d57aiaf5ae" path="res://Resources/Modifiers/Player/Luck.tres" id="10_fb5l6"]
 
 [resource]
 script = ExtResource("8_20q6s")
-modifiers = Array[ExtResource("1_wb8hy")]([ExtResource("2_yr176"), ExtResource("3_lxeis"), ExtResource("4_fb5l6"), ExtResource("5_ni13j"), ExtResource("6_bil31"), ExtResource("7_e2uos")])
+modifiers = Array[ExtResource("1_wb8hy")]([ExtResource("7_e2uos"), ExtResource("3_lxeis"), ExtResource("5_ni13j"), ExtResource("2_yr176"), ExtResource("4_fb5l6"), ExtResource("9_lxeis"), ExtResource("8_yr176"), ExtResource("6_bil31"), ExtResource("10_fb5l6")])

@@ -15,6 +15,9 @@ signal on_xp_changed
 @export var mana_regen: int = 5
 #MISC
 @export var dodge: float = 0.0
+@export var more_xp: float = 1
+@export var more_gold:float = 1
+@export var luck: float = 110
 
 const LEVELUP_MENU = preload("res://Prefabs/UI/UILevelUpMenu.tscn") # adjust path
 var levelup_menu: LevelUpMenu = null
@@ -77,8 +80,8 @@ func _ready():
 
 
 func gain_xp(amount: int) -> void:
-	xp += amount
-	print("Gained XP: ", amount, " | Total XP: ", xp)
+	xp += amount*more_xp
+	print("Gained XP: ", amount*more_xp, " | Total XP: ", xp)
 	
 	# Update XP bar
 	on_xp_changed.emit()
@@ -94,12 +97,12 @@ func gain_xp(amount: int) -> void:
 func level_up() -> void:
 	level += 1
 	print("LEVEL UP!")
-	
+
 	# Update XP required
 	var base_xp = 40
 	var exponent = 1.3
 	xp_to_next_level = int(base_xp * pow(level, exponent))
-	
+
 	# Pause the game
 	get_tree().paused = true
 
@@ -108,29 +111,85 @@ func level_up() -> void:
 	get_parent().add_child(levelup_menu)
 
 	# Randomly generate 3 options
-	var choices = modifier_collection.modifiers
-
+	var choices = modifier_collection.modifiers.duplicate()
 	choices.shuffle()
 
-	# show 3
-	levelup_menu.set_options(
-		choices[0].name,
-		choices[1].name,
-		choices[2].name
+	# Arrays for names, values, and colors
+	var names: Array = []
+	var rolled_values: Array = []
+	var colors: Array = []
+
+	for i in range(3):
+		names.append(choices[i].name)
+
+		var roll_result = roll_modifier_value(choices[i], luck)
+		rolled_values.append(roll_result.value)
+		colors.append(roll_result.color)
+
+	# Set menu options with names, values, and colors
+	levelup_menu.set_options(names, rolled_values, colors)
+
+	# Connect button selection
+	levelup_menu.option_selected.connect(func(option_id):
+		modifiers.append(choices[option_id])
+		# Apply the rolled value to the player
+		choices[option_id].apply(self, rolled_values[option_id])
+		levelup_menu.queue_free()
+		levelup_menu = null
+
+		# Unpause game
+		get_tree().paused = false
+		print("Applied bonus: ", choices[option_id].name)
 	)
 
-	# Wait for a click
-	levelup_menu.option_selected.connect(
-		func(option_id):
-			modifiers.append(choices[option_id])
-			choices[option_id].apply(self)
-			levelup_menu.queue_free()
-			levelup_menu = null
 
-			# Unpause game
-			get_tree().paused = false
-			print("Applied bonus: ", choices[option_id].name)
-	)
+
+# Returns a dictionary with 'value' and 'color'
+func roll_modifier_value(mod: PlayerModifier, player_luck: float) -> Dictionary:
+	var luck = clamp(player_luck, 0.0, 100.0)
+
+	# Base chances
+	var bronze_chance = 0.55
+	var silver_chance = 0.30
+	var gold_chance   = 0.15
+
+	# Increase gold chance based on luck, decrease bronze
+	gold_chance += luck * 0.002
+	bronze_chance -= luck * 0.002
+
+	# Clamp to valid range
+	bronze_chance = clamp(bronze_chance, 0.0, 1.0)
+	gold_chance   = clamp(gold_chance, 0.0, 1.0)
+	silver_chance = clamp(1.0 - bronze_chance - gold_chance, 0.0, 1.0)
+
+	# Roll random
+	var r = randf()
+	var val: float
+
+	if r < gold_chance:
+		val = mod.value1  # gold = rarest
+	elif r < gold_chance + silver_chance:
+		val = mod.value2  # silver = middle
+	else:
+		val = mod.value3  # bronze = lowest
+
+	# Determine color based on rarity
+	var sorted_values = [mod.value1, mod.value2, mod.value3]
+	sorted_values.sort_custom(func(a, b): return b - a) # descending
+
+	var color: Color
+	if val == sorted_values[0]:
+		color = Color(1, 0.84, 0)       # gold = best
+	elif val == sorted_values[1]:
+		color = Color(0.75, 0.75, 0.75) # silver = middle
+	else:
+		color = Color(0.8, 0.5, 0.2)    # bronze = lowest
+
+	# Debug print
+	print("Rolled value:", val, "Color:", color, "Luck:", luck, "r:", r)
+	return {"value": val, "color": color}
+
+
 
 
 var _mana_regen_accumulator: float = 0.0
@@ -185,8 +244,8 @@ func consume_mana(amount: int) -> bool:
 
 
 func add_gold(amount):
-	gold += amount
-	$gold.text = str(gold)
+	gold += int(floor(amount * more_gold + 0.5))
+	$gold.text = 'GOLD '+str(gold)
 
 func pick_up_item(item: Item) -> bool:
 	return _inventory.add_items(item.item_data, item.amount)

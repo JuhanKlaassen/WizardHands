@@ -4,7 +4,9 @@
 
 [resource]
 script = ExtResource("1_yx30k")
-name = "+1 Mana Regen"
+name = "Mana Regen"
 type = 3
-value = 1.0
+value1 = 1.0
+value2 = 2.0
+value3 = 3.0
 metadata/_custom_type_script = "uid://dox5h7bbn17vr"
