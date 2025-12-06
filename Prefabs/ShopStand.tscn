@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=3 uid="uid://125tuj0qjf4n"]
+
+[ext_resource type="Texture2D" uid="uid://wl1cle7bkqu4" path="res://Sprites/Shikashi's Fantasy Icons Pack v2/#1 - Transparent Icons.png" id="1_1uile"]
+[ext_resource type="Script" uid="uid://bvalw0t28it3h" path="res://Scripts/ShopStand.gd" id="1_j6llf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j6llf"]
+atlas = ExtResource("1_1uile")
+region = Rect2(0, 640, 32, 32)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1uile"]
+radius = 28.0
+height = 120.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_j6llf"]
+font_size = 30
+font_color = Color(1, 1, 0, 1)
+
+[node name="ShopStand" type="StaticBody2D"]
+collision_layer = 34
+collision_mask = 0
+script = ExtResource("1_j6llf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
+texture = SubResource("AtlasTexture_j6llf")
+
+[node name="ItemSprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+scale = Vector2(2, 2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 32)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_1uile")
+
+[node name="InteractHint" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Label" type="Label" parent="InteractHint"]
+offset_left = -29.0
+offset_top = -87.0
+offset_right = 30.0
+offset_bottom = -64.0
+text = " Press E"
+
+[node name="PriceLabel" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = -34.0
+offset_top = 12.0
+offset_right = 35.0
+offset_bottom = 54.0
+text = "100$"
+label_settings = SubResource("LabelSettings_j6llf")
+horizontal_alignment = 1
+vertical_alignment = 1

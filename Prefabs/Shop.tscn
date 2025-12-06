@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bn7lyv541j5b3"]
+
+[ext_resource type="Script" uid="uid://cel3gtcosdjam" path="res://Scripts/Shop.gd" id="1_wubrc"]
+[ext_resource type="Resource" uid="uid://c7y2nst5ny27v" path="res://Resources/DefaultShopCollection.tres" id="2_pu482"]
+[ext_resource type="PackedScene" uid="uid://125tuj0qjf4n" path="res://Prefabs/ShopStand.tscn" id="3_0y0u7"]
+
+[node name="Shop" type="Node2D" node_paths=PackedStringArray("stands")]
+script = ExtResource("1_wubrc")
+offer_collection = ExtResource("2_pu482")
+stands = [NodePath("ShopStand"), NodePath("ShopStand2"), NodePath("ShopStand3")]
+
+[node name="ShopStand" parent="." instance=ExtResource("3_0y0u7")]
+
+[node name="ShopStand2" parent="." instance=ExtResource("3_0y0u7")]
+position = Vector2(-200, 0)
+
+[node name="ShopStand3" parent="." instance=ExtResource("3_0y0u7")]
+position = Vector2(200, 0)

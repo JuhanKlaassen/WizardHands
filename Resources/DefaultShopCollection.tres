@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="ShopCollection" load_steps=11 format=3 uid="uid://c7y2nst5ny27v"]
+
+[ext_resource type="Script" uid="uid://vk087g6hsy7f" path="res://Scripts/Item.gd" id="1_rjimu"]
+[ext_resource type="Script" uid="uid://mhlssx7s1eb0" path="res://Scripts/ShopCollection.gd" id="2_3lwyb"]
+[ext_resource type="Resource" uid="uid://bwe7qvdyyofcy" path="res://Resources/Modifiers/Wand/Range.tres" id="2_uw0ym"]
+[ext_resource type="Resource" uid="uid://d2y7pc7qvp4ms" path="res://Resources/Modifiers/Wand/ProjectileSpeed.tres" id="3_7wr7v"]
+[ext_resource type="Resource" uid="uid://dkljyuy1hasv5" path="res://Resources/Modifiers/Wand/Cooldown.tres" id="4_jndcg"]
+[ext_resource type="Resource" uid="uid://4faau1dywkh7" path="res://Resources/Modifiers/Wand/Damage.tres" id="5_6mavd"]
+
+[sub_resource type="Resource" id="Resource_um1j5"]
+script = ExtResource("1_rjimu")
+item_data = ExtResource("2_uw0ym")
+amount = 1
+metadata/_custom_type_script = "uid://vk087g6hsy7f"
+
+[sub_resource type="Resource" id="Resource_5c84q"]
+script = ExtResource("1_rjimu")
+item_data = ExtResource("3_7wr7v")
+amount = 1
+metadata/_custom_type_script = "uid://vk087g6hsy7f"
+
+[sub_resource type="Resource" id="Resource_yt0gk"]
+script = ExtResource("1_rjimu")
+item_data = ExtResource("4_jndcg")
+amount = 1
+metadata/_custom_type_script = "uid://vk087g6hsy7f"
+
+[sub_resource type="Resource" id="Resource_x7u84"]
+script = ExtResource("1_rjimu")
+item_data = ExtResource("5_6mavd")
+amount = 1
+metadata/_custom_type_script = "uid://vk087g6hsy7f"
+
+[resource]
+script = ExtResource("2_3lwyb")
+offers = Dictionary[ExtResource("1_rjimu"), int]({
+SubResource("Resource_um1j5"): 10,
+SubResource("Resource_5c84q"): 10,
+SubResource("Resource_yt0gk"): 10,
+SubResource("Resource_x7u84"): 10
+})
+metadata/_custom_type_script = "uid://mhlssx7s1eb0"

@@ -35,7 +35,6 @@ func add_items(item_data: ItemData, amount: int = -1) -> bool:
 
 	var not_full_items: Array[Item] = get_not_full_items(item_data)
 
-
 	for item in not_full_items:
 		var amount_to_add: int = item.item_data.max_stack - item.amount
 		if amount > amount_to_add:
@@ -67,6 +66,7 @@ func add_items(item_data: ItemData, amount: int = -1) -> bool:
 
 	if amount > 0:
 		push_error("InventorySystem.add_items: Error adding all items.")
+
 
 	return true
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://bc6wwmcjvdkky"]
+[gd_scene load_steps=33 format=3 uid="uid://bc6wwmcjvdkky"]
 
 [ext_resource type="Script" uid="uid://dsbq1ab0s18ho" path="res://Scripts/Waves.gd" id="1_h1m7h"]
 [ext_resource type="PackedScene" uid="uid://dsw8raqgacxsc" path="res://Prefabs/Player.tscn" id="2_fk7m3"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://dn2a8dni3wcso" path="res://Prefabs/UI/UIAltarMenu.tscn" id="14_2w5on"]
 [ext_resource type="Script" uid="uid://ddgl0jpyv1eyu" path="res://Scripts/Actions.gd" id="15_h1m7h"]
 [ext_resource type="PackedScene" uid="uid://r5whp1ra7f3l" path="res://Prefabs/WandAltar.tscn" id="16_erwvk"]
+[ext_resource type="PackedScene" uid="uid://bn7lyv541j5b3" path="res://Prefabs/Shop.tscn" id="22_hwpts"]
 
 [sub_resource type="Resource" id="Resource_grg3l"]
 script = ExtResource("4_bmxlf")
@@ -837,6 +838,9 @@ script = ExtResource("15_h1m7h")
 
 [node name="WandAltar" parent="." instance=ExtResource("16_erwvk")]
 position = Vector2(246, -267)
+
+[node name="Shop" parent="." instance=ExtResource("22_hwpts")]
+position = Vector2(250, -602)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 

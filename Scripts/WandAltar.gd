@@ -72,9 +72,10 @@ func update_stats() -> void:
 	})
 
 
-func interact() -> void:
+func interact() -> bool:
 	altar_ui.show()
 	get_node("/root/Game/UI/UIControler/UIPlayerInventory").show()
+	return true
 
 func end_interaction() -> void:
 	altar_ui.hide()

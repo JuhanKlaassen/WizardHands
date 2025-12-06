@@ -36,6 +36,7 @@ var levelup_menu: LevelUpMenu = null
 
 var interactable = null
 var interacting: bool = false
+var interactables_in_range: Array[Node2D] = []
 
 const WAND = preload("res://Prefabs/Wand.tscn")
 
@@ -52,23 +53,14 @@ func _ready():
 		get_node("%GameOver").show()
 		get_tree().paused = true
 	)
+
 	interaction_collider.body_entered.connect(func(body):
 		if body.has_method("interact"):
-			if body != interactable and interactable != null:
-				if interacting:
-					return
-				interactable.hide_iteract_hint()
-				interactable = null
-			interactable = body
-			interactable.show_iteract_hint()
+			interactables_in_range.append(body)
 	)
 	interaction_collider.body_exited.connect(func(body):
-		if interactable == body:
-			if interacting:
-				interacting = false
-				interactable.end_interaction()
-			interactable.hide_iteract_hint()
-			interactable = null
+		interactables_in_range.erase(body)
+		try_stop_interacting(body)
 	)
 
 	for child in _left_hand.get_children():
@@ -210,6 +202,26 @@ func _physics_process(delta):
 	_left_hand.look_at(mouse_pos)
 	_right_hand.look_at(mouse_pos)
 
+	for interactable_in_range in interactables_in_range:
+		if interactable == interactable_in_range:
+			continue
+
+		if interactable == null:
+			interactable = interactable_in_range
+			interactable.show_iteract_hint()
+			continue
+
+		if interacting:
+			return
+			
+		var distance1 = global_position.distance_to(interactable_in_range.global_position)
+		var distance2 = global_position.distance_to(interactable.global_position)
+		if distance1 < distance2:
+			try_stop_interacting(interactable)
+			interactable = interactable_in_range
+			interactable.show_iteract_hint()
+
+
 	# Mana regen
 	_mana_regen_accumulator += delta
 	if _mana_regen_accumulator >= 1.0:
@@ -228,7 +240,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact"):
 		if interactable != null:
 			interacting = true
-			interactable.interact()
+			if interactable.interact() == false:
+				interacting = false
+
 	elif event.is_action_pressed("cancel"):
 		if interacting:
 			interacting = false
@@ -241,6 +255,15 @@ func consume_mana(amount: int) -> bool:
 		return true
 	else:
 		return false
+
+
+func remove_gold(amount: int) -> bool:
+	if gold < amount:
+		return false
+
+	gold -= amount
+	$gold.text = str(gold)
+	return true
 
 
 func add_gold(amount):
@@ -296,6 +319,18 @@ func on_hotbar_item_changed():
 				slot.on_slot_action_called.disconnect(shoot_lambda_func)
 			)
 			_right_hand.add_child(wand)
+
+
+func try_stop_interacting(body) -> void:
+	if body.has_method("interact"):
+		if interactable == body:
+			if interacting:
+				interacting = false
+				interactable.end_interaction()
+			interactable.hide_iteract_hint()
+			interactable = null
+		
+
 func update_health_ui() -> void:
 	$HealthBar.value = health
 	$HealthBar.max_value = max_health
