@@ -12,6 +12,8 @@ var display_wave_count := 1
 var enemies_to_spawn := 0
 var spawn_timer := 0.0
 
+var spawnedEnemies: Array[Enemy]
+
 # Constants
 const WAVE_DELAY = 30.0 # seconds between waves
 
@@ -136,6 +138,7 @@ func _process(delta):
 	if between_waves:
 		delay_timer -= delta
 		wave_info_ui.set_cooldown(delay_timer)
+		wave_info_ui.clear_enemies()
 		if delay_timer <= 0:
 			wave_info_ui.clear_cooldown()
 			wave_label.visible = true
@@ -145,7 +148,9 @@ func _process(delta):
 
 	process_wave(delta)
 
-	if enemies_to_spawn <= 0 and not between_waves:
+	wave_info_ui.set_enemies(spawnedEnemies.size() + enemies_to_spawn)
+
+	if enemies_to_spawn <= 0 and not between_waves and spawnedEnemies.size() == 0:
 		next_wave()
 		start_wave()
 
@@ -153,7 +158,11 @@ func spawn_enemy(enemy_data: EnemyData):
 	%PathFollow2D.progress_ratio = randf()
 	var scene = Enemy.new_enemy(enemy_data)
 	scene.global_position = %PathFollow2D.global_position
-	
+
+	spawnedEnemies.append(scene)
+	scene.on_death.connect(func():
+		spawnedEnemies.erase(scene)
+	)
 	# enemy scaling
 	apply_wave_scaling(scene)
 	
