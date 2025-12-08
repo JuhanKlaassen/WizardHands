@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://bc6wwmcjvdkky"]
+[gd_scene load_steps=36 format=3 uid="uid://bc6wwmcjvdkky"]
 
 [ext_resource type="Script" uid="uid://dsbq1ab0s18ho" path="res://Scripts/Waves.gd" id="1_h1m7h"]
 [ext_resource type="PackedScene" uid="uid://cy6b6lq1jkrrw" path="res://Prefabs/Player.tscn" id="2_fk7m3"]
@@ -73,6 +73,8 @@ default_font = ExtResource("10_erwvk")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3tgeq"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jyqft"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_1p5hy"]
 action = &"inventory_toggle"
@@ -265,6 +267,28 @@ theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("10_erwvk")
 theme_override_font_sizes/font_size = 46
 text = "Next wave statrts in 30"
+
+[node name="Panel" type="Panel" parent="UI/UIControler/UIWaveInfo/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxEmpty_jyqft")
+
+[node name="StartNextWaveButton" type="Button" parent="UI/UIControler/UIWaveInfo/MarginContainer/Panel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -324.0
+offset_top = -116.0
+offset_right = 3.0
+offset_bottom = -61.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("10_erwvk")
+theme_override_font_sizes/font_size = 46
+text = "Start next wave"
 
 [node name="UIPlayerHotbar" parent="UI/UIControler" instance=ExtResource("6_v0jmy")]
 layout_mode = 1

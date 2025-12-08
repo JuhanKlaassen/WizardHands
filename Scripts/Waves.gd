@@ -31,6 +31,7 @@ const WAVE_DELAY = 30.0 # seconds between waves
 
 func _ready():
 	start_wave()
+	wave_info_ui.start_wave.connect(func(): delay_timer = 0)
 
 func start_wave():
 	wave_label.text = "Wave " + str(display_wave_count)
@@ -43,6 +44,7 @@ func start_wave():
 	# show label for some seconds
 	delay_timer = WAVE_DELAY
 	between_waves = true
+	wave_info_ui.show_start_wave_button()
 
 func start_waves():
 	wave_active = true
@@ -141,6 +143,7 @@ func _process(delta):
 		wave_info_ui.clear_enemies()
 		if delay_timer <= 0:
 			wave_info_ui.clear_cooldown()
+			wave_info_ui.hide_start_wave_button()
 			wave_label.visible = true
 			between_waves = false
 			start_waves() # load first wave or continue waves
