@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ii5dplb40sax"]
 
-[ext_resource type="Script" uid="uid://kp38rivcarnb" path="res://Scripts/level_up_popup.gd" id="1_lcm6v"]
+[ext_resource type="Script" path="res://Scripts/LeveIUpPopup.gd" id="1_lcm6v"]
 
 [node name="LevelUpPopup" type="RichTextLabel"]
 offset_right = 300.0
