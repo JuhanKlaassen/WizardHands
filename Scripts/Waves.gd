@@ -13,7 +13,7 @@ var enemies_to_spawn := 0
 var spawn_timer := 0.0
 
 # Constants
-const WAVE_DELAY = 3.0 # seconds between waves
+const WAVE_DELAY = 30.0 # seconds between waves
 
 # enemy scaling settings per wave
 @export var health_per_wave := 1.15
@@ -25,6 +25,7 @@ const WAVE_DELAY = 3.0 # seconds between waves
 
 @onready var wave_label = $"/root/Game/UI/WaveLabel"
 @onready var difficulty_label = $"/root/Game/UI/DifficultyScalingLabel"
+@onready var wave_info_ui: UIWaveInfo = $"/root/Game/UI/UIControler/UIWaveInfo"
 
 func _ready():
 	start_wave()
@@ -134,7 +135,9 @@ func get_current_difficulty_multiplier() -> float:
 func _process(delta):
 	if between_waves:
 		delay_timer -= delta
+		wave_info_ui.set_cooldown(delay_timer)
 		if delay_timer <= 0:
+			wave_info_ui.clear_cooldown()
 			wave_label.visible = false
 			between_waves = false
 			start_waves() # load first wave or continue waves
