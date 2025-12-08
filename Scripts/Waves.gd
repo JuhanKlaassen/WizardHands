@@ -138,7 +138,7 @@ func _process(delta):
 		wave_info_ui.set_cooldown(delay_timer)
 		if delay_timer <= 0:
 			wave_info_ui.clear_cooldown()
-			wave_label.visible = false
+			wave_label.visible = true
 			between_waves = false
 			start_waves() # load first wave or continue waves
 		return
