@@ -11,7 +11,7 @@ region = Rect2(256, 192, 32, 32)
 
 [resource]
 script = ExtResource("1_aq7vn")
-base_cooldown_ms = 100
+base_cooldown_ms = 500
 projectile_prefab = ExtResource("2_jbfmr")
 wand_sprite = ExtResource("4_ximmi")
 shooting_point_offset = Vector2(53, 0)

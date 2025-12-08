@@ -1,7 +1,7 @@
 [gd_scene load_steps=33 format=3 uid="uid://bc6wwmcjvdkky"]
 
 [ext_resource type="Script" uid="uid://dsbq1ab0s18ho" path="res://Scripts/Waves.gd" id="1_h1m7h"]
-[ext_resource type="PackedScene" uid="uid://dsw8raqgacxsc" path="res://Prefabs/Player.tscn" id="2_fk7m3"]
+[ext_resource type="PackedScene" uid="uid://cy6b6lq1jkrrw" path="res://Prefabs/Player.tscn" id="2_fk7m3"]
 [ext_resource type="PackedScene" uid="uid://c2qg1nuvfnd4q" path="res://Assets/trees/pine_tree.tscn" id="3_eua6o"]
 [ext_resource type="Resource" uid="uid://b2bo4qnof11j0" path="res://Resources/Waves/WaveCollection.tres" id="3_h1m7h"]
 [ext_resource type="Resource" uid="uid://18knp5812ewg" path="res://Resources/Items/BasicWand.tres" id="4_4kpch"]
@@ -102,6 +102,7 @@ position = Vector2(-1055, -697)
 [node name="GameOver" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
 visible = false
+script = ExtResource("15_h1m7h")
 
 [node name="ColorRect" type="ColorRect" parent="GameOver"]
 anchors_preset = 15
@@ -843,6 +844,7 @@ position = Vector2(246, -267)
 position = Vector2(250, -602)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="pressed" from="GameOver/ColorRect/VBoxContainer/HBoxContainer/LinkButton" to="GameOver" method="_on_link_button_pressed"]
 
 [editable path="Player"]
 [editable path="UI/UIControler/UIPlayerHotbar"]
