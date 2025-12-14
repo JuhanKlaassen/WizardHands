@@ -5,8 +5,7 @@ class_name PlayerModifier
 enum PlayerModifierType {
 	HEALTH, HEALTH_REGEN,
 	MANA, MANA_REGEN,
-	SPEED,
-	DODGE,
+	SPEED, DODGE,
 	MOREXP, MOREGOLD,
 	MORELUCK
 }

@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://btx1418xypjlp"]
+[gd_scene load_steps=5 format=3 uid="uid://btx1418xypjlp"]
 
 [ext_resource type="Script" uid="uid://d1dlp5etk3j5g" path="res://Scripts/UI/UIPauseMenu.gd" id="1_rnh56"]
 [ext_resource type="FontFile" uid="uid://bdw4cp37sssxr" path="res://Resources/BoldPixels.ttf" id="2_d1ra8"]
+[ext_resource type="Theme" uid="uid://c1cajj6lt8til" path="res://theme/UIPauseMenu.tres" id="3_kyrl2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kyrl2"]
+bg_color = Color(0.06666667, 0.0627451, 0.06666667, 0.9137255)
 
 [node name="UIPauseMenu" type="PanelContainer"]
 process_mode = 2
@@ -10,6 +14,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kyrl2")
 script = ExtResource("1_rnh56")
 
 [node name="Paused" type="Control" parent="."]
@@ -31,7 +36,7 @@ size_flags_vertical = 0
 theme_type_variation = &"Heading"
 theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("2_d1ra8")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 30
 text = "Paused
 "
 
@@ -45,73 +50,130 @@ grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Paused/CenterContainer"]
 layout_mode = 2
+theme = ExtResource("3_kyrl2")
 theme_type_variation = &"VButtonContainer"
 
 [node name="Resume" type="Button" parent="Paused/CenterContainer/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("3_kyrl2")
 theme_type_variation = &"VMenuButton"
-theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("2_d1ra8")
-theme_override_font_sizes/font_size = 20
 text = "Resume"
 
 [node name="Options" type="Button" parent="Paused/CenterContainer/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("3_kyrl2")
 theme_type_variation = &"VMenuButton"
-theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("2_d1ra8")
-theme_override_font_sizes/font_size = 20
 text = "Options
 "
 
 [node name="Main menu" type="Button" parent="Paused/CenterContainer/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("3_kyrl2")
 theme_type_variation = &"VMenuButton"
-theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("2_d1ra8")
-theme_override_font_sizes/font_size = 20
 text = "Main menu"
 
 [node name="Options" type="Control" parent="."]
 visible = false
 layout_mode = 2
 
+[node name="CenterContainer" type="CenterContainer" parent="Options"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Options/CenterContainer"]
+layout_mode = 2
+theme = ExtResource("3_kyrl2")
+
+[node name="Back" type="Button" parent="Options/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_kyrl2")
+text = "Back"
+
+[node name="Resolutions" type="OptionButton" parent="Options/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_kyrl2")
+selected = 0
+item_count = 3
+popup/item_0/text = "1920x1080"
+popup/item_0/id = 0
+popup/item_1/text = "1600x900"
+popup/item_1/id = 1
+popup/item_2/text = "1280x720"
+popup/item_2/id = 2
+
+[node name="Fullscreen" type="CheckBox" parent="Options/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_kyrl2")
+text = "Fullscreen"
+
+[node name="Label" type="Label" parent="Options/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_kyrl2")
+text = "Audio"
+
+[node name="Volume" type="HSlider" parent="Options/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_kyrl2")
+max_value = 1.0
+step = 0.01
+value = 1.0
+
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
-size_flags_horizontal = 8
+size_flags_horizontal = 0
 size_flags_vertical = 4
+theme = ExtResource("3_kyrl2")
 
 [node name="level" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 text = "LEVEL"
 
-[node name="dodge" type="Label" parent="VBoxContainer"]
-layout_mode = 2
-text = "DODGE:"
-
 [node name="mana_reg" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_d1ra8")
 text = "MANA REGEN:"
 
 [node name="hp_reg" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_d1ra8")
 text = "HP REGEN:"
+
+[node name="luck" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_d1ra8")
+text = "luck"
 
 [node name="speed" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_d1ra8")
 text = "SPEED"
+
+[node name="dodge" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_d1ra8")
+text = "DODGE:"
 
 [node name="xp_gain" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_d1ra8")
 text = "xp"
 
 [node name="gold_gain" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_d1ra8")
 text = "gold"
 
-[node name="luck" type="Label" parent="VBoxContainer"]
-layout_mode = 2
-text = "luck"
-
 [connection signal="pressed" from="Paused/CenterContainer/VBoxContainer/Resume" to="." method="resume"]
+[connection signal="pressed" from="Paused/CenterContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="Paused/CenterContainer/VBoxContainer/Main menu" to="." method="Quit"]
+[connection signal="pressed" from="Options/CenterContainer/VBoxContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="item_selected" from="Options/CenterContainer/VBoxContainer/Resolutions" to="." method="_on_resolutions_item_selected"]
+[connection signal="toggled" from="Options/CenterContainer/VBoxContainer/Fullscreen" to="." method="_on_fullscreen_toggled"]
+[connection signal="value_changed" from="Options/CenterContainer/VBoxContainer/Volume" to="." method="_on_volume_value_changed"]

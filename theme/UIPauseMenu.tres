@@ -1,0 +1,28 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://c1cajj6lt8til"]
+
+[ext_resource type="FontFile" uid="uid://bdw4cp37sssxr" path="res://Resources/BoldPixels.ttf" id="1_lqxjx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d1ra8"]
+bg_color = Color(0.381524, 0.34507418, 0.3510312, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.24582532, 0.18824646, 0.194695, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[resource]
+Button/colors/font_color = Color(0.7328321, 0.74146885, 0.71878946, 1)
+Button/constants/outline_size = 8
+Button/font_sizes/font_size = 50
+Button/fonts/font = ExtResource("1_lqxjx")
+Button/styles/normal = SubResource("StyleBoxFlat_d1ra8")
+CheckBox/font_sizes/font_size = 50
+Label/colors/font_color = Color(0.73333335, 0.7411765, 0.7176471, 1)
+Label/font_sizes/font_size = 50
+Label/fonts/font = ExtResource("1_lqxjx")
+VBoxContainer/constants/separation = 20
