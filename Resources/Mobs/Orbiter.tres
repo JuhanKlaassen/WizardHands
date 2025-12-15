@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=3 format=3 uid="uid://c34fajcdlavr2"]
+
+[ext_resource type="PackedScene" uid="uid://2bmswj3a1r0o" path="res://Assets/characters/orbiter/orbiter.tscn" id="1_20nw6"]
+[ext_resource type="Script" uid="uid://cpjqunrr48jmv" path="res://Scripts/EnemyData.gd" id="2_sdxqt"]
+
+[resource]
+script = ExtResource("2_sdxqt")
+speed = 150
+health = 4
+xp = 50
+enemy_scene = ExtResource("1_20nw6")
+look_at = true
+offset = Vector2(0, 11)
+scale = Vector2(1.5, 1.5)
+metadata/_custom_type_script = "uid://cpjqunrr48jmv"

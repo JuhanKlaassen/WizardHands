@@ -161,7 +161,10 @@ func spawn_enemy(enemy_data: EnemyData):
 	%PathFollow2D.progress_ratio = randf()
 	var scene = Enemy.new_enemy(enemy_data)
 	scene.global_position = %PathFollow2D.global_position
-
+	
+	if "orbit" in enemy_data.resource_path.to_lower():
+		scene.request_minion_spawn.connect(_on_orbit_enemy_spawn_minion)
+	
 	spawnedEnemies.append(scene)
 	scene.on_death.connect(func():
 		spawnedEnemies.erase(scene)
@@ -170,3 +173,12 @@ func spawn_enemy(enemy_data: EnemyData):
 	apply_wave_scaling(scene)
 	
 	get_parent().add_child(scene)
+
+func _on_orbit_enemy_spawn_minion(position: Vector2, data: EnemyData):
+	# Spawn the minion
+	var minion = Enemy.new_enemy(data)
+	minion.scale = Vector2(0.6, 0.6)
+	minion.global_position = position
+	minion.speed = data.speed * 1.5
+	minion.health = 1
+	get_parent().add_child(minion)

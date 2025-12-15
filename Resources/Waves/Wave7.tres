@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="WaveData" load_steps=6 format=3 uid="uid://83xlbixr2kl6"]
+
+[ext_resource type="Script" uid="uid://cpjqunrr48jmv" path="res://Scripts/EnemyData.gd" id="1_1u25b"]
+[ext_resource type="Resource" uid="uid://didfatkyanhar" path="res://Resources/Mobs/Slime.tres" id="2_w483m"]
+[ext_resource type="Resource" uid="uid://btlqo00wklsws" path="res://Resources/Mobs/Rat.tres" id="3_kkm81"]
+[ext_resource type="Script" uid="uid://20bspsnmgdyb" path="res://Scripts/WaveData.gd" id="4_50oog"]
+[ext_resource type="Resource" uid="uid://c34fajcdlavr2" path="res://Resources/Mobs/Orbiter.tres" id="5_3auxo"]
+
+[resource]
+script = ExtResource("4_50oog")
+count = 20
+spawn_rate = 0.6
+enemies = Array[ExtResource("1_1u25b")]([ExtResource("2_w483m"), ExtResource("3_kkm81")])
+spawn_special_at_end = ExtResource("5_3auxo")

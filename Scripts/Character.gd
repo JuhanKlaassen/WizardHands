@@ -11,7 +11,7 @@ var health: float
 @export var health_regen_per_second: float = 0.0
 @export var max_health: float = 100.0
 
-@onready var Walk_Sound = $Walk
+@onready var Walk_Sound = get_node_or_null("Walk")
 
 func _init() -> void:
 	health = max_health
